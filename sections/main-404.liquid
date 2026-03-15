@@ -1,0 +1,150 @@
+<style type="text/css">
+  .template-404 {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(var(--color-base-accent-1), 0.05) 0%, rgba(var(--color-base-accent-2), 0.05) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .template-404::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(var(--color-base-accent-1), 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 20s ease-in-out infinite;
+  }
+
+  .template-404::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(var(--color-base-accent-2), 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 15s ease-in-out infinite reverse;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
+  }
+
+  .template-404__content {
+    text-align: center;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.8s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .template-404__icon {
+    font-size: 8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, rgb(var(--color-base-accent-1)) 0%, rgb(var(--color-base-accent-2)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+    line-height: 1;
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  @media screen and (min-width: 750px) {
+    .template-404__icon {
+      font-size: 12rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  .template-404 .title {
+    margin: 0 0 1rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: rgb(var(--color-foreground));
+  }
+
+  @media screen and (min-width: 750px) {
+    .template-404 .title {
+      font-size: 3.6rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .template-404__text {
+    margin: 0 0 3rem;
+    font-size: 1.6rem;
+    color: rgba(var(--color-foreground), 0.7);
+    line-height: 1.6;
+  }
+
+  @media screen and (min-width: 750px) {
+    .template-404__text {
+      font-size: 1.8rem;
+      margin-bottom: 4rem;
+    }
+  }
+
+  .template-404 .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 200px;
+    padding: 1.5rem 3rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(var(--color-button), 0.2);
+  }
+
+  .template-404 .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(var(--color-button), 0.3);
+  }
+
+  .template-404 .button:active {
+    transform: translateY(0);
+  }
+</style>
+
+<div class="template-404">
+  <div class="template-404__content">
+    <div class="template-404__icon">404</div>
+    <h1 class="title">
+      {{ 'templates.404.title' | t }}
+    </h1>
+    <p class="template-404__text">
+      {{ 'templates.404.subtext' | t }}
+    </p>
+    <a href="{{ routes.all_products_collection_url }}" class="button">
+      {{ 'general.continue_shopping' | t }}
+    </a>
+  </div>
+</div>
