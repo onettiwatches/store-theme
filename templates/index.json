@@ -65,7 +65,7 @@
         "heading": "Recomendados",
         "products_to_show": 8,
         "cta_label": "Ver producto",
-        "autoplay": false,
+        "autoplay": true,
         "autoplay_speed": 4000
       }
     },
