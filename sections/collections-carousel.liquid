@@ -187,7 +187,7 @@
 
 <script>
 (function () {
-  {%- assign source_collection = collections[section.settings.collection] -%}
+  {%- assign source_collection = collections[section.settings.collection_handle] -%}
   {%- if source_collection == nil -%}
     {%- assign source_collection = collections.recomendados -%}
   {%- endif -%}
@@ -433,9 +433,8 @@
     },
     {
       "type": "collection",
-      "id": "collection",
-      "label": "Colección",
-      "default": "recomendados"
+      "id": "collection_handle",
+      "label": "Colección"
     },
     {
       "type": "range",
@@ -450,7 +449,7 @@
       "type": "range",
       "id": "products_scan_limit",
       "min": 10,
-      "max": 200,
+      "max": 110,
       "step": 1,
       "label": "Máximo de productos a revisar",
       "default": 50
