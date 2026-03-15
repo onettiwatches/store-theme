@@ -1,7 +1,6 @@
 <style>
   #cc-{{ section.id }} {
     --cc-bg:      {{ settings.colors_background_1 }};
-    --cc-bg2:     {{ settings.colors_background_2 }};
     --cc-text:    {{ settings.colors_text }};
     --cc-accent:  {{ settings.colors_accent_2 }};
     --cc-btn-txt: {{ settings.colors_solid_button_labels }};
@@ -10,15 +9,6 @@
     padding: 72px 0 96px;
     overflow: hidden;
     position: relative;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-  }
-
-  #cc-{{ section.id }}::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 50%; transform: translateX(-50%);
-    width: 120px; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--cc-accent), transparent);
   }
 
   #cc-{{ section.id }} .cc-header {
@@ -27,50 +17,12 @@
     padding: 0 24px;
   }
 
-  #cc-{{ section.id }} .cc-eyebrow {
-    display: block;
-    font-size: 0.68rem;
-    letter-spacing: 0.35em;
-    text-transform: uppercase;
-    color: var(--cc-accent);
-    margin-bottom: 12px;
-    opacity: 0.85;
-  }
-
   #cc-{{ section.id }} .cc-title {
-    font-size: clamp(2rem, 4.5vw, 3.2rem);
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--cc-text);
     margin: 0;
     line-height: 1;
   }
 
-  #cc-{{ section.id }} .cc-ornament {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-top: 16px;
-  }
-
-  #cc-{{ section.id }} .cc-ornament-line {
-    display: block;
-    height: 1px; width: 48px;
-    background: linear-gradient(90deg, transparent, var(--cc-accent));
-  }
-
-  #cc-{{ section.id }} .cc-ornament-line-r {
-    background: linear-gradient(90deg, var(--cc-accent), transparent);
-  }
-
-  #cc-{{ section.id }} .cc-ornament svg {
-    width: 10px; height: 10px;
-    fill: var(--cc-accent);
-    opacity: 0.8;
-  }
-
+  /* ── NAV ARROWS ── */
   #cc-{{ section.id }} .cc-nav {
     position: absolute;
     top: 72px; right: 40px;
@@ -78,15 +30,19 @@
     z-index: 10;
   }
 
+  @media (max-width: 768px) {
+    #cc-{{ section.id }} .cc-nav { top: 16px; right: 16px; }
+  }
+
   #cc-{{ section.id }} .cc-nav-btn {
     width: 42px; height: 42px;
     border-radius: 50%;
-    border: 1px solid color-mix(in srgb, var(--cc-accent) 35%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cc-accent) 40%, transparent);
     background: transparent;
     color: var(--cc-text);
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
-    transition: all 0.3s ease;
+    transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
     padding: 0;
   }
 
@@ -99,115 +55,170 @@
 
   #cc-{{ section.id }} .cc-nav-btn svg {
     width: 15px; height: 15px;
-    stroke: currentColor;
-    stroke-width: 1.8;
-    fill: none;
+    stroke: currentColor; stroke-width: 1.8; fill: none;
   }
 
+  /* ── TRACK WRAPPER — FIXED HEIGHT so layout never jumps ── */
   #cc-{{ section.id }} .cc-track-wrapper {
     width: 100%;
     overflow: hidden;
+    position: relative;
+    height: 520px;   /* desktop: tallest card (340px img) + labels + shadow room */
   }
 
+  @media (max-width: 768px) {
+    #cc-{{ section.id }} .cc-track-wrapper { height: 340px; }
+  }
+
+  /* ── TRACK — anchored to the bottom of the wrapper ── */
   #cc-{{ section.id }} .cc-track {
     display: flex;
-    align-items: flex-end;
-    padding: 48px 0 64px;
-    transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    align-items: flex-end;   /* cards grow upward from shared baseline */
+    position: absolute;
+    bottom: 0; left: 0;
+    height: 100%;
+    /* transition toggled by JS (disabled for instant teleport) */
     will-change: transform;
   }
 
+  /* ── CARDS ── */
   #cc-{{ section.id }} .cc-card {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    padding: 0 18px;
+    padding: 0 28px;
     transform-origin: bottom center;
-    transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      opacity   0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  #cc-{{ section.id }} .cc-card:not(.is-active):not(.is-adjacent) { opacity: 0.4; transform: scale(0.68) translateY(24px); }
-  #cc-{{ section.id }} .cc-card.is-adjacent  { opacity: 0.7; transform: scale(0.82) translateY(12px); }
-  #cc-{{ section.id }} .cc-card.is-active    { opacity: 1;   transform: scale(1) translateY(0); z-index: 2; }
+  #cc-{{ section.id }} .cc-card:not(.is-active):not(.is-adjacent) {
+    opacity: 0.3;
+    transform: scale(0.62) translateY(32px);
+  }
 
-  #cc-{{ section.id }} .cc-img-wrap { position: relative; overflow: visible; }
+  #cc-{{ section.id }} .cc-card.is-adjacent {
+    opacity: 0.7;
+    transform: scale(0.78) translateY(16px);
+  }
+
+  #cc-{{ section.id }} .cc-card.is-active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    z-index: 2;
+  }
+
+  /* ── IMAGE WRAP ── */
+  #cc-{{ section.id }} .cc-img-wrap {
+    position: relative;
+    overflow: visible;
+    background: transparent;
+  }
 
   #cc-{{ section.id }} .cc-img-wrap::before {
     content: '';
     position: absolute;
-    bottom: -18px; left: 50%; transform: translateX(-50%);
-    width: 65%; height: 36px;
-    background: radial-gradient(ellipse, rgba(0,0,0,0.5) 0%, transparent 70%);
+    bottom: -18px; left: 50%;
+    transform: translateX(-50%);
+    width: 55%; height: 28px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.45) 0%, transparent 72%);
     filter: blur(10px);
-    transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: width 0.75s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.75s ease;
     pointer-events: none;
+    opacity: 0.6;
   }
 
-  #cc-{{ section.id }} .cc-card.is-active .cc-img-wrap::before { width: 85%; }
+  #cc-{{ section.id }} .cc-card.is-active .cc-img-wrap::before {
+    width: 88%;
+    opacity: 0.85;
+  }
 
   #cc-{{ section.id }} .cc-card.is-active .cc-img-wrap::after {
     content: '';
     position: absolute;
-    inset: -20px; border-radius: 50%;
-    background: radial-gradient(ellipse, color-mix(in srgb, var(--cc-accent) 10%, transparent) 0%, transparent 70%);
+    inset: -28px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse, color-mix(in srgb, var(--cc-accent) 10%, transparent) 0%, transparent 68%);
     pointer-events: none;
+    animation: cc-halo-in 0.55s ease both;
   }
 
+  @keyframes cc-halo-in {
+    from { opacity: 0; transform: scale(0.75); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  /* ── PRODUCT IMAGE ── */
   #cc-{{ section.id }} .cc-card img {
     display: block;
     object-fit: contain;
-    transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5));
+    background: transparent;
+    border-radius: 0;
+    transition:
+      width   0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      height  0.75s cubic-bezier(0.22, 1, 0.36, 1),
+      filter  0.75s ease;
   }
 
-  #cc-{{ section.id }} .cc-card:not(.is-active):not(.is-adjacent) img { width: 130px; height: 130px; }
-  #cc-{{ section.id }} .cc-card.is-adjacent img                        { width: 195px; height: 195px; }
-  #cc-{{ section.id }} .cc-card.is-active    img                       { width: 320px; height: 320px; filter: drop-shadow(0 20px 48px rgba(0,0,0,0.75)); }
+  #cc-{{ section.id }} .cc-card:not(.is-active):not(.is-adjacent) img {
+    width: 110px; height: 110px;
+    filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35)) brightness(0.78);
+  }
+  #cc-{{ section.id }} .cc-card.is-adjacent img {
+    width: 190px; height: 190px;
+    filter: drop-shadow(0 8px 22px rgba(0,0,0,0.45)) brightness(0.92);
+  }
+  #cc-{{ section.id }} .cc-card.is-active img {
+    width: 340px; height: 340px;
+    filter: drop-shadow(0 22px 52px rgba(0,0,0,0.65)) brightness(1);
+  }
 
   @media (max-width: 768px) {
-    #cc-{{ section.id }} .cc-card:not(.is-active):not(.is-adjacent) img { width: 90px;  height: 90px;  }
-    #cc-{{ section.id }} .cc-card.is-adjacent img                        { width: 140px; height: 140px; }
+    #cc-{{ section.id }} .cc-card:not(.is-active):not(.is-adjacent) img { width: 72px;  height: 72px;  }
+    #cc-{{ section.id }} .cc-card.is-adjacent img                        { width: 130px; height: 130px; }
     #cc-{{ section.id }} .cc-card.is-active    img                       { width: 210px; height: 210px; }
-    #cc-{{ section.id }} .cc-nav { top: 16px; right: 16px; }
   }
 
+  /* ── LABELS ── */
   #cc-{{ section.id }} .cc-name {
-    margin-top: 24px;
-    font-size: 0.95rem; font-weight: 600; letter-spacing: 0.08em;
+    margin-top: 22px;
+    font-size: 0.9rem; font-weight: 600; letter-spacing: 0.09em;
     color: var(--cc-text); text-align: center;
-    opacity: 0; transform: translateY(6px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-    white-space: nowrap; max-width: 260px;
+    white-space: nowrap; max-width: 280px;
     overflow: hidden; text-overflow: ellipsis;
+    transition: opacity 0.5s ease 0.08s, font-size 0.5s ease 0.08s, transform 0.5s ease 0.08s;
   }
-
-  #cc-{{ section.id }} .cc-card.is-active   .cc-name,
-  #cc-{{ section.id }} .cc-card.is-adjacent .cc-name { opacity: 1; transform: translateY(0); }
 
   #cc-{{ section.id }} .cc-card:not(.is-active):not(.is-adjacent) .cc-name {
-    font-size: 0.68rem; opacity: 0.35; transform: translateY(0);
+    font-size: 0.6rem; opacity: 0.25; transform: translateY(3px);
+  }
+  #cc-{{ section.id }} .cc-card.is-adjacent .cc-name {
+    font-size: 0.75rem; opacity: 0.65; transform: translateY(0);
+  }
+  #cc-{{ section.id }} .cc-card.is-active .cc-name {
+    font-size: 0.9rem; opacity: 1; transform: translateY(0);
   }
 
   #cc-{{ section.id }} .cc-price {
     margin-top: 6px;
-    font-size: 0.82rem; letter-spacing: 0.1em;
+    font-size: 0.8rem; letter-spacing: 0.12em;
     color: var(--cc-accent);
-    opacity: 0; transform: translateY(4px);
-    transition: opacity 0.4s ease 0.08s, transform 0.4s ease 0.08s;
+    transition: opacity 0.45s ease 0.16s, transform 0.45s ease 0.16s;
   }
 
-  #cc-{{ section.id }} .cc-card.is-active .cc-price { opacity: 1; transform: translateY(0); }
+  #cc-{{ section.id }} .cc-card:not(.is-active) .cc-price { opacity: 0; transform: translateY(5px); }
+  #cc-{{ section.id }} .cc-card.is-active        .cc-price { opacity: 1; transform: translateY(0); }
 
   #cc-{{ section.id }} .cc-cta {
-    margin-top: 16px;
+    margin-top: 14px;
     display: inline-flex; align-items: center; gap: 8px;
-    font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase;
+    font-size: 0.62rem; letter-spacing: 0.28em; text-transform: uppercase;
     color: var(--cc-accent); text-decoration: none;
-    opacity: 0; transform: translateY(6px);
-    transition: opacity 0.4s ease 0.16s, transform 0.4s ease 0.16s;
     pointer-events: none;
+    transition: opacity 0.45s ease 0.24s, transform 0.45s ease 0.24s;
   }
 
   #cc-{{ section.id }} .cc-cta::after {
@@ -218,35 +229,32 @@
   }
 
   #cc-{{ section.id }} .cc-cta:hover::after { width: 32px; }
-  #cc-{{ section.id }} .cc-card.is-active .cc-cta { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
+  #cc-{{ section.id }} .cc-card:not(.is-active) .cc-cta { opacity: 0; transform: translateY(7px); }
+  #cc-{{ section.id }} .cc-card.is-active        .cc-cta { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+  /* ── DOTS ── */
   #cc-{{ section.id }} .cc-dots {
     display: flex; justify-content: center; align-items: center;
-    gap: 8px; margin-top: 44px;
+    gap: 8px; margin-top: 32px;
   }
 
   #cc-{{ section.id }} .cc-dot {
     width: 4px; height: 4px; border-radius: 50%;
-    background: color-mix(in srgb, var(--cc-accent) 30%, transparent);
+    background: color-mix(in srgb, var(--cc-accent) 28%, transparent);
     border: none; padding: 0; cursor: pointer;
-    transition: all 0.35s ease;
+    transition: background 0.35s ease, transform 0.35s ease;
   }
 
-  #cc-{{ section.id }} .cc-dot.is-active { background: var(--cc-accent); transform: scale(1.8); }
+  #cc-{{ section.id }} .cc-dot.is-active {
+    background: var(--cc-accent);
+    transform: scale(1.9);
+  }
 </style>
 
 <section id="cc-{{ section.id }}">
-
   <div class="cc-header">
-    {%- if section.settings.eyebrow != blank -%}
-      <span class="cc-eyebrow">{{ section.settings.eyebrow }}</span>
-    {%- endif -%}
     <h2 class="cc-title">{{ section.settings.heading }}</h2>
-    <div class="cc-ornament">
-      <span class="cc-ornament-line"></span>
-      <svg viewBox="0 0 10 10"><polygon points="5,0 6.5,3.5 10,5 6.5,6.5 5,10 3.5,6.5 0,5 3.5,3.5"/></svg>
-      <span class="cc-ornament-line cc-ornament-line-r"></span>
-    </div>
   </div>
 
   <div class="cc-nav">
@@ -261,30 +269,23 @@
   <div class="cc-track-wrapper">
     <div class="cc-track" id="cc-track-{{ section.id }}">
 
-      {%- assign seen_ids = '' -%}
-      {%- assign all_products = '' | split: '' -%}
-      {%- for col in collections -%}
-        {%- for product in col.products limit: 4 -%}
-          {%- unless seen_ids contains product.id -%}
-            {%- assign seen_ids = seen_ids | append: product.id | append: ',' -%}
-            {%- assign all_products = all_products | concat: product -%}
-          {%- endunless -%}
-        {%- endfor -%}
-      {%- endfor -%}
-
       {%- assign card_index = 0 -%}
-      {%- for product in all_products limit: section.settings.products_to_show -%}
-        <div class="cc-card{% if card_index == 0 %} is-active{% endif %}"
+      {%- for product in collections.all.products limit: 50 -%}
+        {%- if product.featured_image == blank -%}{%- continue -%}{%- endif -%}
+        {%- if card_index >= section.settings.products_to_show -%}{%- break -%}{%- endif -%}
+        <div class="cc-card"
              data-index="{{ card_index }}"
              data-url="{{ product.url }}">
           <div class="cc-img-wrap">
-            {%- if product.featured_image -%}
-              <img src="{{ product.featured_image | img_url: '500x500', crop: 'center' }}"
-                   alt="{{ product.featured_image.alt | escape | default: product.title }}"
-                   loading="lazy" width="500" height="500">
-            {%- else -%}
-              {{ 'product-1' | placeholder_svg_tag }}
-            {%- endif -%}
+            {{-
+              product.featured_image
+              | image_url: width: 600
+              | image_tag:
+                  loading: 'lazy',
+                  alt: product.featured_image.alt | default: product.title,
+                  width: 600,
+                  height: 600
+            -}}
           </div>
           <p class="cc-name">{{ product.title }}</p>
           <p class="cc-price">
@@ -300,82 +301,177 @@
   </div>
 
   <div class="cc-dots" id="cc-dots-{{ section.id }}"></div>
-
 </section>
 
 <script>
 (function () {
   var sid     = '{{ section.id }}';
   var track   = document.getElementById('cc-track-' + sid);
-  var dots    = document.getElementById('cc-dots-'  + sid);
+  var dotsEl  = document.getElementById('cc-dots-'  + sid);
   var prevBtn = document.getElementById('cc-prev-'  + sid);
   var nextBtn = document.getElementById('cc-next-'  + sid);
   if (!track || !track.querySelector('.cc-card')) return;
 
-  var cards   = Array.from(track.querySelectorAll('.cc-card'));
-  var total   = cards.length;
-  var current = 0;
-  var busy    = false;
-  var timer   = null;
+  /* ─────────────────────────────────────────────────────────────
+     TRUE INFINITE LOOP — clone-teleport technique
+     ─────────────────────────────────────────────────────────────
+     Layout in the DOM:
+       [before-clones: N cards] [originals: N cards] [after-clones: N cards]
 
-  cards.forEach(function (_, i) {
+     We always navigate inside the middle (original) zone.
+     When we cross into a clone zone, after the CSS animation
+     finishes we instantly teleport (transition:none) to the
+     matching card in the original zone. The clones are pixel-
+     identical so the jump is invisible.
+  ─────────────────────────────────────────────────────────────── */
+
+  var originals = Array.from(track.querySelectorAll('.cc-card'));
+  var N         = originals.length;
+  var timer     = null;
+  var busy      = false;
+
+  /* Dots for original N items */
+  originals.forEach(function (_, i) {
     var d = document.createElement('button');
-    d.className = 'cc-dot' + (i === 0 ? ' is-active' : '');
+    d.className = 'cc-dot';
     d.setAttribute('aria-label', 'Ir a ' + (i + 1));
-    d.addEventListener('click', function () { go(i); });
-    dots.appendChild(d);
+    d.addEventListener('click', function () { goToOrig(i); });
+    dotsEl.appendChild(d);
   });
+  var dotBtns = Array.from(dotsEl.children);
 
-  function recenter() {
-    requestAnimationFrame(function () {
-      var card = cards[current];
-      var wrap = track.parentElement.offsetWidth;
-      track.style.transform = 'translateX(' + (wrap / 2 - card.offsetLeft - card.offsetWidth / 2) + 'px)';
+  /* Clone sets */
+  function cloneSet() {
+    return originals.map(function (c) {
+      var cl = c.cloneNode(true);
+      cl.setAttribute('aria-hidden', 'true');
+      cl.classList.add('cc-clone');
+      return cl;
     });
   }
 
-  function update() {
-    cards.forEach(function (c, i) {
+  var beforeClones = cloneSet();
+  var afterClones  = cloneSet();
+
+  /* Prepend before-clones (keep original order) */
+  beforeClones.slice().reverse().forEach(function (cl) {
+    track.insertBefore(cl, track.firstChild);
+  });
+  /* Append after-clones */
+  afterClones.forEach(function (cl) { track.appendChild(cl); });
+
+  /* Full flat list: [before N] [orig N] [after N] */
+  var allCards = Array.from(track.querySelectorAll('.cc-card'));
+  /* pos = absolute index in allCards; start at first original */
+  var pos = N;
+
+  /* ── helpers ── */
+  function origIdx(absIdx) {
+    /* wrap any absolute index to 0…N-1 */
+    return ((absIdx % N) + N) % N;
+  }
+
+  function setAnim(on) {
+    track.style.transition = on
+      ? 'transform 0.75s cubic-bezier(0.22, 1, 0.36, 1)'
+      : 'none';
+  }
+
+  function applyTranslate() {
+    var wrap   = track.parentElement.offsetWidth;
+    var card   = allCards[pos];
+    var offset = wrap / 2 - card.offsetLeft - card.offsetWidth / 2;
+    track.style.transform = 'translateX(' + offset + 'px)';
+  }
+
+  function updateClasses() {
+    var ri = origIdx(pos);
+    allCards.forEach(function (c, i) {
       c.classList.remove('is-active', 'is-adjacent');
-      var d = Math.min(Math.abs(i - current), total - Math.abs(i - current));
+      var d = Math.min(Math.abs(origIdx(i) - ri), N - Math.abs(origIdx(i) - ri));
       if      (d === 0) c.classList.add('is-active');
       else if (d === 1) c.classList.add('is-adjacent');
     });
-    Array.from(dots.children).forEach(function (d, i) {
-      d.classList.toggle('is-active', i === current);
+    dotBtns.forEach(function (d, i) {
+      d.classList.toggle('is-active', i === ri);
     });
-    recenter();
   }
 
-  function go(idx) {
+  function render(animated) {
+    setAnim(animated);
+    updateClasses();
+    applyTranslate();
+  }
+
+  /* After animated move: teleport if we drifted into a clone zone */
+  function onTransitionEnd() {
+    var jumped = false;
+    if (pos < N)       { pos += N; jumped = true; }
+    if (pos >= 2 * N)  { pos -= N; jumped = true; }
+    if (jumped) render(false);  /* instant, invisible */
+    busy = false;
+  }
+
+  track.addEventListener('transitionend', function (e) {
+    if (e.propertyName === 'transform') onTransitionEnd();
+  });
+
+  /* ── step by delta ── */
+  function step(delta) {
     if (busy) return;
     busy = true;
-    current = ((idx % total) + total) % total;
-    update();
-    setTimeout(function () { busy = false; }, 750);
+    pos += delta;
+    render(true);
+    /* safety fallback */
+    setTimeout(function () { if (busy) onTransitionEnd(); }, 950);
   }
 
-  prevBtn.addEventListener('click', function () { go(current - 1); });
-  nextBtn.addEventListener('click', function () { go(current + 1); });
+  /* ── jump to a specific original index (dot click) ── */
+  function goToOrig(ri) {
+    if (busy) return;
+    var cur = origIdx(pos);
+    var delta = ri - cur;
+    /* pick shortest arc */
+    if (delta >  N / 2) delta -= N;
+    if (delta < -N / 2) delta += N;
+    if (delta === 0) return;
+    step(delta);
+  }
 
-  cards.forEach(function (c, i) {
+  /* ── click on a card ── */
+  allCards.forEach(function (c, i) {
     c.addEventListener('click', function () {
-      if (i !== current) { go(i); return; }
-      if (c.dataset.url) location.href = c.dataset.url;
+      var ci  = origIdx(i);
+      var cur = origIdx(pos);
+      if (ci !== cur) { goToOrig(ci); return; }
+      /* clicked the active card — navigate to product */
+      var orig = originals[cur];
+      if (orig && orig.dataset.url) location.href = orig.dataset.url;
     });
   });
 
+  /* ── controls ── */
+  prevBtn.addEventListener('click', function () { step(-1); });
+  nextBtn.addEventListener('click', function () { step(1);  });
+
+  /* ── swipe ── */
   var sx = 0;
-  track.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; clearInterval(timer); }, { passive: true });
+  track.addEventListener('touchstart', function (e) {
+    sx = e.touches[0].clientX;
+    clearInterval(timer);
+  }, { passive: true });
+
   track.addEventListener('touchend', function (e) {
-    if (Math.abs(sx - e.changedTouches[0].clientX) > 40) go(current + (sx > e.changedTouches[0].clientX ? 1 : -1));
+    if (Math.abs(sx - e.changedTouches[0].clientX) > 40)
+      step(sx > e.changedTouches[0].clientX ? 1 : -1);
     startAuto();
   }, { passive: true });
 
+  /* ── autoplay ── */
   function startAuto() {
     clearInterval(timer);
     {% if section.settings.autoplay %}
-    timer = setInterval(function () { go(current + 1); }, {{ section.settings.autoplay_speed }});
+    timer = setInterval(function () { step(1); }, {{ section.settings.autoplay_speed }});
     {% endif %}
   }
 
@@ -384,8 +480,10 @@
     b.addEventListener('mouseleave', startAuto);
   });
 
-  window.addEventListener('resize', recenter);
-  update();
+  window.addEventListener('resize', function () { render(false); });
+
+  /* ── init ── */
+  render(false);
   startAuto();
 })();
 </script>
@@ -395,12 +493,6 @@
   "name": "Collections Carousel",
   "tag": "section",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "Texto sobre el título",
-      "default": "Onetti Watches"
-    },
     {
       "type": "text",
       "id": "heading",
