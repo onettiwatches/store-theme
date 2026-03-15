@@ -119,10 +119,23 @@
         "padding_top": 36,
         "padding_bottom": 36
       }
+    },
+    "collections_carousel_Qthrx3": {
+      "type": "collections-carousel",
+      "name": "Collections Carousel",
+      "settings": {
+        "heading": "Collections",
+        "collection": "",
+        "products_to_show": 8,
+        "cta_label": "Ver producto",
+        "autoplay": true,
+        "autoplay_speed": 4000
+      }
     }
   },
   "order": [
     "6a3bb789-ce10-45f5-ae67-e2063ef8c76b",
+    "collections_carousel_Qthrx3",
     "featured_collection",
     "38cdf60f-e431-43b5-aac3-7e6215447d67"
   ]
