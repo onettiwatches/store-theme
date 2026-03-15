@@ -17,7 +17,7 @@
         "55172ef6-3a6a-4cfa-b790-88739b47891f": {
           "type": "link_list",
           "settings": {
-            "heading": "Quick links",
+            "heading": "Mapa del sitio",
             "menu": "main-menu"
           }
         },
@@ -35,11 +35,11 @@
       "settings": {
         "color_scheme": "background-2",
         "newsletter_enable": false,
-        "newsletter_heading": "Subscribe to our emails",
+        "newsletter_heading": "Recibe nuestros correos",
         "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": false,
-        "enable_language_selector": true,
+        "enable_language_selector": false,
         "payment_enable": true,
         "show_policy": true,
         "margin_top": 48,
