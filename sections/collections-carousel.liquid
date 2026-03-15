@@ -1,0 +1,532 @@
+{% comment %}
+  ============================================================
+  COLLECTIONS CAROUSEL — Shopify Section
+  Archivo: sections/collections-carousel.liquid
+  ============================================================
+{% endcomment %}
+
+<style>
+  /* ── Variables desde el tema ── */
+  .cc-section {
+    --cc-bg:         {{ settings.colors_background_1 | default: '#f5f5f3' }};
+    --cc-text:       {{ settings.colors_text | default: '#111111' }};
+    --cc-accent:     {{ settings.colors_accent_1 | default: '#8a7250' }};
+    --cc-subtext:    {{ settings.colors_text | color_modify: 'alpha', 0.45 | default: 'rgba(17,17,17,0.45)' }};
+    --cc-btn-bg:     {{ settings.colors_background_1 | default: '#ffffff' }};
+    --cc-btn-border: {{ settings.colors_text | color_modify: 'alpha', 0.18 | default: 'rgba(17,17,17,0.18)' }};
+    --cc-shadow:     0 24px 64px rgba(0,0,0,0.10);
+    --cc-radius:     4px;
+    --cc-transition: 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* ── Layout ── */
+  .cc-section {
+    background: var(--cc-bg);
+    padding: 80px 0 100px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .cc-header {
+    text-align: center;
+    margin-bottom: 56px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cc-title {
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cc-text);
+    margin: 0;
+    line-height: 1;
+  }
+
+  .cc-title-line {
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--cc-accent);
+    margin: 18px auto 0;
+    transform-origin: center;
+    animation: cc-line-expand 1.2s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  @keyframes cc-line-expand {
+    from { width: 0; opacity: 0; }
+    to   { width: 48px; opacity: 1; }
+  }
+
+  /* ── Navegación ── */
+  .cc-nav {
+    position: absolute;
+    top: 80px;
+    right: 40px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+
+  .cc-nav-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--cc-btn-border);
+    background: var(--cc-btn-bg);
+    color: var(--cc-text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    padding: 0;
+  }
+
+  .cc-nav-btn:hover {
+    background: var(--cc-text);
+    color: var(--cc-bg);
+    border-color: var(--cc-text);
+    transform: scale(1.08);
+  }
+
+  .cc-nav-btn svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    fill: none;
+  }
+
+  /* ── Track del carrusel ── */
+  .cc-track-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .cc-track {
+    display: flex;
+    align-items: flex-end;
+    gap: 0;
+    padding: 40px 0 60px;
+    transition: transform var(--cc-transition);
+    will-change: transform;
+  }
+
+  /* ── Tarjeta ── */
+  .cc-card {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    transition: all var(--cc-transition);
+    padding: 0 20px;
+    transform-origin: bottom center;
+  }
+
+  .cc-card:not(.is-active) {
+    opacity: 0.55;
+    transform: scale(0.72) translateY(20px);
+  }
+
+  .cc-card.is-active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    z-index: 2;
+  }
+
+  .cc-card.is-adjacent {
+    opacity: 0.78;
+    transform: scale(0.84) translateY(10px);
+  }
+
+  .cc-card-img-wrap {
+    position: relative;
+    overflow: visible;
+  }
+
+  .cc-card-img-wrap::before {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    height: 40px;
+    background: radial-gradient(ellipse, rgba(0,0,0,0.12) 0%, transparent 70%);
+    filter: blur(8px);
+    transition: all var(--cc-transition);
+    pointer-events: none;
+  }
+
+  .cc-card.is-active .cc-card-img-wrap::before {
+    width: 80%;
+    opacity: 0.8;
+  }
+
+  .cc-card img {
+    display: block;
+    object-fit: contain;
+    transition: transform var(--cc-transition);
+  }
+
+  /* Tamaños de imagen por posición */
+  .cc-card:not(.is-active):not(.is-adjacent) img {
+    width: 140px;
+    height: 140px;
+  }
+  .cc-card.is-adjacent img {
+    width: 200px;
+    height: 200px;
+  }
+  .cc-card.is-active img {
+    width: 320px;
+    height: 320px;
+  }
+
+  @media (max-width: 768px) {
+    .cc-card:not(.is-active):not(.is-adjacent) img { width: 100px; height: 100px; }
+    .cc-card.is-adjacent img { width: 150px; height: 150px; }
+    .cc-card.is-active img  { width: 220px; height: 220px; }
+  }
+
+  /* ── Nombre ── */
+  .cc-card-name {
+    margin-top: 28px;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--cc-text);
+    text-align: center;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    white-space: nowrap;
+  }
+
+  .cc-card.is-active .cc-card-name,
+  .cc-card.is-adjacent .cc-card-name {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cc-card:not(.is-active):not(.is-adjacent) .cc-card-name {
+    font-size: 0.75rem;
+    opacity: 0.5;
+    transform: translateY(0);
+  }
+
+  /* ── Precio (solo activo) ── */
+  .cc-card-price {
+    margin-top: 6px;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    color: var(--cc-accent);
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+  }
+
+  .cc-card.is-active .cc-card-price {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── CTA del activo ── */
+  .cc-card-cta {
+    margin-top: 14px;
+    display: inline-block;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cc-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--cc-accent);
+    padding-bottom: 2px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease 0.18s, transform 0.4s ease 0.18s, color 0.2s;
+    pointer-events: none;
+  }
+
+  .cc-card.is-active .cc-card-cta {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .cc-card-cta:hover {
+    color: var(--cc-accent);
+  }
+
+  /* ── Dots ── */
+  .cc-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 48px;
+  }
+
+  .cc-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--cc-btn-border);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.35s ease;
+  }
+
+  .cc-dot.is-active {
+    background: var(--cc-text);
+    transform: scale(1.5);
+  }
+
+  /* ── Google Font ── */
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&display=swap');
+</style>
+
+{% comment %} ── Markup ── {% endcomment %}
+<section
+  class="cc-section"
+  id="cc-section-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+>
+
+  <div class="cc-header">
+    <h2 class="cc-title">{{ section.settings.heading | default: 'Collections' }}</h2>
+    <span class="cc-title-line"></span>
+  </div>
+
+  <div class="cc-nav">
+    <button class="cc-nav-btn" id="cc-prev-{{ section.id }}" aria-label="Anterior">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="cc-nav-btn" id="cc-next-{{ section.id }}" aria-label="Siguiente">
+      <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+    </button>
+  </div>
+
+  <div class="cc-track-wrapper">
+    <div class="cc-track" id="cc-track-{{ section.id }}">
+
+      {% assign products = section.settings.collection.products %}
+      {% if products.size == 0 %}
+        {% assign products = collections.all.products | limit: 8 %}
+      {% endif %}
+
+      {% for product in products limit: section.settings.products_to_show %}
+        <div
+          class="cc-card{% if forloop.index0 == 0 %} is-active{% endif %}"
+          data-index="{{ forloop.index0 }}"
+          data-url="{{ product.url }}"
+        >
+          <div class="cc-card-img-wrap">
+            {% if product.featured_image %}
+              <img
+                src="{{ product.featured_image | img_url: '400x400', crop: 'center' }}"
+                alt="{{ product.featured_image.alt | escape | default: product.title }}"
+                loading="lazy"
+                width="400"
+                height="400"
+              >
+            {% else %}
+              {{ 'product-1' | placeholder_svg_tag: 'cc-placeholder' }}
+            {% endif %}
+          </div>
+
+          <p class="cc-card-name">{{ product.title }}</p>
+          <p class="cc-card-price">
+            {% if product.price_varies %}
+              {{ 'products.product.from_text_html' | t: price: product.price_min | money }}
+            {% else %}
+              {{ product.price | money }}
+            {% endif %}
+          </p>
+          <a class="cc-card-cta" href="{{ product.url }}">
+            {{ section.settings.cta_label | default: 'Ver producto' }}
+          </a>
+        </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+  <div class="cc-dots" id="cc-dots-{{ section.id }}"></div>
+
+</section>
+
+<script>
+(function() {
+  const SECTION_ID = '{{ section.id }}';
+  const track    = document.getElementById('cc-track-' + SECTION_ID);
+  const dotsWrap = document.getElementById('cc-dots-'  + SECTION_ID);
+  const prevBtn  = document.getElementById('cc-prev-'  + SECTION_ID);
+  const nextBtn  = document.getElementById('cc-next-'  + SECTION_ID);
+
+  if (!track) return;
+
+  const cards = Array.from(track.querySelectorAll('.cc-card'));
+  const total = cards.length;
+  let current = 0;
+  let isAnimating = false;
+  let autoTimer = null;
+
+  /* ── Crear dots ── */
+  cards.forEach(function(_, i) {
+    const dot = document.createElement('button');
+    dot.className = 'cc-dot' + (i === 0 ? ' is-active' : '');
+    dot.setAttribute('aria-label', 'Ir a ' + (i + 1));
+    dot.addEventListener('click', function() { goTo(i); });
+    dotsWrap.appendChild(dot);
+  });
+
+  function getCardCenter(card) {
+    return card.offsetLeft + card.offsetWidth / 2;
+  }
+
+  function goTo(index) {
+    if (isAnimating || index === current) return;
+    isAnimating = true;
+    current = (index + total) % total;
+    update();
+    setTimeout(function() { isAnimating = false; }, 720);
+  }
+
+  function update() {
+    /* Clases en tarjetas */
+    cards.forEach(function(card, i) {
+      card.classList.remove('is-active', 'is-adjacent');
+      const dist = Math.abs(i - current);
+      const wrapDist = Math.min(dist, total - dist);
+      if (wrapDist === 0) card.classList.add('is-active');
+      else if (wrapDist === 1) card.classList.add('is-adjacent');
+    });
+
+    /* Centrar el track en la tarjeta activa */
+    requestAnimationFrame(function() {
+      const activeCard = cards[current];
+      const wrapperWidth = track.parentElement.offsetWidth;
+      const cardCenterX  = getCardCenter(activeCard);
+      const offset = cardCenterX - wrapperWidth / 2;
+      track.style.transform = 'translateX(-' + offset + 'px)';
+    });
+
+    /* Dots */
+    Array.from(dotsWrap.children).forEach(function(dot, i) {
+      dot.classList.toggle('is-active', i === current);
+    });
+  }
+
+  /* ── Botones ── */
+  prevBtn.addEventListener('click', function() { goTo(current - 1); });
+  nextBtn.addEventListener('click', function() { goTo(current + 1); });
+
+  /* ── Click en tarjeta ── */
+  cards.forEach(function(card, i) {
+    card.addEventListener('click', function() {
+      if (i !== current) { goTo(i); return; }
+      const url = card.dataset.url;
+      if (url) window.location.href = url;
+    });
+  });
+
+  /* ── Swipe táctil ── */
+  var touchStartX = 0;
+  track.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
+    clearAutoplay();
+  }, { passive: true });
+
+  track.addEventListener('touchend', function(e) {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) goTo(current + (diff > 0 ? 1 : -1));
+    startAutoplay();
+  }, { passive: true });
+
+  /* ── Autoplay ── */
+  function startAutoplay() {
+    if (!{{ section.settings.autoplay | default: true }}) return;
+    clearAutoplay();
+    autoTimer = setInterval(function() { goTo(current + 1); }, {{ section.settings.autoplay_speed | default: 4000 }});
+  }
+  function clearAutoplay() { clearInterval(autoTimer); }
+
+  prevBtn.addEventListener('mouseenter', clearAutoplay);
+  nextBtn.addEventListener('mouseenter', clearAutoplay);
+  prevBtn.addEventListener('mouseleave', startAutoplay);
+  nextBtn.addEventListener('mouseleave', startAutoplay);
+
+  /* ── Init ── */
+  update();
+  startAutoplay();
+})();
+</script>
+
+
+{% schema %}
+{
+  "name": "Collections Carousel",
+  "tag": "section",
+  "class": "cc-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Collections"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección de productos"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 3,
+      "max": 16,
+      "step": 1,
+      "label": "Número de productos",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Texto del botón CTA",
+      "default": "Ver producto"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Reproducción automática",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 2000,
+      "max": 8000,
+      "step": 500,
+      "label": "Velocidad (ms)",
+      "default": 4000
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collections Carousel",
+      "category": "Colecciones"
+    }
+  ]
+}
+{% endschema %}
