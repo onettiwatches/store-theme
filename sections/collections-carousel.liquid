@@ -187,9 +187,14 @@
 
 <script>
 (function () {
+  {%- assign source_collection = collections[section.settings.collection] -%}
+  {%- if source_collection == nil -%}
+    {%- assign source_collection = collections.recomendados -%}
+  {%- endif -%}
+
   const rawProducts = [
     {%- assign shown = 0 -%}
-    {%- for product in collections.all.products limit: 50 -%}
+    {%- for product in source_collection.products limit: section.settings.products_scan_limit -%}
       {%- if product.featured_image == blank -%}{%- continue -%}{%- endif -%}
       {%- if shown >= section.settings.products_to_show -%}{%- break -%}{%- endif -%}
       {
@@ -427,6 +432,12 @@
       "default": "Collections"
     },
     {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colección",
+      "default": "recomendados"
+    },
+    {
       "type": "range",
       "id": "products_to_show",
       "min": 4,
@@ -434,6 +445,15 @@
       "step": 1,
       "label": "Máximo de productos",
       "default": 20
+    },
+    {
+      "type": "range",
+      "id": "products_scan_limit",
+      "min": 10,
+      "max": 200,
+      "step": 1,
+      "label": "Máximo de productos a revisar",
+      "default": 50
     },
     {
       "type": "text",
