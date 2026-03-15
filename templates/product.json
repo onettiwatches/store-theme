@@ -42,7 +42,7 @@
           "type": "shopify://apps/amp-back-in-stock/blocks/app-block/bfa6a8c4-24e2-411a-9396-e35031b33f34",
           "settings": {
             "caption": "Avísame cuando esté disponible",
-            "font_size": 16,
+            "font_size": 15,
             "color": "#ffffff",
             "background_color": "#1a202c",
             "margin_top": 10,
