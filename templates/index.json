@@ -58,6 +58,17 @@
         "show_text_below": true
       }
     },
+    "collections_carousel_Qthrx3": {
+      "type": "collections-carousel",
+      "name": "Collections Carousel",
+      "settings": {
+        "heading": "Recomendados",
+        "products_to_show": 8,
+        "cta_label": "Ver producto",
+        "autoplay": true,
+        "autoplay_speed": 4000
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
@@ -116,18 +127,6 @@
         "swipe_on_mobile": false,
         "padding_top": 36,
         "padding_bottom": 36
-      }
-    },
-    "collections_carousel_Qthrx3": {
-      "type": "collections-carousel",
-      "name": "Collections Carousel",
-      "settings": {
-        "heading": "Collections",
-        "collection": "",
-        "products_to_show": 8,
-        "cta_label": "Ver producto",
-        "autoplay": true,
-        "autoplay_speed": 4000
       }
     }
   },
