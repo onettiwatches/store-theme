@@ -22,11 +22,106 @@
     },
     "07c5541b-f8e9-4e48-9d3c-06973d977a3a": {
       "type": "collection-list",
+      "blocks": {
+        "featured_collection_CkjhUH": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "submarine-gmt"
+          }
+        },
+        "featured_collection_hnBQ8T": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "skx007"
+          }
+        },
+        "featured_collection_nTDfYM": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "royal-oak"
+          }
+        },
+        "featured_collection_YnLbBy": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "onetti-yatch-master"
+          }
+        },
+        "featured_collection_tJggFi": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "onetti-seamaster"
+          }
+        },
+        "featured_collection_pg7pPx": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "onetti-santos"
+          }
+        },
+        "featured_collection_bWpYgQ": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "onetti-prospex"
+          }
+        },
+        "featured_collection_xH4MTt": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "onetti-presage"
+          }
+        },
+        "featured_collection_Y4a6Tj": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "nautilius"
+          }
+        },
+        "featured_collection_qU47dm": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "grand-onetti"
+          }
+        },
+        "featured_collection_xGWYqb": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "explorer"
+          }
+        },
+        "featured_collection_VTFgPj": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "daytona"
+          }
+        },
+        "featured_collection_ETnwnF": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "datejust"
+          }
+        }
+      },
+      "block_order": [
+        "featured_collection_CkjhUH",
+        "featured_collection_hnBQ8T",
+        "featured_collection_nTDfYM",
+        "featured_collection_YnLbBy",
+        "featured_collection_tJggFi",
+        "featured_collection_pg7pPx",
+        "featured_collection_bWpYgQ",
+        "featured_collection_xH4MTt",
+        "featured_collection_Y4a6Tj",
+        "featured_collection_qU47dm",
+        "featured_collection_xGWYqb",
+        "featured_collection_VTFgPj",
+        "featured_collection_ETnwnF"
+      ],
       "settings": {
-        "title": "Colecciones",
+        "title": "Todas las Colecciones",
         "heading_size": "h1",
         "image_ratio": "square",
-        "columns_desktop": 2,
+        "columns_desktop": 4,
         "color_scheme": "background-1",
         "show_view_all": false,
         "columns_mobile": "1",
