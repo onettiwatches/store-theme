@@ -63,9 +63,10 @@
       "name": "Collections Carousel",
       "settings": {
         "heading": "Recomendados",
+        "collection_handle": "recomendados",
         "products_to_show": 8,
-        "cta_label": "Ver producto",
-        "autoplay": false,
+        "products_scan_limit": 20,
+        "autoplay": true,
         "autoplay_speed": 4000
       }
     },
