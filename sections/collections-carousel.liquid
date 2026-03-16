@@ -2,8 +2,8 @@
   :root {
     --slide-w: 280px;
     --gap: 20px;
-    --speed: 420ms;
-    --easing: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --speed: 400ms;
+    --easing: cubic-bezier(0.22, 1, 0.36, 1);
     --scale: 1.2;
   }
 
@@ -92,7 +92,7 @@
     overflow: hidden;
     background: var(--color-base-background-2);
     border: 1px solid rgba(0, 0, 0, 0.08);
-    transition: all 0.3s var(--easing);
+    transition: all var(--speed) var(--easing);
     padding-top: 12px;
   }
 
@@ -115,7 +115,7 @@
     display: block;
     pointer-events: none;
     user-select: none;
-    transition: transform 0.5s var(--easing);
+    transition: transform calc(var(--speed) * 0.9) var(--easing);
   }
 
   #cc-{{ section.id }} .cc-card.center .cc-img-wrap img {
