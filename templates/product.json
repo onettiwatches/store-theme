@@ -38,19 +38,6 @@
           "type": "price",
           "settings": {}
         },
-        "amp_back_in_stock_app_block_q74DEe": {
-          "type": "shopify://apps/amp-back-in-stock/blocks/app-block/bfa6a8c4-24e2-411a-9396-e35031b33f34",
-          "settings": {
-            "caption": "Avísame cuando esté disponible",
-            "font_size": 15,
-            "color": "#ffffff",
-            "background_color": "#1a202c",
-            "margin_top": 10,
-            "margin_bottom": -15,
-            "classes": "button button--full-width",
-            "style": "text-decoration:none"
-          }
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -80,7 +67,6 @@
         "variant_picker",
         "quantity_selector",
         "price",
-        "amp_back_in_stock_app_block_q74DEe",
         "buy_buttons",
         "description",
         "share",
@@ -125,7 +111,7 @@
           "type": "shopify://apps/judge-me-reviews/blocks/review_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
             "review_data": "sample_data",
-            "max_width": 1200,
+            "max_width": 1150,
             "show_shop_reviews": true,
             "empty_state": "empty_widget"
           }
