@@ -60,12 +60,90 @@
     },
     "collections_carousel_Qthrx3": {
       "type": "collections-carousel",
+      "blocks": {
+        "collection_6iQDxr": {
+          "type": "collection",
+          "settings": {
+            "collection": "submarine-gmt"
+          }
+        },
+        "collection_yUVWn9": {
+          "type": "collection",
+          "settings": {
+            "collection": "royal-oak"
+          }
+        },
+        "collection_cRwhJB": {
+          "type": "collection",
+          "settings": {
+            "collection": "onetti-yatch-master"
+          }
+        },
+        "collection_aqiC73": {
+          "type": "collection",
+          "settings": {
+            "collection": "onetti-seamaster"
+          }
+        },
+        "collection_RAR9R8": {
+          "type": "collection",
+          "settings": {
+            "collection": "onetti-santos"
+          }
+        },
+        "collection_RYpQFB": {
+          "type": "collection",
+          "settings": {
+            "collection": "onetti-presage"
+          }
+        },
+        "collection_fJdrAc": {
+          "type": "collection",
+          "settings": {
+            "collection": "nautilius"
+          }
+        },
+        "collection_FtiCQ3": {
+          "type": "collection",
+          "settings": {
+            "collection": "grand-onetti"
+          }
+        },
+        "collection_FkPwFM": {
+          "type": "collection",
+          "settings": {
+            "collection": "explorer"
+          }
+        },
+        "collection_7EdpQF": {
+          "type": "collection",
+          "settings": {
+            "collection": "daytona"
+          }
+        },
+        "collection_BkwVMV": {
+          "type": "collection",
+          "settings": {
+            "collection": "datejust"
+          }
+        }
+      },
+      "block_order": [
+        "collection_6iQDxr",
+        "collection_yUVWn9",
+        "collection_cRwhJB",
+        "collection_aqiC73",
+        "collection_RAR9R8",
+        "collection_RYpQFB",
+        "collection_fJdrAc",
+        "collection_FtiCQ3",
+        "collection_FkPwFM",
+        "collection_7EdpQF",
+        "collection_BkwVMV"
+      ],
       "name": "Collections Carousel",
       "settings": {
         "heading": "Recomendados",
-        "collection_handle": "recomendados",
-        "products_to_show": 8,
-        "products_scan_limit": 20,
         "autoplay": true,
         "autoplay_speed": 4000
       }
@@ -172,9 +250,9 @@
             "max_width": 1100,
             "corner_styling": "soft",
             "header_text_color": "#ffffff",
-            "card_color": "#7D7D7D",
+            "card_color": "#7d7d7d",
             "stars_color": "",
-            "text_color": "#FFFFFF",
+            "text_color": "#ffffff",
             "arrows_color": "#c5a059",
             "show_drop_shadow": false,
             "show_border": false,
