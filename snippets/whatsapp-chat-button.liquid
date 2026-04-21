@@ -78,6 +78,10 @@
       justify-content: center;
     }
 
+    body.whatsapp-modal-open {
+      overflow: hidden;
+    }
+
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -130,7 +134,7 @@
       width: 100%;
     }
 
-    .whatsapp-custom-select select {
+    .whatsapp-dropdown-trigger {
       width: 100%;
       padding: 12px 16px;
       border: 2px solid {{ settings.colors_accent_2 }};
@@ -139,31 +143,149 @@
       cursor: pointer;
       background-color: transparent;
       color: {{ settings.colors_text }};
-      appearance: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23{{ settings.colors_accent_2 | remove: '#' }}' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 12px center;
-      padding-right: 36px;
+      text-align: left;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       transition: all 0.3s ease;
+      position: relative;
     }
 
-    .whatsapp-custom-select select:hover {
+    .whatsapp-dropdown-trigger:hover {
       border-color: {{ settings.colors_accent_2 }};
       box-shadow: 0 0 0 3px {{ settings.colors_accent_2 }}15;
     }
 
-    .whatsapp-custom-select select:focus {
-      outline: none;
+    .whatsapp-dropdown-trigger.active {
       border-color: {{ settings.colors_accent_2 }};
       box-shadow: 0 0 0 3px {{ settings.colors_accent_2 }}25;
     }
 
-    .whatsapp-custom-select select option {
+    .whatsapp-dropdown-arrow {
+      width: 12px;
+      height: 8px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23{{ settings.colors_accent_2 | remove: '#' }}' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      transition: transform 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .whatsapp-dropdown-trigger.active .whatsapp-dropdown-arrow {
+      transform: rotate(180deg);
+    }
+
+    .whatsapp-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
       background-color: {{ settings.colors_background_1 }};
+      border: 2px solid {{ settings.colors_accent_2 }};
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+
+    .whatsapp-dropdown-menu.active {
+      max-height: 360px;
+      overflow-y: auto;
+    }
+
+    .whatsapp-search-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 2;
+      background-color: {{ settings.colors_background_1 }};
+    }
+
+    .whatsapp-search-input {
+      padding: 12px 16px;
+      border: none;
+      border-bottom: 1px solid {{ settings.colors_accent_2 }}20;
+      font-size: 14px;
       color: {{ settings.colors_text }};
-      padding: 8px;
+      background-color: transparent;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .whatsapp-search-input::placeholder {
+      color: {{ settings.colors_text }}66;
+    }
+
+    .whatsapp-search-input:focus {
+      outline: none;
+      background-color: {{ settings.colors_accent_2 }}08;
+    }
+
+    .whatsapp-dropdown-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .whatsapp-dropdown-item {
+      padding: 12px 16px;
+      cursor: pointer;
+      color: {{ settings.colors_text }};
+      transition: all 0.2s ease;
+      border-bottom: 1px solid {{ settings.colors_accent_2 }}10;
+      animation: slideInDropdown 0.3s ease backwards;
+    }
+
+    .whatsapp-dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    @keyframes slideInDropdown {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .whatsapp-dropdown-item:hover {
+      background-color: {{ settings.colors_accent_2 }}15;
+      padding-left: 20px;
+    }
+
+    .whatsapp-dropdown-item.selected {
+      background-color: {{ settings.colors_accent_2 }}25;
+      font-weight: 500;
+      color: {{ settings.whatsapp_button_color }};
+    }
+
+    .whatsapp-dropdown-empty {
+      padding: 16px;
+      text-align: center;
+      color: {{ settings.colors_text }}99;
+      font-size: 13px;
+      animation: slideInDropdown 0.3s ease;
+    }
+
+    .whatsapp-dropdown-menu::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .whatsapp-dropdown-menu::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .whatsapp-dropdown-menu::-webkit-scrollbar-thumb {
+      background: {{ settings.colors_accent_2 }};
+      border-radius: 3px;
+    }
+
+    .whatsapp-dropdown-menu::-webkit-scrollbar-thumb:hover {
+      background: {{ settings.colors_accent_1 }};
     }
 
     .whatsapp-message-preview {
@@ -302,9 +424,21 @@
       <div class="whatsapp-product-selector" id="productSelector" style="display: none;">
         <label for="whatsappProductSelect">Selecciona un producto (opcional)</label>
         <div class="whatsapp-custom-select">
-          <select id="whatsappProductSelect">
-            <option value="">-- Seleccionar producto --</option>
-          </select>
+          <button class="whatsapp-dropdown-trigger" id="whatsappProductSelect" type="button">
+            <span id="whatsappProductPlaceholder">-- Seleccionar producto --</span>
+            <span class="whatsapp-dropdown-arrow"></span>
+          </button>
+          <div class="whatsapp-dropdown-menu" id="whatsappDropdownMenu">
+            <div class="whatsapp-search-wrapper">
+              <input 
+                type="text" 
+                class="whatsapp-search-input" 
+                id="whatsappProductSearch" 
+                placeholder="Buscar producto..."
+              >
+            </div>
+            <ul class="whatsapp-dropdown-list" id="whatsappDropdownList"></ul>
+          </div>
         </div>
       </div>
 
@@ -325,18 +459,23 @@
   const whatsappCloseBtn = document.getElementById('whatsappCloseBtn');
   const whatsappSendBtn = document.getElementById('whatsappSendBtn');
   const productSelector = document.getElementById('productSelector');
-  const productSelect = document.getElementById('whatsappProductSelect');
+  const productTrigger = document.getElementById('whatsappProductSelect');
+  const productDropdown = document.getElementById('whatsappDropdownMenu');
+  const productList = document.getElementById('whatsappDropdownList');
+  const searchInput = document.getElementById('whatsappProductSearch');
+  const placeholderText = document.getElementById('whatsappProductPlaceholder');
   const previewDiv = document.getElementById('whatsappPreview');
 
   let currentProduct = null;
   let allProducts = [];
+  let filteredProducts = [];
+  let selectedProduct = null;
+  let dropdownOpen = false;
 
   // Construir URL completa del producto
   function buildProductUrl(productUrl) {
     if (!productUrl) return '';
-    // Si ya tiene protocolo, devolverlo tal cual
     if (productUrl.startsWith('http')) return productUrl;
-    // Si es ruta relativa, agregar el dominio
     const baseUrl = window.location.origin;
     return baseUrl + productUrl;
   }
@@ -350,7 +489,6 @@
       title: productTitle,
       url: buildProductUrl(productUrl)
     };
-    // Mostrar badge cuando hay producto prellenado
     document.getElementById('whatsappBadge').style.display = 'flex';
   }
 
@@ -367,21 +505,76 @@
     
     if (currentProduct) {
       message = `Hola! 👋\n\nMe interesa este producto:\n\n${currentProduct.title}\n\n${currentProduct.url}`;
-    } else if (productSelect.value) {
-      const selected = allProducts.find(p => p.title === productSelect.value);
-      if (selected) {
-        message = `Hola! 👋\n\nMe interesa este producto:\n\n${selected.title}\n\n${selected.url}`;
-      }
+    } else if (selectedProduct) {
+      message = `Hola! 👋\n\nMe interesa este producto:\n\n${selectedProduct.title}\n\n${selectedProduct.url}`;
     }
 
     previewDiv.textContent = message;
     return message;
   }
 
+  function filterProducts(query) {
+    const q = query.toLowerCase().trim();
+    filteredProducts = allProducts.filter(p => p.title.toLowerCase().includes(q));
+    renderDropdownList();
+  }
+
+  function renderDropdownList() {
+    productList.innerHTML = '';
+    
+    if (filteredProducts.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'whatsapp-dropdown-empty';
+      empty.textContent = 'No hay productos que coincidan';
+      productList.appendChild(empty);
+      return;
+    }
+
+    filteredProducts.forEach((product, index) => {
+      const item = document.createElement('li');
+      item.className = 'whatsapp-dropdown-item';
+      item.textContent = product.title;
+      item.style.animationDelay = `${index * 0.05}s`;
+      
+      if (selectedProduct && selectedProduct.title === product.title) {
+        item.classList.add('selected');
+      }
+
+      item.addEventListener('click', () => selectProduct(product, item));
+      productList.appendChild(item);
+    });
+  }
+
+  function selectProduct(product, element) {
+    selectedProduct = product;
+    placeholderText.textContent = product.title;
+    closeDropdown();
+    updatePreview();
+  }
+
+  function openDropdown() {
+    if (filteredProducts.length === 0) {
+      filteredProducts = allProducts;
+      renderDropdownList();
+    }
+    dropdownOpen = true;
+    productTrigger.classList.add('active');
+    productDropdown.classList.add('active');
+    searchInput.focus();
+  }
+
+  function closeDropdown() {
+    dropdownOpen = false;
+    productTrigger.classList.remove('active');
+    productDropdown.classList.remove('active');
+    searchInput.value = '';
+    filteredProducts = [];
+  }
+
   function openModal() {
     whatsappModal.classList.add('open');
+    document.body.classList.add('whatsapp-modal-open');
     
-    // Mostrar/ocultar notificación de producto prellenado
     const notification = document.getElementById('whatsappNotification');
     if (currentProduct) {
       notification.classList.add('show');
@@ -389,11 +582,9 @@
       notification.classList.remove('show');
     }
     
-    // Solo mostrar selector si no hay producto actual
     if (!currentProduct) {
       productSelector.style.display = 'block';
       
-      // Cargar productos en selector
       if (allProducts.length === 0) {
         fetch('/products.json?limit=250')
           .then(r => r.json())
@@ -402,31 +593,20 @@
               title: p.title,
               url: buildProductUrl(p.url)
             }));
-            populateProductSelect();
           })
           .catch(() => {
             productSelector.style.display = 'none';
           });
-      } else {
-        populateProductSelect();
       }
     }
 
     updatePreview();
   }
 
-  function populateProductSelect() {
-    productSelect.innerHTML = '<option value="">-- Seleccionar producto --</option>';
-    allProducts.forEach(product => {
-      const opt = document.createElement('option');
-      opt.value = product.title;
-      opt.textContent = product.title;
-      productSelect.appendChild(opt);
-    });
-  }
-
   function closeModal() {
     whatsappModal.classList.remove('open');
+    document.body.classList.remove('whatsapp-modal-open');
+    closeDropdown();
   }
 
   function sendWhatsApp() {
@@ -437,10 +617,28 @@
     closeModal();
   }
 
+  // Event listeners
   whatsappBtn.addEventListener('click', openModal);
   whatsappCloseBtn.addEventListener('click', closeModal);
   whatsappSendBtn.addEventListener('click', sendWhatsApp);
-  productSelect.addEventListener('change', updatePreview);
+  productTrigger.addEventListener('click', () => {
+    if (dropdownOpen) {
+      closeDropdown();
+    } else {
+      openDropdown();
+    }
+  });
+
+  searchInput.addEventListener('input', (e) => {
+    filterProducts(e.target.value);
+  });
+
+  // Cerrar dropdown al hacer click fuera
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.whatsapp-custom-select') && dropdownOpen) {
+      closeDropdown();
+    }
+  });
 
   // Cerrar modal al hacer click fuera
   whatsappModal.addEventListener('click', (e) => {
