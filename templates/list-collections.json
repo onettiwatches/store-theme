@@ -29,12 +29,6 @@
             "collection": "submarine-gmt"
           }
         },
-        "featured_collection_hnBQ8T": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "skx007"
-          }
-        },
         "featured_collection_nTDfYM": {
           "type": "featured_collection",
           "settings": {
@@ -57,12 +51,6 @@
           "type": "featured_collection",
           "settings": {
             "collection": "onetti-santos"
-          }
-        },
-        "featured_collection_bWpYgQ": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "onetti-prospex"
           }
         },
         "featured_collection_xH4MTt": {
@@ -104,12 +92,10 @@
       },
       "block_order": [
         "featured_collection_CkjhUH",
-        "featured_collection_hnBQ8T",
         "featured_collection_nTDfYM",
         "featured_collection_YnLbBy",
         "featured_collection_tJggFi",
         "featured_collection_pg7pPx",
-        "featured_collection_bWpYgQ",
         "featured_collection_xH4MTt",
         "featured_collection_Y4a6Tj",
         "featured_collection_qU47dm",
