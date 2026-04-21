@@ -79,18 +79,6 @@
             "collection": "onetti-yatch-master"
           }
         },
-        "collection_aqiC73": {
-          "type": "collection",
-          "settings": {
-            "collection": "onetti-seamaster"
-          }
-        },
-        "collection_RAR9R8": {
-          "type": "collection",
-          "settings": {
-            "collection": "onetti-santos"
-          }
-        },
         "collection_RYpQFB": {
           "type": "collection",
           "settings": {
@@ -107,12 +95,6 @@
           "type": "collection",
           "settings": {
             "collection": "grand-onetti"
-          }
-        },
-        "collection_FkPwFM": {
-          "type": "collection",
-          "settings": {
-            "collection": "explorer"
           }
         },
         "collection_7EdpQF": {
@@ -132,18 +114,15 @@
         "collection_6iQDxr",
         "collection_yUVWn9",
         "collection_cRwhJB",
-        "collection_aqiC73",
-        "collection_RAR9R8",
         "collection_RYpQFB",
         "collection_fJdrAc",
         "collection_FtiCQ3",
-        "collection_FkPwFM",
         "collection_7EdpQF",
         "collection_BkwVMV"
       ],
       "name": "Collections Carousel",
       "settings": {
-        "heading": "Recomendados",
+        "heading": "Colecciones destacadas",
         "autoplay": true,
         "autoplay_speed": 4000
       }
