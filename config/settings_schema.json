@@ -1557,5 +1557,23 @@
         "info": "t:settings_schema.cart.settings.cart_drawer.collection.info"
       }
     ]
+  },
+  {
+    "name": "WhatsApp Chat",
+    "settings": [
+      {
+        "type": "text",
+        "id": "whatsapp_phone",
+        "label": "Número de WhatsApp",
+        "placeholder": "573001234567",
+        "info": "Incluye código de país sin + ni espacios"
+      },
+      {
+        "type": "color",
+        "id": "whatsapp_button_color",
+        "label": "Color del botón",
+        "default": "#25D366"
+      }
+    ]
   }
 ]

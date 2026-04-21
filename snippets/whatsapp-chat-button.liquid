@@ -1,0 +1,309 @@
+{% if settings.whatsapp_phone != blank %}
+<style>
+  .whatsapp-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: {{ settings.whatsapp_button_color }};
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 999;
+    transition: all 0.3s ease;
+  }
+
+  .whatsapp-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
+
+  .whatsapp-btn svg {
+    width: 32px;
+    height: 32px;
+    fill: white;
+  }
+
+  @keyframes whatsapp-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .whatsapp-btn.notify {
+    animation: whatsapp-pulse 2s infinite;
+  }
+
+  .whatsapp-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s;
+  }
+
+  .whatsapp-modal.open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .whatsapp-modal-content {
+    background-color: white;
+    padding: 32px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .whatsapp-modal-header {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  .whatsapp-product-selector {
+    margin-bottom: 20px;
+  }
+
+  .whatsapp-product-selector label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #666;
+  }
+
+  .whatsapp-product-selector select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .whatsapp-message-preview {
+    background-color: #f5f5f5;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    color: #555;
+    max-height: 120px;
+    overflow-y: auto;
+  }
+
+  .whatsapp-actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  .whatsapp-actions button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .whatsapp-send-btn {
+    background-color: {{ settings.whatsapp_button_color }};
+    color: white;
+  }
+
+  .whatsapp-send-btn:hover {
+    opacity: 0.9;
+  }
+
+  .whatsapp-close-btn {
+    background-color: #f0f0f0;
+    color: #333;
+  }
+
+  .whatsapp-close-btn:hover {
+    background-color: #e0e0e0;
+  }
+
+  @media (max-width: 768px) {
+    .whatsapp-btn {
+      bottom: 16px;
+      right: 16px;
+      width: 56px;
+      height: 56px;
+    }
+
+    .whatsapp-btn svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .whatsapp-modal-content {
+      width: 95%;
+      padding: 24px;
+    }
+  }
+</style>
+
+<button class="whatsapp-btn notify" id="whatsappBtn" aria-label="Chat por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.6915026,13.4744748 C17.4788797,13.3837623 16.3818949,12.8158879 16.1840035,12.7327527 C15.9861121,12.6496175 15.8379153,12.6080499 15.6897185,12.8158879 C15.5415217,13.0237258 15.1305556,13.5048598 14.9964766,13.6530566 C14.8623976,13.8012533 14.7283186,13.8428209 14.5205806,13.7521084 C14.3128427,13.6613959 13.6338971,13.4122472 12.8268109,12.6942053 C12.2047772,12.1272231 11.7988198,11.4368835 11.6647408,11.2290456 C11.5306618,11.0212077 11.6505563,10.8902775 11.7572517,10.7996772 C11.8555953,10.7193424 11.9705757,10.5958513 12.0757098,10.4632346 C12.1808439,10.330618 12.2351824,10.2395044 12.3437145,10.0913076 C12.4522467,9.94311077 12.4078802,9.81043003 12.3329309,9.71971751 C12.2579816,9.62900498 11.8490969,8.53743235 11.6734276,8.10003692 C11.5024701,7.68267161 11.3292202,7.74444157 11.2015198,7.73835281 C11.0846213,7.73357471 10.9369648,7.73357471 10.7900671,7.73357471 C10.6374797,7.73357471 10.4026677,7.80849249 10.2048903,7.98625156 C10.0070129,8.16401063 9.45058481,8.73189657 9.45058481,9.82346519 C9.45058481,10.9150338 10.2231091,12.0755529 10.3282432,12.2237496 C10.4333773,12.3719464 11.7968621,14.5854434 13.9098813,15.5247366 C14.4137549,15.7566487 14.8034664,15.8769889 15.1015468,15.9678014 C15.6126353,16.1095508 16.0941278,16.0831271 16.4772117,16.0063975 C16.9080949,15.9226379 17.8073699,15.4234489 17.984039,14.8774308 C18.1607082,14.3314127 18.1607082,13.8834147 18.0856589,13.7921223 C18.0120948,13.7001606 17.8643179,13.5648035 17.6915026,13.4744748 Z M12.0045457,19.5 C6.48062479,19.5 2,15.0193752 2,9.5 C2,3.98062479 6.48062479,0.5 12.0045457,0.5 C17.5239267,0.5 22,3.98062479 22,9.5 C22,15.0193752 17.5239267,19.5 12.0045457,19.5 Z"/>
+  </svg>
+</button>
+
+<div class="whatsapp-modal" id="whatsappModal">
+  <div class="whatsapp-modal-content">
+    <div class="whatsapp-modal-header">Cuéntanos cómo podemos ayudarte</div>
+    
+    <div class="whatsapp-product-selector" id="productSelector" style="display: none;">
+      <label for="whatsappProductSelect">Selecciona un producto (opcional)</label>
+      <select id="whatsappProductSelect">
+        <option value="">-- Seleccionar producto --</option>
+      </select>
+    </div>
+
+    <div class="whatsapp-message-preview" id="whatsappPreview"></div>
+
+    <div class="whatsapp-actions">
+      <button class="whatsapp-send-btn" id="whatsappSendBtn">Enviar por WhatsApp</button>
+      <button class="whatsapp-close-btn" id="whatsappCloseBtn">Cancelar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const whatsappPhone = {{ settings.whatsapp_phone | json }};
+  const whatsappBtn = document.getElementById('whatsappBtn');
+  const whatsappModal = document.getElementById('whatsappModal');
+  const whatsappCloseBtn = document.getElementById('whatsappCloseBtn');
+  const whatsappSendBtn = document.getElementById('whatsappSendBtn');
+  const productSelector = document.getElementById('productSelector');
+  const productSelect = document.getElementById('whatsappProductSelect');
+  const previewDiv = document.getElementById('whatsappPreview');
+
+  let currentProduct = null;
+  let allProducts = [];
+
+  // Detectar si estamos en página de producto
+  const productData = document.querySelector('[data-product-info]');
+  if (productData) {
+    const productTitle = productData.getAttribute('data-product-title');
+    const productUrl = productData.getAttribute('data-product-url');
+    currentProduct = {
+      title: productTitle,
+      url: productUrl
+    };
+  }
+
+  // Obtener lista de productos si estamos en página genérica
+  if (!currentProduct && window.Shopify && window.Shopify.products) {
+    allProducts = window.Shopify.products.map(p => ({
+      title: p.title,
+      url: p.url
+    }));
+  }
+
+  function updatePreview() {
+    let message = 'Hola! Me interesa obtener más información sobre vuestros productos.';
+    
+    if (currentProduct) {
+      message = `Hola! 👋\n\nMe interesa este producto:\n\n${currentProduct.title}\n${currentProduct.url}`;
+    } else if (productSelect.value) {
+      const selected = allProducts.find(p => p.title === productSelect.value);
+      if (selected) {
+        message = `Hola! 👋\n\nMe interesa este producto:\n\n${selected.title}\n${selected.url}`;
+      }
+    }
+
+    previewDiv.textContent = message;
+    return message;
+  }
+
+  function openModal() {
+    whatsappModal.classList.add('open');
+    
+    // Solo mostrar selector si no hay producto actual
+    if (!currentProduct) {
+      productSelector.style.display = 'block';
+      
+      // Cargar productos en selector
+      if (allProducts.length === 0) {
+        fetch('/products.json?limit=250')
+          .then(r => r.json())
+          .then(data => {
+            allProducts = data.products.map(p => ({
+              title: p.title,
+              url: p.url
+            }));
+            populateProductSelect();
+          })
+          .catch(() => {
+            productSelector.style.display = 'none';
+          });
+      } else {
+        populateProductSelect();
+      }
+    }
+
+    updatePreview();
+  }
+
+  function populateProductSelect() {
+    productSelect.innerHTML = '<option value="">-- Seleccionar producto --</option>';
+    allProducts.forEach(product => {
+      const opt = document.createElement('option');
+      opt.value = product.title;
+      opt.textContent = product.title;
+      productSelect.appendChild(opt);
+    });
+  }
+
+  function closeModal() {
+    whatsappModal.classList.remove('open');
+  }
+
+  function sendWhatsApp() {
+    const message = updatePreview();
+    const encoded = encodeURIComponent(message);
+    const waLink = `https://wa.me/${whatsappPhone}?text=${encoded}`;
+    window.open(waLink, '_blank');
+    closeModal();
+  }
+
+  whatsappBtn.addEventListener('click', openModal);
+  whatsappCloseBtn.addEventListener('click', closeModal);
+  whatsappSendBtn.addEventListener('click', sendWhatsApp);
+  productSelect.addEventListener('change', updatePreview);
+
+  // Cerrar modal al hacer click fuera
+  whatsappModal.addEventListener('click', (e) => {
+    if (e.target === whatsappModal) closeModal();
+  });
+
+  // Remover animación después de 6 segundos
+  setTimeout(() => {
+    whatsappBtn.classList.remove('notify');
+  }, 6000);
+})();
+</script>
+{% endif %}
