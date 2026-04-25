@@ -257,9 +257,9 @@
         "collapsible_row_3Fmpcx": {
           "type": "collapsible_row",
           "settings": {
-            "heading": "Collapsible row",
+            "heading": "aaa",
             "icon": "check_mark",
-            "row_content": "",
+            "row_content": "<p>aaa</p>",
             "page": ""
           }
         },
