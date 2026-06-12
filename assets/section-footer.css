@@ -514,3 +514,166 @@
     }
   }
 }
+
+/* ============================================================
+   Onetti editorial footer
+   - Body text in Inter (readable), brand display in Cormorant
+   - Gold center-grow underline on links (matches header)
+   - Hairline gold rule under brand name + active section links
+   - All transitions reuse --ease-out-quart
+   ============================================================ */
+
+/* Section headings (menu/newsletter labels): Inter, tracked, all-caps */
+.footer-block__heading {
+  font-family: var(--font-body-family);
+  font-weight: var(--font-body-weight-bold, 600);
+  font-size: var(--text-md);
+  letter-spacing: 0.18em;
+  margin-bottom: var(--space-4);
+  color: rgb(var(--color-foreground));
+}
+@media screen and (min-width: 750px) {
+  .footer-block__heading {
+    font-size: var(--text-base);
+    margin-bottom: var(--space-5);
+  }
+}
+
+/* Brand block: serif display name + readable body intro */
+.footer-block__brand-info .footer-block__heading {
+  font-family: var(--font-heading-family);
+  font-weight: 500;
+  font-style: normal;
+  font-size: clamp(2.4rem, 3.6vw, 3.4rem);
+  letter-spacing: 0.02em;
+  line-height: var(--lh-tight);
+  text-transform: none;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-4);
+  position: relative;
+  color: rgb(var(--color-foreground));
+  text-wrap: balance;
+}
+.footer-block__brand-info .footer-block__heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.4rem;
+  height: 1px;
+  background: rgb(var(--color-base-accent-2));
+}
+.footer-block__brand-info .rte {
+  font-family: var(--font-body-family);
+  font-size: var(--text-lg);
+  line-height: var(--lh-relaxed);
+  color: rgba(var(--color-foreground), 0.78);
+  max-width: 38rem;
+  text-wrap: pretty;
+  margin-bottom: var(--space-5);
+}
+
+/* List menu links: Inter, muted idle → full on hover, gold center-grow */
+.footer-block__details-content .list-menu__item--link {
+  font-family: var(--font-body-family);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: rgba(var(--color-foreground), 0.7);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s var(--ease-out-quart);
+}
+.footer-block__details-content .list-menu__item--link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: rgb(var(--color-base-accent-2));
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.45s var(--ease-out-quart);
+}
+.footer-block__details-content .list-menu__item--link:hover,
+.footer-block__details-content .list-menu__item--link:focus-visible {
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+}
+.footer-block__details-content .list-menu__item--link:hover::after,
+.footer-block__details-content .list-menu__item--link:focus-visible::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Active menu link: italic accent + persistent short gold rule */
+  .footer-block__details-content .list-menu__item--active {
+    color: rgb(var(--color-foreground));
+    text-decoration: none;
+  }
+.footer-block__details-content .list-menu__item--active::after {
+  transform: translateX(-50%) scaleX(1);
+  width: 0.9rem;
+}
+
+/* Copyright + policies: small Inter, muted, gold hover */
+.footer__copyright,
+.footer__copyright .copyright__content,
+.footer .policies li a {
+  font-family: var(--font-body-family);
+  font-size: var(--text-md);
+  letter-spacing: 0.04em;
+  color: rgba(var(--color-foreground), 0.65);
+  text-decoration: none;
+  transition: color 0.3s var(--ease-out-quart);
+}
+.footer__copyright a:hover,
+.footer .policies li a:hover {
+  color: rgb(var(--color-foreground));
+}
+.footer .policies li::before {
+  color: rgba(var(--color-foreground), 0.35);
+}
+
+/* Bottom bar: refined divider, breathing room */
+.footer__content-bottom {
+  border-top: 1px solid rgba(var(--color-foreground), 0.12);
+  padding-top: var(--space-5);
+  margin-top: var(--space-6);
+}
+@media screen and (min-width: 750px) {
+  .footer__content-bottom {
+    padding-top: var(--space-5);
+  }
+}
+
+/* Social icons: match header idle opacity (0.7), keep existing lift+gold hover */
+.footer .list-social__link {
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+/* Localization labels: small Inter, kept subtle */
+.footer__localization h2 {
+  font-family: var(--font-body-family);
+  font-size: 1.1rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.75);
+}
+
+/* Newsletter copy & fields: force Inter for any inherited serif */
+.footer__newsletter,
+.footer__newsletter .newsletter-form__field-wrapper .field__input,
+.footer__newsletter .field__label {
+  font-family: var(--font-body-family);
+}
+
+/* Reduced motion: drop transitions, transforms still apply instantly */
+@media (prefers-reduced-motion: reduce) {
+  .footer-block__details-content .list-menu__item--link::after,
+  .footer-block__details-content .list-menu__item--active::after,
+  .footer__copyright,
+  .footer__copyright a,
+  .footer .policies li a {
+    transition: none;
+  }
+}

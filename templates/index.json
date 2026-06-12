@@ -250,11 +250,63 @@
       "settings": {
         "include_margins": true
       }
+    },
+    "philosophy": {
+      "type": "main-philosophy",
+      "blocks": {
+        "item-1": {
+          "type": "item",
+          "settings": {
+            "title": "Componentes de alta gama",
+            "body": "<p>Seleccionamos piezas de proveedores suizos y japoneses reconocidos, eligiendo cada componente por su fiabilidad demostrada y su comportamiento a largo plazo.</p>",
+            "position": "alternating"
+          }
+        },
+        "item-2": {
+          "type": "item",
+          "settings": {
+            "title": "Montaje manual y ajuste individual",
+            "body": "<p>Cada reloj se ensambla a mano en nuestro taller. El ajuste de precisión se realiza individualmente para asegurar una marcha estable y exacta desde el primer día.</p>",
+            "position": "alternating"
+          }
+        },
+        "item-3": {
+          "type": "item",
+          "settings": {
+            "title": "Producción controlada, sin exceso",
+            "body": "<p>Cada pieza se produce bajo pedido, manteniendo un control total de calidad y evitando la producción en masa. Tu reloj es único, no uno más en una línea de ensamblaje.</p>",
+            "position": "alternating"
+          }
+        }
+      },
+      "block_order": [
+        "item-1",
+        "item-2",
+        "item-3"
+      ],
+      "settings": {
+        "heading": "Nuestra Filosofía",
+        "color_scheme": "background-1",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
+    },
+    "products_carousel_demo": {
+      "type": "products-carousel",
+      "settings": {
+        "heading": "Productos destacados",
+        "source_collection": "submarine-gmt",
+        "products_limit": 12,
+        "autoplay": true,
+        "autoplay_speed": 4500
+      }
     }
   },
   "order": [
     "6a3bb789-ce10-45f5-ae67-e2063ef8c76b",
+    "philosophy",
     "collections_carousel_Qthrx3",
+    "products_carousel_demo",
     "featured_collection",
     "38cdf60f-e431-43b5-aac3-7e6215447d67",
     "video_azVNCN",

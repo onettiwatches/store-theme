@@ -1,0 +1,219 @@
+<style>
+  #filosofia-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+  }
+
+  #filosofia-{{ section.id }} .ph-title-wrapper {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  #filosofia-{{ section.id }} .ph-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+    align-items: center;
+    max-width: var(--page-width, 1600px);
+    margin: 0 auto var(--space-8);
+    padding: 0 var(--space-4);
+  }
+  #filosofia-{{ section.id }} .ph-block:last-child {
+    margin-bottom: 0;
+  }
+  @media (max-width: 989px) {
+    #filosofia-{{ section.id }} .ph-block {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      margin-bottom: var(--space-5);
+    }
+  }
+
+  #filosofia-{{ section.id }} .ph-block-text {
+    text-align: left;
+  }
+  #filosofia-{{ section.id }} .ph-block-title {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
+    font-weight: 500;
+    line-height: var(--lh-snug);
+    margin: 0 0 var(--space-3);
+    text-wrap: balance;
+  }
+  #filosofia-{{ section.id }} .ph-block-body {
+    font-family: var(--font-body-family);
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: rgba(var(--color-foreground), 0.78);
+    margin: 0;
+  }
+  #filosofia-{{ section.id }} .ph-block-body p {
+    margin: 0 0 var(--space-3);
+  }
+  #filosofia-{{ section.id }} .ph-block-body p:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Right text (image would be on the left) */
+  #filosofia-{{ section.id }} .ph-block--right .ph-block-text {
+    grid-column: 2;
+  }
+  /* Left text (image would be on the right) */
+  #filosofia-{{ section.id }} .ph-block--left .ph-block-text {
+    grid-column: 1;
+  }
+  @media (max-width: 989px) {
+    #filosofia-{{ section.id }} .ph-block--right .ph-block-text,
+    #filosofia-{{ section.id }} .ph-block--left .ph-block-text {
+      grid-column: 1;
+    }
+  }
+</style>
+
+<section
+  id="filosofia-{{ section.id }}"
+  class="section color-{{ section.settings.color_scheme }}"
+>
+  <div class="ph-title-wrapper page-width">
+    {%- if section.settings.heading != blank -%}
+      <h2 class="title">{{ section.settings.heading }}</h2>
+    {%- endif -%}
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    {%- for block in section.blocks -%}
+      {%- assign pos = block.settings.position -%}
+      {%- if pos == 'right' -%}
+        {%- assign pos_class = 'ph-block--right' -%}
+      {%- elsif pos == 'left' -%}
+        {%- assign pos_class = 'ph-block--left' -%}
+      {%- else -%}
+        {%- assign mod = forloop.index | modulo: 2 -%}
+        {%- if mod == 0 -%}
+          {%- assign pos_class = 'ph-block--right' -%}
+        {%- else -%}
+          {%- assign pos_class = 'ph-block--left' -%}
+        {%- endif -%}
+      {%- endif -%}
+
+      <div class="ph-block {{ pos_class }}" {{ block.shopify_attributes }}>
+        <div class="ph-block-text">
+          {%- if block.settings.title != blank -%}
+            <h3 class="ph-block-title">{{ block.settings.title }}</h3>
+          {%- endif -%}
+          {%- if block.settings.body != blank -%}
+            <div class="ph-block-body">
+              {{ block.settings.body }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endfor -%}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Nuestra Filosofía",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título de la sección",
+      "default": "Nuestra Filosofía"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Esquema de color",
+      "default": "background-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding superior",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding inferior",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Párrafo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Selección de componentes"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Párrafo",
+          "default": "<p>Cada pieza se elige cuidadosamente para garantizar calidad, ajuste y durabilidad real.</p>"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Posición del texto",
+          "options": [
+            { "value": "alternating", "label": "Intercalada (auto)" },
+            { "value": "right", "label": "Derecha" },
+            { "value": "left", "label": "Izquierda" }
+          ],
+          "default": "alternating",
+          "info": "En modo auto, alterna: 1ª derecha, 2ª izquierda, 3ª derecha."
+        }
+      ]
+    }
+  ],
+  "max_blocks": 3,
+  "presets": [
+    {
+      "name": "Nuestra Filosofía",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "title": "Componentes de alta gama",
+            "body": "<p>Seleccionamos piezas de proveedores suizos y japoneses reconocidos, eligiendo cada componente por su fiabilidad demostrada y su comportamiento a largo plazo.</p>",
+            "position": "alternating"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "Montaje manual y ajuste individual",
+            "body": "<p>Cada reloj se ensambla a mano en nuestro taller. El ajuste de precisión se realiza individualmente para asegurar una marcha estable y exacta desde el primer día.</p>",
+            "position": "alternating"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "title": "Producción controlada, sin exceso",
+            "body": "<p>Cada pieza se produce bajo pedido, manteniendo un control total de calidad y evitando la producción en masa. Tu reloj es único, no uno más en una línea de ensamblaje.</p>",
+            "position": "alternating"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

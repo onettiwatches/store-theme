@@ -7,32 +7,32 @@
     --scale: 1.2;
   }
 
-  #cc-{{ section.id }} {
-    --cc-bg:                  {{ settings.colors_background_1 }};
-    --cc-text:                {{ settings.colors_text }};
-    --cc-accent:              {{ settings.colors_accent_2 }};
-    --cc-btn-txt:             {{ settings.colors_solid_button_labels }};
+  #pc-{{ section.id }} {
+    --pc-bg:                  {{ settings.colors_background_1 }};
+    --pc-text:                {{ settings.colors_text }};
+    --pc-accent:              {{ settings.colors_accent_2 }};
+    --pc-btn-txt:             {{ settings.colors_solid_button_labels }};
 
-    background-color: var(--cc-bg);
+    background-color: var(--pc-bg);
     padding: var(--space-7) 0 var(--space-8);
     overflow: hidden;
     position: relative;
   }
 
-  #cc-{{ section.id }} .cc-header {
+  #pc-{{ section.id }} .pc-header {
     text-align: center;
     margin-bottom: var(--space-6);
     padding: 0 var(--space-4);
   }
 
-  #cc-{{ section.id }} .cc-title {
+  #pc-{{ section.id }} .pc-title {
     margin: 0;
     line-height: var(--lh-tight);
-    color: var(--cc-text);
+    color: var(--pc-text);
     font-family: var(--font-heading-family);
   }
 
-  #cc-{{ section.id }} .cc-nav {
+  #pc-{{ section.id }} .pc-nav {
     position: absolute;
     top: var(--space-7);
     right: var(--space-5);
@@ -41,34 +41,34 @@
   }
 
   @media (max-width: 768px) {
-    #cc-{{ section.id }} .cc-nav { top: var(--space-4); right: var(--space-4); }
+    #pc-{{ section.id }} .pc-nav { top: var(--space-4); right: var(--space-4); }
   }
 
-  #cc-{{ section.id }} .cc-nav-btn {
+  #pc-{{ section.id }} .pc-nav-btn {
     width: 4.2rem; height: 4.2rem;
     border-radius: 50%;
-    border: 1px solid color-mix(in srgb, var(--cc-accent) 40%, transparent);
+    border: 1px solid color-mix(in srgb, var(--pc-accent) 40%, transparent);
     background: transparent;
-    color: var(--cc-text);
+    color: var(--pc-text);
     cursor: pointer;
     display: flex; align-items: center; justify-content: center;
     transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
     padding: 0;
   }
 
-  #cc-{{ section.id }} .cc-nav-btn:hover {
-    background: var(--cc-accent);
-    color: var(--cc-btn-txt);
-    border-color: var(--cc-accent);
+  #pc-{{ section.id }} .pc-nav-btn:hover {
+    background: var(--pc-accent);
+    color: var(--pc-btn-txt);
+    border-color: var(--pc-accent);
   }
 
-  #cc-{{ section.id }} .cc-nav-btn svg {
+  #pc-{{ section.id }} .pc-nav-btn svg {
     width: 1.5rem; height: 1.5rem;
     stroke: currentColor; stroke-width: 1.8; fill: none;
     pointer-events: none;
   }
 
-  #cc-{{ section.id }} .cc-viewport {
+  #pc-{{ section.id }} .pc-viewport {
     overflow: hidden;
     width: 100%;
     display: flex;
@@ -76,7 +76,7 @@
     height: 48rem;
   }
 
-  #cc-{{ section.id }} .cc-track {
+  #pc-{{ section.id }} .pc-track {
     display: flex;
     will-change: transform;
     transition: transform var(--speed) var(--easing);
@@ -84,30 +84,30 @@
     height: 100%;
   }
 
-  #cc-{{ section.id }} .cc-card {
+  #pc-{{ section.id }} .pc-card {
     flex: 0 0 var(--slide-w);
     margin: 0 var(--gap);
     cursor: pointer;
     border-radius: var(--radius-md);
-    background: var(--cc-bg);
-    border: 1px solid rgba(var(--cc-text), 0.08);
+    background: var(--pc-bg);
+    border: 1px solid rgba(var(--pc-text), 0.08);
     transition: all var(--speed) var(--easing);
     padding-top: var(--space-3);
   }
 
-  #cc-{{ section.id }} .cc-card.center {
+  #pc-{{ section.id }} .pc-card.center {
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
     position: relative;
     transform: scale(var(--scale));
   }
 
-  #cc-{{ section.id }} .cc-img-wrap {
+  #pc-{{ section.id }} .pc-img-wrap {
     width: 100%;
     aspect-ratio: 1 / 1;
     overflow: hidden;
   }
 
-  #cc-{{ section.id }} .cc-img-wrap img {
+  #pc-{{ section.id }} .pc-img-wrap img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -117,88 +117,114 @@
     transition: transform calc(var(--speed) * 0.9) var(--easing);
   }
 
-  #cc-{{ section.id }} .cc-card.center .cc-img-wrap img {
+  #pc-{{ section.id }} .pc-card.center .pc-img-wrap img {
     transform: scale(1.04);
   }
 
-  #cc-{{ section.id }} .cc-card-body {
-    padding: var(--space-4) var(--space-4) var(--space-4);
+  #pc-{{ section.id }} .pc-card-body {
+    padding: var(--space-4);
     text-align: left;
   }
 
-  #cc-{{ section.id }} .cc-name {
-    margin: 0;
+  #pc-{{ section.id }} a.pc-card,
+  #pc-{{ section.id }} a.pc-card *,
+  #pc-{{ section.id }} a.pc-card .pc-name,
+  #pc-{{ section.id }} a.pc-card .pc-price {
+    color: var(--pc-text);
+    text-decoration: none !important;
+  }
+
+  #pc-{{ section.id }} a.pc-card:hover .pc-name,
+  #pc-{{ section.id }} a.pc-card:focus-visible .pc-name {
+    color: var(--pc-accent);
+  }
+
+  #pc-{{ section.id }} .pc-name {
+    margin: 0 0 var(--space-1);
     font-family: var(--font-heading-family);
     font-size: var(--text-base);
     font-weight: 500;
-    color: var(--cc-text);
+    color: var(--pc-text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: var(--lh-normal);
   }
 
-  #cc-{{ section.id }} .cc-dots {
-    display: flex;
-    justify-content: center;
-    gap: var(--space-2);
-    margin-top: var(--space-5);
+  #pc-{{ section.id }} .pc-price {
+    margin: 0;
+    font-family: var(--font-body-family);
+    font-size: var(--text-sm);
+    color: rgba(var(--pc-text), 0.75);
   }
 
-  #cc-{{ section.id }} .cc-dot {
+  #pc-{{ section.id }} .pc-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 36px;
+  }
+
+  #pc-{{ section.id }} .pc-dot {
     width: 7px; height: 7px;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--cc-text) 20%, transparent);
+    background: color-mix(in srgb, var(--pc-text) 20%, transparent);
     border: none;
     padding: 0;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease;
   }
 
-  #cc-{{ section.id }} .cc-dot.active {
-    background: var(--cc-accent);
+  #pc-{{ section.id }} .pc-dot.active {
+    background: var(--pc-accent);
     transform: scale(1.4);
   }
 </style>
 
-<section id="cc-{{ section.id }}">
-  <div class="cc-header">
-    <h2 class="cc-title">{{ section.settings.heading }}</h2>
+<section id="pc-{{ section.id }}">
+  <div class="pc-header">
+    <h2 class="pc-title">{{ section.settings.heading }}</h2>
   </div>
 
-  <div class="cc-nav">
-    <button class="cc-nav-btn" id="cc-prev-{{ section.id }}" aria-label="Anterior">
+  <div class="pc-nav">
+    <button class="pc-nav-btn" id="pc-prev-{{ section.id }}" aria-label="Anterior">
       <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
-    <button class="cc-nav-btn" id="cc-next-{{ section.id }}" aria-label="Siguiente">
+    <button class="pc-nav-btn" id="pc-next-{{ section.id }}" aria-label="Siguiente">
       <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
     </button>
   </div>
 
-  <div class="cc-viewport" id="cc-vp-{{ section.id }}">
-    <div class="cc-track" id="cc-track-{{ section.id }}"></div>
+  <div class="pc-viewport" id="pc-vp-{{ section.id }}">
+    <div class="pc-track" id="pc-track-{{ section.id }}"></div>
   </div>
 
-  <div class="cc-dots" id="cc-dots-{{ section.id }}"></div>
+  <div class="pc-dots" id="pc-dots-{{ section.id }}"></div>
 </section>
+
+{%- assign source_collection = collections[section.settings.source_collection] -%}
 
 <script>
 (function () {
-  const rawCollections = [
-    {%- for block in section.blocks -%}
-      {%- assign col = collections[block.settings.collection] -%}
-      {%- if col != blank and col.image != blank -%}
-      {
-        url:   {{ col.url | json }},
-        title: {{ col.title | json }},
-        img:   {{ col.image | image_url: width: 600 | json }},
-        alt:   {{ col.image.alt | default: col.title | json }}
-      }{% unless forloop.last %},{% endunless %}
-      {%- endif -%}
-    {%- endfor -%}
+  const rawItems = [
+    {%- if source_collection != blank and source_collection.products.size > 0 -%}
+      {%- for product in source_collection.products limit: section.settings.products_limit -%}
+        {
+          url:   {{ product.url | json }},
+          title: {{ product.title | json }},
+          img:   {{ product.featured_image | default: product.images.first | image_url: width: 600 | json }},
+          alt:   {{ product.featured_image.alt | default: product.title | json }},
+          price: {{ product.price | money | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    {%- endif -%}
   ];
 
-  if (rawCollections.length === 0) return;
+  if (rawItems.length === 0) {
+    document.getElementById('pc-vp-{{ section.id }}').style.display = 'none';
+    document.getElementById('pc-dots-{{ section.id }}').style.display = 'none';
+    return;
+  }
 
   const SLIDE_W       = 280;
   const GAP           = 20;
@@ -209,11 +235,11 @@
   const AUTOPLAY_COOLDOWN_MS  = AUTOPLAY_MS * 5;
   const SECTION_ID            = {{ section.id | json }};
 
-  const track       = document.getElementById('cc-track-' + SECTION_ID);
-  const viewport    = document.getElementById('cc-vp-' + SECTION_ID);
-  const prevBtn     = document.getElementById('cc-prev-' + SECTION_ID);
-  const nextBtn     = document.getElementById('cc-next-' + SECTION_ID);
-  const dotsWrap    = document.getElementById('cc-dots-' + SECTION_ID);
+  const track       = document.getElementById('pc-track-' + SECTION_ID);
+  const viewport    = document.getElementById('pc-vp-' + SECTION_ID);
+  const prevBtn     = document.getElementById('pc-prev-' + SECTION_ID);
+  const nextBtn     = document.getElementById('pc-next-' + SECTION_ID);
+  const dotsWrap    = document.getElementById('pc-dots-' + SECTION_ID);
 
   let centerIndex          = 0;
   let isMoving             = false;
@@ -222,9 +248,9 @@
   let currentVirtual       = 0;
   let lastManualNavigation = 0;
 
-  const dots = rawCollections.map((_, i) => {
+  const dots = rawItems.map((_, i) => {
     const btn = document.createElement('button');
-    btn.className = 'cc-dot';
+    btn.className = 'pc-dot';
     btn.setAttribute('aria-label', 'Ir al producto ' + (i + 1));
     btn.addEventListener('click', () => {
       recordManualNavigation();
@@ -235,31 +261,29 @@
   });
 
   function updateDots(virtualIdx) {
-    const realIdx = ((virtualIdx % rawCollections.length) + rawCollections.length) % rawCollections.length;
+    const realIdx = ((virtualIdx % rawItems.length) + rawItems.length) % rawItems.length;
     dots.forEach((d, i) => d.classList.toggle('active', i === realIdx));
   }
 
   function createSlide(virtualIndex) {
-    const n   = ((virtualIndex % rawCollections.length) + rawCollections.length) % rawCollections.length;
-    const c   = rawCollections[n];
+    const n   = ((virtualIndex % rawItems.length) + rawItems.length) % rawItems.length;
+    const c   = rawItems[n];
 
-    const div = document.createElement('div');
-    div.className     = 'cc-card';
+    const div = document.createElement('a');
+    div.href = c.url;
+    div.className     = 'pc-card';
     div.dataset.index = virtualIndex;
     div.dataset.real  = n;
 
     div.innerHTML = `
-      <div class="cc-img-wrap">
+      <div class="pc-img-wrap">
         <img src="${c.img}" alt="${c.alt}" loading="lazy" width="600" height="600" draggable="false" ondragstart="return false;">
       </div>
-      <div class="cc-card-body">
-        <p class="cc-name">${c.title}</p>
+      <div class="pc-card-body">
+        <p class="pc-name">${c.title}</p>
+        <p class="pc-price">${c.price}</p>
       </div>
     `;
-
-    div.addEventListener('click', () => {
-      window.location.href = c.url;
-    });
 
     return div;
   }
@@ -350,10 +374,10 @@
 
   function goTo(realIndex) {
     if (isMoving) return;
-    const currentReal = ((currentVirtual % rawCollections.length) + rawCollections.length) % rawCollections.length;
+    const currentReal = ((currentVirtual % rawItems.length) + rawItems.length) % rawItems.length;
     let diff = realIndex - currentReal;
-    if (diff > rawCollections.length / 2)  diff -= rawCollections.length;
-    if (diff < -rawCollections.length / 2) diff += rawCollections.length;
+    if (diff > rawItems.length / 2)  diff -= rawItems.length;
+    if (diff < -rawItems.length / 2) diff += rawItems.length;
     if (diff === 0) return;
     move(diff);
   }
@@ -412,14 +436,28 @@
 
 {% schema %}
 {
-  "name": "Collections Carousel",
+  "name": "Products Carousel",
   "tag": "section",
   "settings": [
     {
       "type": "text",
       "id": "heading",
       "label": "Título",
-      "default": "Colecciones"
+      "default": "Productos destacados"
+    },
+    {
+      "type": "collection",
+      "id": "source_collection",
+      "label": "Colección de origen"
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "min": 4,
+      "max": 24,
+      "step": 1,
+      "label": "Número de productos",
+      "default": 12
     },
     {
       "type": "checkbox",
@@ -437,22 +475,9 @@
       "default": 4500
     }
   ],
-  "blocks": [
-    {
-      "type": "collection",
-      "name": "Colección",
-      "settings": [
-        {
-          "type": "collection",
-          "id": "collection",
-          "label": "Selecciona colección"
-        }
-      ]
-    }
-  ],
   "presets": [
     {
-      "name": "Collections Carousel",
+      "name": "Products Carousel",
       "category": "Productos"
     }
   ]
