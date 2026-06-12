@@ -21,6 +21,35 @@
       }
     }
   {%- endstyle -%}
+{%- elsif section.settings.image != blank -%}
+  {%- style -%}
+    @media screen and (max-width: 749px) {
+      #Banner-{{ section.id }}.banner--small,
+      #Banner-{{ section.id }}.banner--medium,
+      #Banner-{{ section.id }}.banner--large {
+        min-height: 0 !important;
+        height: auto !important;
+      }
+      #Banner-{{ section.id }}.banner--small .banner__media,
+      #Banner-{{ section.id }}.banner--medium .banner__media,
+      #Banner-{{ section.id }}.banner--large .banner__media {
+        position: relative !important;
+        height: 0 !important;
+        padding-bottom: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}% !important;
+        overflow: hidden;
+      }
+      #Banner-{{ section.id }} .banner__media img,
+      #Banner-{{ section.id }} .banner__media video {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+        object-position: center;
+      }
+    }
+  {%- endstyle -%}
 {%- endif -%}
 
 {%- style -%}
