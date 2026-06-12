@@ -111,11 +111,155 @@
   #filosofia-{{ section.id }} .ph-block-body p:last-child {
     margin-bottom: 0;
   }
+
+  #filosofia-{{ section.id }} .ph-holo {
+    max-width: var(--page-width, 1600px);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+  #filosofia-{{ section.id }} .ph-holo-container {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 22rem;
+    margin: 0 auto;
+  }
+  #filosofia-{{ section.id }} .ph-holo-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    transform-style: preserve-3d;
+    border-radius: 1rem;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(var(--color-base-accent-2), 0.18) 0%,
+        rgba(var(--color-base-accent-2), 0.04) 35%,
+        rgba(var(--color-foreground), 0.04) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(var(--color-background), 0.6) 0%,
+        rgba(var(--color-background), 0.95) 100%
+      );
+    border: 1px solid rgba(var(--color-base-accent-2), 0.35);
+    box-shadow:
+      0 10px 30px rgba(0, 0, 0, 0.35),
+      0 0 0 1px rgba(var(--color-foreground), 0.04) inset;
+    transition: transform 0.15s var(--ease-out-quart);
+    will-change: transform;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  #filosofia-{{ section.id }} .ph-holo-card:focus-visible {
+    outline: 0.2rem solid rgba(var(--color-base-accent-2), 0.7);
+    outline-offset: 0.3rem;
+  }
+
+  #filosofia-{{ section.id }} .ph-holo-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: var(--space-4);
+    text-align: center;
+    color: rgb(var(--color-foreground));
+  }
+
+  #filosofia-{{ section.id }} .ph-holo-eyebrow {
+    display: inline-block;
+    font-family: var(--font-body-family);
+    font-size: var(--text-xs);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    font-weight: var(--font-body-weight-bold);
+    color: rgb(var(--color-base-accent-2));
+  }
+  #filosofia-{{ section.id }} .ph-holo-title {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.4rem, 2vw, 1.75rem);
+    font-weight: 500;
+    line-height: var(--lh-snug);
+    margin: var(--space-1) 0 0;
+    text-wrap: balance;
+  }
+  #filosofia-{{ section.id }} .ph-holo-subtitle {
+    display: block;
+    font-family: var(--font-body-family);
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(var(--color-foreground), 0.65);
+    margin-top: var(--space-1);
+  }
+
+  #filosofia-{{ section.id }} .ph-holo-image {
+    flex: 1 1 auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: var(--space-3) 0;
+    overflow: hidden;
+  }
+  #filosofia-{{ section.id }} .ph-holo-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  #filosofia-{{ section.id }} .ph-holo-image--empty {
+    aspect-ratio: 1 / 1;
+    border: 1px dashed rgba(var(--color-foreground), 0.2);
+    border-radius: var(--radius-md);
+  }
+  #filosofia-{{ section.id }} .ph-holo-image--empty span {
+    color: rgba(var(--color-foreground), 0.4);
+    font-family: var(--font-body-family);
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  #filosofia-{{ section.id }} .ph-holo-meta {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: var(--space-2);
+    border-top: 1px solid rgba(var(--color-base-accent-2), 0.2);
+    font-family: var(--font-body-family);
+    font-size: var(--text-xs);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+  #filosofia-{{ section.id }} .ph-holo-meta-item {
+    flex: 1 1 0;
+  }
+
+  #filosofia-{{ section.id }} .ph-holo-glow {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: overlay;
+    opacity: 0.9;
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      #ffffff55,
+      #0000000f
+    );
+    transition: opacity 0.3s var(--ease-out-quart);
+  }
 </style>
 
 <section
   id="filosofia-{{ section.id }}"
-  class="section color-{{ section.settings.color_scheme }}"
+  class="section color-background-1"
 >
   <div class="ph-title-wrapper page-width">
     {%- if section.settings.heading != blank -%}
@@ -125,49 +269,162 @@
 
   {%- if section.blocks.size > 0 -%}
     {%- for block in section.blocks -%}
-      {%- assign pos = block.settings.position -%}
-      {%- if pos == 'right' -%}
-        {%- assign pos_class = 'ph-block--right' -%}
-      {%- elsif pos == 'left' -%}
-        {%- assign pos_class = 'ph-block--left' -%}
-      {%- else -%}
-        {%- assign mod = forloop.index | modulo: 2 -%}
-        {%- if mod == 0 -%}
-          {%- assign pos_class = 'ph-block--right' -%}
-        {%- else -%}
-          {%- assign pos_class = 'ph-block--left' -%}
-        {%- endif -%}
-      {%- endif -%}
+      {%- if block.type == 'holo_card' -%}
+        <div class="ph-holo" {{ block.shopify_attributes }}>
+          <div class="ph-holo-container">
+            <div class="ph-holo-card" tabindex="0">
+              <div class="ph-holo-content">
+                {%- if block.settings.eyebrow != blank -%}
+                  <span class="ph-holo-eyebrow">{{ block.settings.eyebrow }}</span>
+                {%- endif -%}
+                {%- if block.settings.title != blank -%}
+                  <h3 class="ph-holo-title">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.subtitle != blank -%}
+                  <span class="ph-holo-subtitle">{{ block.settings.subtitle }}</span>
+                {%- endif -%}
 
-      <div class="ph-block {{ pos_class }}" {{ block.shopify_attributes }}>
-        <div class="ph-block-image{% if block.settings.image == blank %} ph-block-image--empty{% endif %}">
-          {%- if block.settings.image != blank -%}
-            {{ block.settings.image | image_url: width: 1200 | image_tag:
-              loading: 'lazy',
-              width: block.settings.image.width,
-              height: block.settings.image.height,
-              sizes: '(min-width: 990px) 50vw, 100vw',
-              alt: block.settings.image.alt | default: block.settings.title
-            }}
-          {%- else -%}
-            <span>Imagen</span>
-          {%- endif -%}
-        </div>
+                <div class="ph-holo-image{% if block.settings.image == blank %} ph-holo-image--empty{% endif %}">
+                  {%- if block.settings.image != blank -%}
+                    {{ block.settings.image | image_url: width: 1200 | image_tag:
+                      loading: 'lazy',
+                      width: block.settings.image.width,
+                      height: block.settings.image.height,
+                      sizes: '(min-width: 990px) 360px, 80vw',
+                      alt: block.settings.image.alt | default: block.settings.title
+                    }}
+                  {%- else -%}
+                    <span>Imagen</span>
+                  {%- endif -%}
+                </div>
 
-        <div class="ph-block-text">
-          {%- if block.settings.title != blank -%}
-            <h3 class="ph-block-title">{{ block.settings.title }}</h3>
-          {%- endif -%}
-          {%- if block.settings.body != blank -%}
-            <div class="ph-block-body">
-              {{ block.settings.body }}
+                {%- if block.settings.meta_left != blank or block.settings.meta_right != blank -%}
+                  <div class="ph-holo-meta">
+                    {%- if block.settings.meta_left != blank -%}
+                      <span class="ph-holo-meta-item">{{ block.settings.meta_left }}</span>
+                    {%- endif -%}
+                    {%- if block.settings.meta_right != blank -%}
+                      <span class="ph-holo-meta-item">{{ block.settings.meta_right }}</span>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+              </div>
+              <div class="ph-holo-glow" aria-hidden="true"></div>
             </div>
-          {%- endif -%}
+          </div>
         </div>
-      </div>
+      {%- else -%}
+        {%- assign pos = block.settings.position -%}
+        {%- if pos == 'right' -%}
+          {%- assign pos_class = 'ph-block--right' -%}
+        {%- elsif pos == 'left' -%}
+          {%- assign pos_class = 'ph-block--left' -%}
+        {%- else -%}
+          {%- assign mod = forloop.index | modulo: 2 -%}
+          {%- if mod == 0 -%}
+            {%- assign pos_class = 'ph-block--right' -%}
+          {%- else -%}
+            {%- assign pos_class = 'ph-block--left' -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        <div class="ph-block {{ pos_class }}" {{ block.shopify_attributes }}>
+          <div class="ph-block-image{% if block.settings.image == blank %} ph-block-image--empty{% endif %}">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 1200 | image_tag:
+                loading: 'lazy',
+                width: block.settings.image.width,
+                height: block.settings.image.height,
+                sizes: '(min-width: 990px) 50vw, 100vw',
+                alt: block.settings.image.alt | default: block.settings.title
+              }}
+            {%- else -%}
+              <span>Imagen</span>
+            {%- endif -%}
+          </div>
+
+          <div class="ph-block-text">
+            {%- if block.settings.title != blank -%}
+              <h3 class="ph-block-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.body != blank -%}
+              <div class="ph-block-body">
+                {{ block.settings.body }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
     {%- endfor -%}
   {%- endif -%}
 </section>
+
+{%- if section.blocks.size > 0 -%}
+  <script>
+    (function () {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var section = document.getElementById('filosofia-{{ section.id }}');
+      if (!section) return;
+
+      var cards = section.querySelectorAll('.ph-holo-card');
+      if (!cards.length) return;
+
+      cards.forEach(function ($card) {
+        var bounds = null;
+
+        var rotateToMouse = function (e) {
+          if (!bounds) return;
+
+          var mouseX = e.clientX;
+          var mouseY = e.clientY;
+          var leftX = mouseX - bounds.x;
+          var topY = mouseY - bounds.y;
+          var center = {
+            x: leftX - bounds.width / 2,
+            y: topY - bounds.height / 2
+          };
+          var distance = Math.sqrt(center.x * center.x + center.y * center.y);
+
+          $card.style.transform =
+            'scale3d(1.07, 1.07, 1.07) rotate3d(' +
+              center.y / 100 + ', ' +
+              -center.x / 100 + ', 0, ' +
+              Math.log(distance) * 2 + 'deg)';
+
+          var glow = $card.querySelector('.ph-holo-glow');
+          if (glow) {
+            glow.style.backgroundImage =
+              'radial-gradient(' +
+                'circle at ' +
+                (center.x * 2 + bounds.width / 2) + 'px ' +
+                (center.y * 2 + bounds.height / 2) + 'px, ' +
+                '#ffffff55, #0000000f)';
+          }
+        };
+
+        var handleMouseEnter = function () {
+          bounds = $card.getBoundingClientRect();
+          document.addEventListener('mousemove', rotateToMouse);
+        };
+
+        var handleMouseLeave = function () {
+          document.removeEventListener('mousemove', rotateToMouse);
+          $card.style.transform = '';
+          var glow = $card.querySelector('.ph-holo-glow');
+          if (glow) glow.style.backgroundImage = '';
+          bounds = null;
+        };
+
+        $card.addEventListener('mouseenter', handleMouseEnter);
+        $card.addEventListener('mouseleave', handleMouseLeave);
+        $card.addEventListener('focus', handleMouseEnter);
+        $card.addEventListener('blur', handleMouseLeave);
+      });
+    })();
+  </script>
+{%- endif -%}
 
 {% schema %}
 {
@@ -180,12 +437,6 @@
       "id": "heading",
       "label": "Título de la sección",
       "default": "Nuestra Filosofía"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "Esquema de color",
-      "default": "background-1"
     },
     {
       "type": "range",
@@ -243,6 +494,47 @@
           "info": "En modo auto, alterna: 1ª derecha, 2ª izquierda, 3ª derecha."
         }
       ]
+    },
+    {
+      "type": "holo_card",
+      "name": "Tarjeta holográfica",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen principal"
+        },
+        {
+          "type": "text",
+          "id": "eyebrow",
+          "label": "Etiqueta superior",
+          "default": "Edición limitada"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Submarine GMT"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Referencia 001 / 100"
+        },
+        {
+          "type": "text",
+          "id": "meta_left",
+          "label": "Meta izquierda",
+          "default": "42 mm"
+        },
+        {
+          "type": "text",
+          "id": "meta_right",
+          "label": "Meta derecha",
+          "default": "300 m"
+        }
+      ]
     }
   ],
   "max_blocks": 3,
@@ -267,11 +559,13 @@
           }
         },
         {
-          "type": "item",
+          "type": "holo_card",
           "settings": {
-            "title": "Producción controlada, sin exceso",
-            "body": "<p>Cada pieza se produce bajo pedido, manteniendo un control total de calidad y evitando la producción en masa. Tu reloj es único, no uno más en una línea de ensamblaje.</p>",
-            "position": "alternating"
+            "eyebrow": "Edición limitada",
+            "title": "Submarine GMT",
+            "subtitle": "Referencia 001 / 100",
+            "meta_left": "42 mm",
+            "meta_right": "300 m"
           }
         }
       ]
