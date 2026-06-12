@@ -1,0 +1,279 @@
+<style>
+  #faq-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+  }
+
+  #faq-{{ section.id }} .faq-inner {
+    max-width: var(--page-width, 1600px);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  #faq-{{ section.id }} .faq-header {
+    text-align: center;
+    margin-bottom: var(--space-8);
+  }
+
+  #faq-{{ section.id }} .faq-title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    line-height: var(--lh-tight);
+    color: rgb(var(--color-foreground));
+    text-wrap: balance;
+  }
+
+  #faq-{{ section.id }} .faq-subtitle {
+    margin: var(--space-3) auto 0;
+    max-width: 38rem;
+    font-family: var(--font-body-family);
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: rgba(var(--color-foreground), 0.7);
+  }
+
+  #faq-{{ section.id }} .faq-list {
+    max-width: 52rem;
+    margin: 0 auto;
+  }
+
+  #faq-{{ section.id }} .faq-item {
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.12);
+  }
+  #faq-{{ section.id }} .faq-item:first-child {
+    border-top: 1px solid rgba(var(--color-foreground), 0.12);
+  }
+
+  #faq-{{ section.id }} .faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5) 0;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    transition: color 0.3s var(--ease-out-quart);
+  }
+  #faq-{{ section.id }} .faq-question::-webkit-details-marker {
+    display: none;
+  }
+  #faq-{{ section.id }} .faq-question:hover {
+    color: rgb(var(--color-base-accent-2));
+  }
+  #faq-{{ section.id }} .faq-question-text {
+    font-family: var(--font-heading-family);
+    font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+    font-weight: 500;
+    line-height: var(--lh-snug);
+    letter-spacing: 0.01em;
+  }
+  #faq-{{ section.id }} .faq-icon {
+    flex-shrink: 0;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(var(--color-foreground), 0.25);
+    border-radius: 50%;
+    color: rgb(var(--color-base-accent-2));
+    transition: transform 0.35s var(--ease-out-quart), border-color 0.3s var(--ease-out-quart);
+    position: relative;
+  }
+  #faq-{{ section.id }} .faq-icon::before,
+  #faq-{{ section.id }} .faq-icon::after {
+    content: '';
+    position: absolute;
+    background: currentColor;
+    border-radius: 1px;
+  }
+  #faq-{{ section.id }} .faq-icon::before {
+    width: 0.875rem;
+    height: 1.5px;
+  }
+  #faq-{{ section.id }} .faq-icon::after {
+    width: 1.5px;
+    height: 0.875rem;
+    transition: transform 0.35s var(--ease-out-quart), opacity 0.2s var(--ease-out-quart);
+  }
+  #faq-{{ section.id }} details[open] .faq-icon {
+    border-color: rgb(var(--color-base-accent-2));
+  }
+  #faq-{{ section.id }} details[open] .faq-icon::after {
+    transform: rotate(90deg);
+    opacity: 0;
+  }
+  #faq-{{ section.id }} details[open] .faq-question {
+    color: rgb(var(--color-base-accent-2));
+  }
+
+  #faq-{{ section.id }} .faq-answer-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s var(--ease-out-quart);
+  }
+  #faq-{{ section.id }} details[open] .faq-answer-wrap {
+    grid-template-rows: 1fr;
+  }
+  #faq-{{ section.id }} .faq-answer-inner {
+    overflow: hidden;
+  }
+  #faq-{{ section.id }} .faq-answer {
+    padding: 0 0 var(--space-5);
+    font-family: var(--font-body-family);
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: rgba(var(--color-foreground), 0.78);
+    max-width: 44rem;
+  }
+  #faq-{{ section.id }} .faq-answer p {
+    margin: 0 0 var(--space-3);
+  }
+  #faq-{{ section.id }} .faq-answer p:last-child {
+    margin-bottom: 0;
+  }
+</style>
+
+<section
+  id="faq-{{ section.id }}"
+  class="section color-background-1"
+>
+  <div class="faq-inner">
+    {%- if section.settings.heading != blank -%}
+      <div class="faq-header">
+        <h2 class="faq-title">{{ section.settings.heading }}</h2>
+        {%- if section.settings.subtitle != blank -%}
+          <p class="faq-subtitle">{{ section.settings.subtitle }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="faq-list">
+        {%- for block in section.blocks -%}
+          <details class="faq-item" {{ block.shopify_attributes }}>
+            <summary class="faq-question">
+              <span class="faq-question-text">{{ block.settings.question | escape }}</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-answer-wrap">
+              <div class="faq-answer-inner">
+                <div class="faq-answer">
+                  {{ block.settings.answer }}
+                </div>
+              </div>
+            </div>
+          </details>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Preguntas frecuentes",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título",
+      "default": "Preguntas frecuentes"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtítulo",
+      "default": "<p>Resolvemos las dudas más comunes sobre nuestros relojes, el proceso de pedido y la garantía.</p>"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding superior",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding inferior",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Pregunta",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pregunta",
+          "default": "¿Cuánto tarda la entrega?"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Respuesta",
+          "default": "<p>El tiempo de entrega varía según el modelo y la personalización. Generalmente entre 4 y 8 semanas desde la confirmación del pedido.</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 20,
+  "presets": [
+    {
+      "name": "Preguntas frecuentes",
+      "blocks": [
+        {
+          "type": "item",
+          "settings": {
+            "question": "¿Cuánto tarda la entrega?",
+            "answer": "<p>Cada reloj se ensambla bajo pedido en nuestro taller. El plazo habitual es de 4 a 8 semanas, dependiendo del modelo y las opciones elegidas.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "¿Qué garantía tienen los relojes?",
+            "answer": "<p>Todos los relojes Onetti cuentan con 2 años de garantía internacional que cubre defectos de fabricación en movimiento y caja.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "¿Puedo personalizar mi reloj?",
+            "answer": "<p>Sí. Ofrecemos opciones de grabado en la trasera de la caja, elección de correa y configuración de bisel para la mayoría de modelos.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "¿Hacen envíos internacionales?",
+            "answer": "<p>Sí, enviamos a la mayoría de países. Los costos y plazos varían según destino y se calculan al cierre del pedido.</p>"
+          }
+        },
+        {
+          "type": "item",
+          "settings": {
+            "question": "¿Cuál es la política de devolución?",
+            "answer": "<p>Aceptamos devoluciones dentro de los 14 días posteriores a la entrega para piezas no personalizadas, en su empaque original.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
