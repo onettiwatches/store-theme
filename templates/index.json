@@ -289,7 +289,7 @@
             "autoplay_media": true,
             "transition_speed": 5,
             "carousel_style": "highlight",
-            "header_text": "Real customer stories",
+            "header_text": "Reseñas de clientes",
             "show_average_rating": true
           }
         }
@@ -346,7 +346,13 @@
         "faq-3",
         "faq-4",
         "faq-5"
-      ]
+      ],
+      "settings": {
+        "heading": "Preguntas frecuentes",
+        "subtitle": "<p>Resolvemos las dudas más comunes sobre nuestros relojes, el proceso de pedido y la garantía.</p>",
+        "padding_top": 80,
+        "padding_bottom": 80
+      }
     }
   },
   "order": [
