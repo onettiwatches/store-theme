@@ -31,7 +31,6 @@
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "disabled": true,
           "settings": {}
         },
         "price": {
@@ -49,6 +48,24 @@
           "type": "description",
           "settings": {}
         },
+        "specs_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Especificaciones",
+            "icon": "stopwatch",
+            "content": "<p>Movimiento automático de alta precisión. Caja de acero inoxidable 316L. Cristal zafiro antirreflejos. Resistencia al agua 10 ATM.</p>",
+            "page": ""
+          }
+        },
+        "shipping_tab": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Envío y garantía",
+            "icon": "truck",
+            "content": "<p>Envío gratis a todo el país. Garantía internacional de 2 años por defectos de fabricación. Devoluciones sin preguntas durante 30 días.</p>",
+            "page": ""
+          }
+        },
         "share": {
           "type": "share",
           "disabled": true,
@@ -64,11 +81,13 @@
       "block_order": [
         "title",
         "vendor",
+        "price",
         "variant_picker",
         "quantity_selector",
-        "price",
         "buy_buttons",
         "description",
+        "specs_tab",
+        "shipping_tab",
         "share",
         "judge_me_reviews_preview_badge_AVND4j"
       ],
@@ -83,7 +102,7 @@
         "mobile_thumbnails": "hide",
         "hide_variants": true,
         "enable_video_looping": false,
-        "padding_top": 64,
+        "padding_top": 80,
         "padding_bottom": 0
       }
     },

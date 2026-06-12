@@ -1,3 +1,31 @@
+function tweenNumber(el, from, to, duration = 600) {
+  if (!el) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = to;
+    return;
+  }
+  if (from === to) {
+    el.textContent = to;
+    return;
+  }
+  const start = performance.now();
+  const ease = (t) => 1 - Math.pow(1 - t, 3);
+  function step(now) {
+    const t = Math.min((now - start) / duration, 1);
+    el.textContent = Math.round(from + (to - from) * ease(t));
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+function readCartCount(bubble) {
+  if (!bubble) return 0;
+  const el = bubble.querySelector('span[aria-hidden="true"]');
+  if (!el) return 0;
+  const n = parseInt(el.textContent.trim(), 10);
+  return Number.isFinite(n) ? n : 0;
+}
+
 class CartRemoveButton extends HTMLElement {
   constructor() {
     super();
@@ -46,12 +74,14 @@ class CartItems extends HTMLElement {
   }
 
   onCartUpdate() {
+    const oldCount = readCartCount(document.querySelector('.cart-count-bubble'));
     fetch(`${routes.cart_url}?section_id=main-cart-items`)
       .then((response) => response.text())
       .then((responseText) => {
         const html = new DOMParser().parseFromString(responseText, 'text/html');
         const sourceQty = html.querySelector('cart-items');
         this.innerHTML = sourceQty.innerHTML;
+        this.pulseCartBubble(oldCount);
       })
       .catch(e => {
         console.error(e);
@@ -84,6 +114,7 @@ class CartItems extends HTMLElement {
   }
 
   updateQuantity(line, quantity, name) {
+    const oldCount = readCartCount(document.querySelector('.cart-count-bubble'));
     this.enableLoading(line);
 
     const body = JSON.stringify({
@@ -141,6 +172,7 @@ class CartItems extends HTMLElement {
           trapFocus(cartDrawerWrapper, document.querySelector('.cart-item__name'))
         }
         publish(PUB_SUB_EVENTS.cartUpdate, {source: 'cart-items'});
+        this.pulseCartBubble(oldCount);
       }).catch(() => {
         this.querySelectorAll('.loading-overlay').forEach((overlay) => overlay.classList.add('hidden'));
         const errors = document.getElementById('cart-errors') || document.getElementById('CartDrawer-CartErrors');
@@ -193,6 +225,23 @@ class CartItems extends HTMLElement {
 
     cartItemElements.forEach((overlay) => overlay.classList.add('hidden'));
     cartDrawerItemElements.forEach((overlay) => overlay.classList.add('hidden'));
+  }
+
+  pulseCartBubble(oldCount) {
+    const bubble = document.querySelector('.cart-count-bubble');
+    if (!bubble) return;
+    bubble.classList.remove('is-updated');
+    // Force reflow so the animation re-triggers on rapid updates
+    void bubble.offsetWidth;
+    bubble.classList.add('is-updated');
+    setTimeout(() => bubble.classList.remove('is-updated'), 700);
+
+    if (typeof oldCount !== 'number') return;
+    const countEl = bubble.querySelector('span[aria-hidden="true"]');
+    if (!countEl) return;
+    const newCount = parseInt(countEl.textContent.trim(), 10);
+    if (!Number.isFinite(newCount)) return;
+    tweenNumber(countEl, oldCount, newCount, 600);
   }
 }
 

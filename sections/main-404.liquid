@@ -132,9 +132,28 @@
   .template-404 .button:active {
     transform: translateY(0);
   }
+
+  .template-404__gear {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: min(90vw, 900px);
+    height: auto;
+    transform: translate(-50%, -50%);
+    opacity: 0.04;
+    pointer-events: none;
+    animation: onetti-rotate 80s linear infinite;
+  }
+  @keyframes onetti-rotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .template-404__gear { animation: none; } }
 </style>
 
 <div class="template-404">
+  <svg class="template-404__gear" viewBox="0 0 800 800" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="400" cy="400" r="200" fill="none" stroke="currentColor" stroke-width="2"/>
+    <circle cx="400" cy="400" r="110" fill="none" stroke="currentColor" stroke-width="2"/>
+    <path d="M 400.0,80.0 L 435.2,132.3 L 482.8,90.9 L 503.3,150.6 L 560.0,122.9 L 564.4,185.8 L 626.3,173.7 L 614.2,235.6 L 677.1,240.0 L 649.4,296.7 L 709.1,317.2 L 667.7,364.8 L 720.0,400.0 L 667.7,435.2 L 709.1,482.8 L 649.4,503.3 L 677.1,560.0 L 614.2,564.4 L 626.3,626.3 L 564.4,614.2 L 560.0,677.1 L 503.3,649.4 L 482.8,709.1 L 435.2,667.7 L 400.0,720.0 L 364.8,667.7 L 317.2,709.1 L 296.7,649.4 L 240.0,677.1 L 235.6,614.2 L 173.7,626.3 L 185.8,564.4 L 122.9,560.0 L 150.6,503.3 L 90.9,482.8 L 132.3,435.2 L 80.0,400.0 L 132.3,364.8 L 90.9,317.2 L 150.6,296.7 L 122.9,240.0 L 185.8,235.6 L 173.7,173.7 L 235.6,185.8 L 240.0,122.9 L 296.7,150.6 L 317.2,90.9 L 364.8,132.3 Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+  </svg>
   <div class="template-404__content">
     <div class="template-404__icon">404</div>
     <h1 class="title">

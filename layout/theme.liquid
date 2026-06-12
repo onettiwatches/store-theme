@@ -242,14 +242,18 @@
       }
     </script>
     <style>
-      #MainContent h2 {
-        display: block !important;
-        text-align: center !important;
-        text-transform: uppercase !important;
-        font-family: {{ settings.type_body_font | font_url }} !important;
-        font-size: clamp(2rem, 4.5vw, 3.2rem) !important;
-        font-weight: var(--font-body-weight-bold) !important;
-        letter-spacing: 0.18em;
+      /* Onetti section headings: uppercase, centered, tracked.
+         Scope is tightly restricted to SECTION h2s only —
+         NOT card titles, accordion labels, facets, sort/count UI, or utility text. */
+      #MainContent h2:not(.accordion__title):not(.facets__heading):not(.facets__heading--vertical):not(.facet-filters__label):not(.product-count__text):not(.card__heading):not(.caption-large):not(.h4):not(.h5):not(.h6):not([class*="mobile-facets"]):not([class*="product-count"]) {
+        display: block;
+        text-align: center;
+        text-transform: uppercase;
+        font-size: clamp(2.1rem, 3.6vw, 2.8rem);
+        font-weight: var(--font-body-weight-bold);
+        letter-spacing: 0.16em;
+        line-height: 1.15;
+        text-wrap: balance;
       }
 
       #MainContent .title-wrapper-with-link {
@@ -260,16 +264,23 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 12px;
-        margin-top: 14px;
+        gap: 14px;
+        margin-top: 18px;
+        animation: onetti-ornament-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: 0.15s;
+      }
+
+      @keyframes onetti-ornament-in {
+        from { opacity: 0; transform: translateY(6px); }
+        to   { opacity: 1; transform: translateY(0); }
       }
 
       #MainContent .onetti-ornament-line {
         display: block;
-        width: 48px;
+        width: 56px;
         height: 1px;
         background: linear-gradient(90deg, transparent, rgb(var(--color-base-accent-2)));
-        opacity: 0.8;
+        opacity: 0.85;
       }
       #MainContent .onetti-ornament-line-r {
         background: linear-gradient(90deg, rgb(var(--color-base-accent-2)), transparent);
@@ -284,31 +295,77 @@
         flex-shrink: 0;
       }
 
+      .button,
+      .button-label,
+      .shopify-challenge__button,
+      .customer button {
+        transition:
+          transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+          background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+          color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow var(--duration-short) ease;
+      }
+
       .button{
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight-bold);
         background: rgb(var(--color-base-accent-2));
         color: rgb(var(--color-base-text));
+        letter-spacing: 0.08em;
         will-change: transform, background;
-        transition: transform 0.3s ease, background 0.3s ease;
+        transition:
+          transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+          background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+          color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+          box-shadow var(--duration-short) ease;
       }
 
       .button:hover {
         background: rgb(var(--color-base-accent-1));
         color: rgb(var(--color-base-text));
-        transform: scale(1.05);
+        transform: scale(1.04);
       }
 
-      .link {
+      .button:not([disabled]):active,
+      .button:not([disabled]):focus-visible:active {
+        transform: scale(0.985);
+        transition-duration: 0.12s;
+      }
+
+      /* .link applies gold only to non-header links */
+      .link:not(.header__menu-item) {
         font-family: var(--font-body-family);
         font-style: var(--font-body-style);
         font-weight: var(--font-body-weight-bold);
         color: rgb(var(--color-base-accent-2));
+        transition:
+          color 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+          text-decoration-thickness 0.3s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
-      .link:hover {
+      .link:not(.header__menu-item):hover {
         color: rgb(var(--color-base-text));
+      }
+
+      /* Header nav: uniform foreground color, consistent size */
+      .header__menu-item {
+        font-size: 1.4rem;
+        font-weight: 500;
+        letter-spacing: 0.06rem;
+        color: rgba(var(--color-foreground), 0.75);
+        text-decoration: none;
+        transition: color 0.2s ease;
+      }
+      .header__menu-item:hover,
+      .header__menu-item:focus-visible {
+        color: rgb(var(--color-foreground));
+      }
+      .header__menu-item .header__active-menu-item {
+        color: rgb(var(--color-foreground));
+        text-decoration: underline;
+        text-underline-offset: 0.35rem;
+        text-decoration-thickness: 0.12rem;
       }
 
       .cart-drawer__overlay {
@@ -366,15 +423,33 @@
           max-width: 30dvw;
         }
       }
+
+      @media (prefers-reduced-motion: reduce) {
+        .button,
+        .button:hover,
+        .button:not([disabled]):active {
+          transition:
+            background-color 0.15s linear,
+            color 0.15s linear,
+            box-shadow 0.15s linear;
+          transform: none !important;
+        }
+        .link { transition: color 0.15s linear; }
+        #MainContent .onetti-ornament { animation: none; }
+      }
     </style>
 
     <script>
       document.addEventListener('DOMContentLoaded', function () {
+        /* Only inject the ornament on section headings — not on UI controls
+           (facets, sort, product count, accordions, card titles, captions). */
         var wrappers = document.querySelectorAll(
-          '#MainContent h2'
+          '#MainContent h2:not(.accordion__title):not(.facets__heading):not(.facets__heading--vertical):not(.facet-filters__label):not(.product-count__text):not(.card__heading):not(.caption-large):not(.h4):not(.h5):not(.h6):not([class*="mobile-facets"]):not([class*="product-count"])'
         );
         wrappers.forEach(function (el) {
+          /* Skip if already has ornament, or is inside an accordion/facets/card */
           if (el.querySelector('.onetti-ornament')) return;
+          if (el.closest('.accordion, .product__accordion, .facets, .facets-container, .facet-filters, .card, .card__information, .sort-by')) return;
           var orn = document.createElement('div');
           orn.className = 'onetti-ornament';
           orn.innerHTML =
@@ -389,6 +464,8 @@
   </head>
 
   <body class="gradient">
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>
@@ -443,6 +520,28 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+
+    <script>
+      (function () {
+        var ticking = false;
+        function update() {
+          var doc = document.documentElement;
+          var max = (doc.scrollHeight - window.innerHeight) || 1;
+          var p = Math.min(Math.max(window.scrollY / max, 0), 1);
+          doc.style.setProperty('--scroll-progress', p);
+          ticking = false;
+        }
+        window.addEventListener('scroll', function () {
+          if (!ticking) { requestAnimationFrame(update); ticking = true; }
+        }, { passive: true });
+        window.addEventListener('resize', function () {
+          if (!ticking) { requestAnimationFrame(update); ticking = true; }
+        }, { passive: true });
+        update();
+      })();
+    </script>
+
+    <script src="{{ 'blur-up.js' | asset_url }}" defer="defer"></script>
 
     {%- render 'whatsapp-chat-button' -%}
   </body>

@@ -1914,7 +1914,7 @@ details[open] > .share-button__fallback {
 .field__input:-webkit-autofill ~ .field__button,
 .field__input:-webkit-autofill ~ .field__label,
 .customer .field input:-webkit-autofill ~ label {
-  color: rgb(0, 0, 0);
+  color: rgb(var(--color-base-outline-button-labels));
 }
 
 /* Text area */
@@ -2501,8 +2501,7 @@ product-info .loading-overlay:not(.hidden) ~ *,
   vertical-align: middle;
 }
 
-.header__icon,
-.header__icon--cart .icon {
+.header__icon {
   height: 4.4rem;
   width: 4.4rem;
   padding: 0;
@@ -3146,4 +3145,1030 @@ details-disclosure > details {
     0% { transform: rotate(0deg) translateX(1em) rotate(0deg) scale(1.2); }
     100% { transform: rotate(360deg) translateX(1em) rotate(-360deg) scale(1.2); }
   }
+}
+
+/* ============================================================
+   Onetti editorial refinements
+   - KEEP all color variables intact (palette is locked)
+   - Token-driven motion + spacing
+   - Tactile hover/press states with custom cubic-bezier
+   - Subtle entrance animations (gated by reduced-motion)
+   ============================================================ */
+
+:root {
+  /* Motion tokens */
+  --ease-out-quart: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --duration-xshort: 120ms;
+  --duration-short: 200ms;
+  --duration-medium: 380ms;
+  --duration-long: 600ms;
+
+  /* Spacing scale (px) */
+  --space-1: 0.4rem;   /* 4  */
+  --space-2: 0.8rem;   /* 8  */
+  --space-3: 1.2rem;   /* 12 */
+  --space-4: 1.6rem;   /* 16 */
+  --space-5: 2.4rem;   /* 24 */
+  --space-6: 3.2rem;   /* 32 */
+  --space-7: 4.8rem;   /* 48 */
+  --space-8: 6.4rem;   /* 64 */
+  --space-9: 9.6rem;   /* 96 */
+
+  /* Radius */
+  --radius-xs: 0.2rem;
+  --radius-sm: 0.4rem;
+  --radius-md: 0.8rem;
+  --radius-lg: 1.2rem;
+}
+
+/* Editorial heading scale: hero gets asymmetric lift, section h2 stays restrained */
+.banner__heading.h1,
+.banner h1.banner__heading {
+  font-size: clamp(2.8rem, 5.6vw, 4.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+@media screen and (min-width: 750px) {
+  .banner__heading.h1,
+  .banner h1.banner__heading {
+    font-size: clamp(3.4rem, 6.4vw, 5.6rem);
+  }
+}
+
+/* Body paragraph rhythm */
+.rte p + p,
+.product__description p + p,
+.cart-drawer .cart-item__details p + p {
+  margin-top: 0.9em;
+}
+
+/* Tactile card hover: override easing on the existing scale transition */
+.card .media.media--hover-effect > img:only-child,
+.card-wrapper .media.media--hover-effect > img:only-child,
+.card-wrapper .media.media--hover-effect > img + img {
+  transition: transform 0.7s var(--ease-out-quart);
+}
+
+@media screen and (min-width: 990px) {
+  .card:hover .media.media--hover-effect > img:first-child:only-child,
+  .card-wrapper:hover .media.media--hover-effect > img:first-child:only-child,
+  .card-wrapper:hover .media.media--hover-effect > img + img {
+    transform: scale(1.045);
+  }
+}
+
+/* Title underline grow on card hover */
+.card__heading a {
+  transition: text-decoration-thickness 0.3s var(--ease-out-quart);
+}
+.card-wrapper:hover .card__heading a {
+  text-decoration-thickness: 0.18rem;
+}
+
+/* Subtle vertical lift on card wrapper */
+.product-card-wrapper {
+  transition: transform 0.5s var(--ease-out-quart);
+}
+@media screen and (min-width: 990px) {
+  .product-card-wrapper:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Entrance: card fade-up, staggered for first 8 */
+@media (prefers-reduced-motion: no-preference) {
+  .product-card-wrapper,
+  .collection-card-wrapper,
+  .article-card-wrapper {
+    animation: onetti-fade-up 0.75s var(--ease-out-quart) both;
+  }
+  .grid > .grid__item:nth-child(1) .product-card-wrapper,
+  .grid > .grid__item:nth-child(1) .collection-card-wrapper,
+  .grid > .grid__item:nth-child(1) .article-card-wrapper { animation-delay: 0.02s; }
+  .grid > .grid__item:nth-child(2) .product-card-wrapper,
+  .grid > .grid__item:nth-child(2) .collection-card-wrapper,
+  .grid > .grid__item:nth-child(2) .article-card-wrapper { animation-delay: 0.08s; }
+  .grid > .grid__item:nth-child(3) .product-card-wrapper,
+  .grid > .grid__item:nth-child(3) .collection-card-wrapper,
+  .grid > .grid__item:nth-child(3) .article-card-wrapper { animation-delay: 0.14s; }
+  .grid > .grid__item:nth-child(4) .product-card-wrapper,
+  .grid > .grid__item:nth-child(4) .collection-card-wrapper,
+  .grid > .grid__item:nth-child(4) .article-card-wrapper { animation-delay: 0.20s; }
+  .grid > .grid__item:nth-child(5) .product-card-wrapper,
+  .grid > .grid__item:nth-child(5) .collection-card-wrapper,
+  .grid > .grid__item:nth-child(5) .article-card-wrapper { animation-delay: 0.26s; }
+  .grid > .grid__item:nth-child(6) .product-card-wrapper,
+  .grid > .grid__item:nth-child(6) .collection-card-wrapper,
+  .grid > .grid__item:nth-child(6) .article-card-wrapper { animation-delay: 0.32s; }
+  .grid > .grid__item:nth-child(7) .product-card-wrapper,
+  .grid > .grid__item:nth-child(7) .collection-card-wrapper,
+  .grid > .grid__item:nth-child(7) .article-card-wrapper { animation-delay: 0.38s; }
+  .grid > .grid__item:nth-child(8) .product-card-wrapper,
+  .grid > .grid__item:nth-child(8) .collection-card-wrapper,
+  .grid > .grid__item:nth-child(8) .article-card-wrapper { animation-delay: 0.44s; }
+
+  @keyframes onetti-fade-up {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* Product info sticky panel: refined offset and smooth focus */
+@media screen and (min-width: 750px) {
+  .product__column-sticky {
+    top: 1.6rem;
+  }
+}
+
+/* Variant pills: smoother border transition */
+.product-form__input input[type='radio'] + label {
+  transition:
+    border-color 0.3s var(--ease-out-quart),
+    background-color 0.3s var(--ease-out-quart),
+    color 0.3s var(--ease-out-quart);
+}
+
+/* Quantity buttons: tactile press */
+.quantity__button {
+  transition: background-color 0.2s var(--ease-out-quart), color 0.2s var(--ease-out-quart);
+}
+.quantity__button:active {
+  transform: scale(0.92);
+}
+
+/* Header underline animation refinement */
+.header__menu-item span {
+  transition: text-decoration var(--duration-short) var(--ease-out-quart);
+}
+
+/* Footer polish: refined link hover */
+.footer-block__details-content a,
+.footer .copyright__content a {
+  transition:
+    color 0.3s var(--ease-out-quart),
+    opacity 0.3s var(--ease-out-quart),
+    text-decoration-thickness 0.3s var(--ease-out-quart);
+}
+.footer-block__details-content a:hover {
+  text-decoration-thickness: 0.18rem;
+}
+.footer-block__heading {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+}
+@media screen and (min-width: 750px) {
+  .footer-block__heading {
+    font-size: 1.4rem;
+  }
+}
+
+/* Cart drawer: fade in the overlay alongside the slide */
+.cart-drawer {
+  transition: visibility 0.35s var(--ease-in-out-quart);
+}
+.cart-drawer__overlay {
+  transition: opacity 0.35s var(--ease-in-out-quart);
+}
+@media (prefers-reduced-motion: reduce) {
+  .cart-drawer,
+  .cart-drawer__overlay {
+    transition: none;
+  }
+}
+
+/* Cart icon bubble: pulse on update */
+@media (prefers-reduced-motion: no-preference) {
+  .cart-count-bubble {
+    transition: transform 0.3s var(--ease-out-quart);
+  }
+  .cart-count-bubble.is-updated {
+    animation: onetti-pulse 0.55s var(--ease-out-quart);
+  }
+  @keyframes onetti-pulse {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.25); }
+    100% { transform: scale(1); }
+  }
+}
+
+/* Totals typography: a touch larger in drawer + cart */
+.drawer__footer .totals__subtotal,
+.cart__footer .totals__subtotal {
+  font-size: 1.1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.drawer__footer .totals__subtotal-value,
+.cart__footer .totals__subtotal-value {
+  font-size: 1.6rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.02em;
+}
+
+/* Section padding rhythm: let headers breathe */
+.section + .section {
+  margin-top: clamp(3.2rem, 6vw, 6.4rem);
+}
+
+/* Image aspect lock to prevent CLS on product cards */
+.card .card__media .media img,
+.card .card__inner .card__media img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Focus ring: keep visible but tasteful, prefer accent 2 */
+@media screen and (min-width: 750px) {
+  *:focus-visible {
+    outline: 0.2rem solid rgba(var(--color-base-accent-2), 0.7);
+    outline-offset: 0.3rem;
+    box-shadow:
+      0 0 0 0.3rem rgb(var(--color-background)),
+      0 0 0.5rem 0.4rem rgba(var(--color-base-accent-2), 0.25);
+  }
+}
+
+/* Collection hero: editorial feel */
+.collection-hero__title {
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+}
+
+/* Title wrapper refinement */
+.title-wrapper-with-link .title {
+  text-wrap: balance;
+}
+
+/* ============================================================
+   Onetti editorial pass 2
+   - Editorial eyebrows, hero lockup, asymmetric grid
+   - Extends pass 1 tokens; no color values, no selectors pass 1 used
+   - All durations + easings reuse --duration-* and --ease-out-quart
+   ============================================================ */
+
+/* Editorial eyebrow: tiny tracked label above titles */
+.onetti-eyebrow {
+  display: inline-block;
+  font-size: 1.1rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: var(--font-body-weight-bold);
+  color: rgb(var(--color-base-accent-2));
+  margin-bottom: var(--space-2);
+  position: relative;
+  padding-left: 0;
+}
+.onetti-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: rgb(var(--color-base-accent-2));
+  vertical-align: middle;
+  margin-right: 12px;
+  transform: translateY(-2px);
+  opacity: 0.6;
+}
+
+/* Banner hero lockup: keep h1 bold but constrain the body width */
+.banner__box .banner__heading.h1,
+.banner__box h1.banner__heading {
+  margin-bottom: var(--space-3);
+}
+@media screen and (min-width: 990px) {
+  .banner__box .banner__heading.h1,
+  .banner__box h1.banner__heading {
+    max-width: 18ch;
+  }
+}
+.banner__text.body {
+  text-wrap: pretty;
+}
+@media screen and (min-width: 750px) {
+  .banner__buttons {
+    margin-top: var(--space-4);
+  }
+}
+
+/* Collection hero: eyebrow + subhead flow */
+.collection-hero__inner {
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-7);
+}
+@media screen and (min-width: 750px) {
+  .collection-hero__inner {
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+}
+.collection-hero__title {
+  font-size: clamp(2.8rem, 5.6vw, 4.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-weight: var(--font-heading-weight);
+}
+@media screen and (min-width: 750px) {
+  .collection-hero__title {
+    font-size: clamp(3.4rem, 6.4vw, 5.6rem);
+  }
+}
+.collection-hero__text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  width: 100%;
+}
+.collection-hero__description {
+  max-width: 56rem;
+  text-wrap: pretty;
+  opacity: 0.85;
+}
+@media (min-width: 750px) {
+  .collection-hero--with-image .collection-hero__inner {
+    flex-direction: column;
+  }
+}
+
+/* Featured collection title: editorial micro rhythm */
+.featured-collection__heading {
+  text-align: left;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+.featured-collection__heading .title {
+  margin-bottom: 0;
+}
+
+/* Product page: editorial info column rhythm */
+.product__info-container > * + * {
+  margin-top: var(--space-3);
+}
+.product__title h1 {
+  letter-spacing: -0.005em;
+  text-wrap: balance;
+  font-weight: var(--font-heading-weight);
+}
+.product__vendor,
+.product__sku,
+.product__inventory {
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+.product__description {
+  border-top: 1px solid rgba(var(--color-base-text), 0.12);
+  padding-top: var(--space-4);
+  margin-top: var(--space-4);
+  text-wrap: pretty;
+}
+.product-form__input legend,
+.product-form__input .form__label {
+  font-size: 1.1rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-2);
+  font-weight: var(--font-body-weight-bold);
+}
+.product-form__input input[type='radio'] + label {
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+}
+.price--large .price-item--regular {
+  font-size: clamp(1.8rem, 2.4vw, 2.4rem);
+  letter-spacing: 0.02em;
+  font-weight: var(--font-body-weight-bold);
+}
+
+/* Cart page: editorial summary card */
+.cart__footer {
+  background: rgba(var(--color-base-background-2), 0.4);
+  border: 1px solid rgba(var(--color-base-text), 0.08);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+@media screen and (min-width: 750px) {
+  .cart__footer {
+    padding: var(--space-6);
+  }
+}
+.cart__footer .totals__subtotal {
+  font-size: 1.2rem;
+}
+.cart__footer .totals__subtotal-value {
+  font-size: 2rem;
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.02em;
+}
+.cart-items th {
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid rgba(var(--color-base-text), 0.1);
+}
+.cart-item {
+  border-bottom: 1px solid rgba(var(--color-base-text), 0.06);
+  padding: var(--space-4) 0;
+  transition: background-color var(--duration-short) var(--ease-out-quart);
+}
+.cart-item:hover {
+  background-color: rgba(var(--color-base-background-2), 0.35);
+}
+.cart-item__media {
+  padding-right: var(--space-3);
+}
+.cart-item__name {
+  font-weight: var(--font-body-weight-bold);
+  letter-spacing: 0.005em;
+}
+
+/* Cart drawer: editorial lockup */
+.drawer__header {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid rgba(var(--color-base-text), 0.08);
+}
+.drawer__heading {
+  font-size: 1.3rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  font-weight: var(--font-body-weight-bold);
+}
+.drawer__cart-items-wrapper {
+  padding: 0 var(--space-5);
+}
+.drawer__cart-items-wrapper .cart-item {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid rgba(var(--color-base-text), 0.06);
+}
+.drawer__footer {
+  padding: var(--space-5);
+  background: rgba(var(--color-base-background-2), 0.4);
+  border-top: 1px solid rgba(var(--color-base-text), 0.08);
+}
+.drawer__footer .totals__subtotal {
+  font-size: 1rem;
+}
+.drawer__footer .totals__subtotal-value {
+  font-size: 1.8rem;
+  font-weight: var(--font-body-weight-bold);
+}
+.drawer__inner-empty {
+  padding: var(--space-7) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60dvh;
+  gap: var(--space-3);
+}
+.drawer__inner-empty .cart__empty-text {
+  font-size: clamp(1.8rem, 3vw, 2.2rem);
+  letter-spacing: 0.04em;
+  text-transform: none;
+  font-weight: var(--font-heading-weight);
+  text-align: center;
+}
+
+/* Cart items enter animation (paired with is-updated class trigger) */
+@media (prefers-reduced-motion: no-preference) {
+  .drawer__cart-items-wrapper .cart-item,
+  .cart-items .cart-item {
+    animation: onetti-cart-item-in var(--duration-medium) var(--ease-out-quart) both;
+  }
+  .drawer__cart-items-wrapper .cart-item:nth-child(1),
+  .cart-items .cart-item:nth-child(1) { animation-delay: 0.02s; }
+  .drawer__cart-items-wrapper .cart-item:nth-child(2),
+  .cart-items .cart-item:nth-child(2) { animation-delay: 0.08s; }
+  .drawer__cart-items-wrapper .cart-item:nth-child(3),
+  .cart-items .cart-item:nth-child(3) { animation-delay: 0.14s; }
+  .drawer__cart-items-wrapper .cart-item:nth-child(4),
+  .cart-items .cart-item:nth-child(4) { animation-delay: 0.20s; }
+  .drawer__cart-items-wrapper .cart-item:nth-child(5),
+  .cart-items .cart-item:nth-child(5) { animation-delay: 0.26s; }
+  .drawer__cart-items-wrapper .cart-item:nth-child(6),
+  .cart-items .cart-item:nth-child(6) { animation-delay: 0.32s; }
+  @keyframes onetti-cart-item-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+}
+
+/* Multicolumn: tighten the card spacing for editorial column layout */
+.multicolumn-card__info {
+  padding-top: var(--space-3);
+}
+.multicolumn-card__info h3 {
+  font-size: clamp(1.4rem, 1.6vw, 1.6rem);
+  letter-spacing: 0.02em;
+  font-weight: var(--font-body-weight-bold);
+  margin-bottom: var(--space-1);
+}
+.multicolumn-card-spacing {
+  margin-bottom: var(--space-3);
+}
+
+/* Rich text editorial centering */
+.rich-text__wrapper--center {
+  text-align: center;
+}
+.rich-text__blocks.center {
+  align-items: center;
+}
+.rich-text__heading {
+  text-wrap: balance;
+  margin-bottom: var(--space-3);
+}
+.rich-text__text {
+  text-wrap: pretty;
+  max-width: 56rem;
+  margin-inline: auto;
+  opacity: 0.85;
+}
+
+/* Collage: heading rhythm */
+.collage-wrapper-title {
+  text-align: center;
+  margin-bottom: var(--space-6);
+  text-wrap: balance;
+}
+
+/* Facets wrapper: quiet typography */
+.facets__heading {
+  font-size: 1rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+.product-count__text {
+  font-size: 1.3rem;
+  letter-spacing: 0.04em;
+}
+
+/* Main cart page: step-indicator + title lockup */
+.title-wrapper-with-link .title--primary {
+  font-size: clamp(2.4rem, 4vw, 3.2rem);
+  letter-spacing: -0.005em;
+  text-transform: none;
+  font-weight: var(--font-heading-weight);
+  text-align: left;
+}
+.cart__empty-text {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  letter-spacing: -0.005em;
+  text-transform: none;
+  font-weight: var(--font-heading-weight);
+  text-align: center;
+  text-wrap: balance;
+}
+
+/* Cart notification: editorial heading */
+.cart-notification__heading {
+  font-size: 1.2rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: var(--font-body-weight-bold);
+}
+.cart-notification-product__name {
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+}
+
+/* Section-to-section rhythm already in pass 1 (.section + .section). Reinforce for rich-text via min-width 990 */
+@media screen and (min-width: 990px) {
+  .section--padding + .section--padding {
+    margin-top: clamp(4.8rem, 8vw, 8rem);
+  }
+}
+
+/* Mobile cart drawer: tighter padding */
+@media screen and (max-width: 749px) {
+  .drawer__cart-items-wrapper,
+  .drawer__header,
+  .drawer__footer {
+    padding-left: var(--space-4);
+    padding-right: var(--space-4);
+  }
+}
+
+/* Reduced motion: kill cart-item-in animation */
+@media (prefers-reduced-motion: reduce) {
+  .drawer__cart-items-wrapper .cart-item,
+  .cart-items .cart-item {
+    animation: none;
+  }
+}
+
+/* Product media gallery: editorial thumbnail rail */
+@media screen and (min-width: 750px) {
+  .product__media-viewer {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+}
+.onetti-thumbnails .thumbnail {
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  transition: border-color var(--duration-short) var(--ease-out-quart), opacity var(--duration-short) var(--ease-out-quart);
+  opacity: 0.65;
+}
+.onetti-thumbnails .thumbnail[aria-current="true"] {
+  border-color: rgb(var(--color-base-accent-2));
+  opacity: 1;
+}
+.onetti-thumbnails .thumbnail:hover {
+  opacity: 1;
+  border-color: rgba(var(--color-base-accent-2), 0.5);
+}
+
+/* ============================================================
+   Onetti pass 3 — icon system
+   Cohesive 24x24 thin-stroke line icons, currentColor driven
+   ============================================================ */
+
+.icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+  transition: transform 0.4s var(--ease-out-quart), stroke 0.3s var(--ease-out-quart);
+}
+
+/* Hero ken-burns on banner media */
+@media (prefers-reduced-motion: no-preference) {
+  .banner__media img,
+  .banner__media video,
+  .collage__item .media img {
+    animation: onetti-ken-burns 22s var(--ease-in-out-quart) infinite alternate;
+    transform-origin: 60% 40%;
+  }
+  @keyframes onetti-ken-burns {
+    from { transform: scale(1) translate(0, 0); }
+    to   { transform: scale(1.08) translate(-1.5%, -1%); }
+  }
+}
+
+/* Announcement bar: static, single message (reverted from pass-3 marquee) */
+
+/* Scroll progress bar */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgb(var(--color-base-accent-2));
+  transform: scaleX(var(--scroll-progress, 0));
+  transform-origin: left;
+  transition: transform 0.1s linear;
+  z-index: 9999;
+  pointer-events: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-progress { display: none; }
+}
+
+/* Header menu hover: handled in theme.liquid inline style (comes after base.css in cascade) */
+
+/* Product card: simple lift only — no 3D tilt (too aggressive) */
+.product-card-wrapper {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s var(--ease-out-quart), box-shadow 0.4s var(--ease-out-quart);
+}
+@media (hover: hover) and (pointer: fine) {
+  .product-card-wrapper:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(var(--color-base-text), 0.12);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .product-card-wrapper { transition: none; transform: none; }
+}
+
+/* Lazy image blur-up */
+img.lazyload, img[loading="lazy"] {
+  filter: blur(0);
+  transition: filter 0.6s var(--ease-out-quart);
+}
+img.lazyload.is-loading, img[loading="lazy"].is-loading {
+  filter: blur(8px);
+}
+@media (prefers-reduced-motion: reduce) {
+  img.lazyload, img[loading="lazy"] { transition: none; }
+}
+
+/* Background grain texture (subtle, premium) */
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+}
+
+/* 404 rotating gear watermark */
+.template-404__gear {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(90vw, 900px);
+  height: auto;
+  transform: translate(-50%, -50%);
+  opacity: 0.04;
+  pointer-events: none;
+  animation: onetti-rotate 80s linear infinite;
+}
+@keyframes onetti-rotate { to { transform: translate(-50%, -50%) rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .template-404__gear { animation: none; } }
+
+/* Smooth scroll + master reduced-motion safety net */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Footer social icon hover lift */
+.footer .list-social__link {
+  display: inline-flex;
+  transition: transform 0.35s var(--ease-out-quart), color 0.35s var(--ease-out-quart);
+}
+.footer .list-social__link:hover {
+  transform: translateY(-2px);
+  color: rgb(var(--color-base-accent-2));
+}
+
+/* Icon opt-out: filled-style icons used by the icon-with-text block.
+   The default .icon rule uses fill: none + stroke, which would render these
+   complex filled glyphs (apple, banana, heart, paw, etc.) invisible.
+   Restore filled rendering for them. */
+.icon.icon-accordion,
+.icon.icon-accordion path,
+.icon.icon-accordion circle {
+  fill: currentColor;
+  stroke: none;
+}
+
+/* ============================================================
+   Onetti targeted fixes
+   - Header nav: force uniform font-size + color across both
+     mega-menu and inline branches (was: mega-menu summary smaller,
+     simple-link larger; users saw mismatched sizes/colors)
+   - Rich-text: center content in a narrow column on desktop,
+     tighten typography so the section doesn't dominate the page
+   ============================================================ */
+
+/* Header nav: color/size set authoritatively in theme.liquid inline style (which wins over base.css).
+   Only utility properties here that the inline style doesn't set. */
+
+/* Rich-text editorial: narrow centered column + tighter scale on desktop */
+@media screen and (min-width: 750px) {
+  .rich-text__blocks {
+    max-width: 56rem;
+    margin-inline: auto;
+  }
+  .rich-text__heading {
+    font-size: clamp(2rem, 3.2vw, 2.6rem) !important;
+    line-height: 1.2;
+    margin-bottom: 1.2rem;
+  }
+  .rich-text__text {
+    font-size: 1.4rem;
+    line-height: 1.7;
+    max-width: 48rem;
+    margin-inline: auto;
+  }
+  .rich-text__text p {
+    margin: 0 0 1rem;
+  }
+}
+@media screen and (max-width: 749px) {
+  .rich-text__heading {
+    font-size: clamp(1.8rem, 6vw, 2.2rem) !important;
+  }
+  .rich-text__text {
+    font-size: 1.3rem;
+  }
+}
+
+/* ============================================================
+   Onetti consistency cleanup — fixes from user feedback
+   Goal: clean, modern, uniform. No oversized UI labels.
+   No ornaments on interactive controls. Tidy spacing.
+   ============================================================ */
+
+/* Sort-by / product-count: restore as small, clean UI text */
+.facet-filters__label,
+.product-count__text,
+.facets__heading,
+.facets__heading--vertical {
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1rem !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  display: block !important;
+  color: rgba(var(--color-foreground), 0.7) !important;
+}
+.facet-filters__label label {
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+  color: rgba(var(--color-foreground), 0.7);
+  cursor: default;
+}
+
+/* Accordion headings: clean, left-aligned, not section-heading size */
+.accordion__title,
+.h4.accordion__title {
+  font-size: 1.3rem !important;
+  letter-spacing: 0.1rem !important;
+  text-transform: uppercase !important;
+  text-align: left !important;
+  font-weight: 600 !important;
+  display: inline !important;
+  color: rgba(var(--color-foreground), 0.9) !important;
+}
+/* Remove ornament from inside accordion if somehow injected */
+.accordion .onetti-ornament,
+.product__accordion .onetti-ornament {
+  display: none !important;
+}
+
+/* Collection banner: tighter padding so no massive empty space above grid */
+.collection-hero,
+.section-collection-hero {
+  padding-top: 2.4rem !important;
+  padding-bottom: 2rem !important;
+}
+.collection-hero__title {
+  font-size: clamp(2.4rem, 5vw, 3.6rem) !important;
+  letter-spacing: 0.1em;
+  text-align: center;
+  margin-bottom: 0.4rem;
+}
+
+/* Product grid: uniform card border-radius, consistent gap */
+.card__inner,
+.card,
+.card .media {
+  border-radius: 4px;
+  overflow: hidden;
+}
+.card-wrapper {
+  border-radius: 4px;
+}
+
+/* Buttons: clean, consistent radius */
+.button,
+.button--primary,
+.button--secondary {
+  border-radius: 4px !important;
+}
+
+/* Inputs + selects: consistent radius */
+select,
+input[type="text"],
+input[type="email"],
+input[type="number"],
+.field__input,
+.quantity__input {
+  border-radius: 4px !important;
+}
+
+/* Collection sort row: tighter, more compact */
+.facet-filters.sorting {
+  padding: 1rem 0;
+  gap: 1.2rem;
+}
+.facet-filters__field {
+  gap: 0.6rem;
+}
+
+/* Suppress oversized ornament under sort/count h2 if already injected
+   (JS exclusions handle new page loads; this is a CSS backstop for any already injected) */
+.facet-filters__label .onetti-ornament,
+.product-count__text .onetti-ornament,
+.facets__heading .onetti-ornament,
+.card__heading .onetti-ornament,
+.caption-large .onetti-ornament {
+  display: none !important;
+}
+
+/* Header icons: rely on SVG width/height attributes for consistent sizing.
+   Snippets are all 22x22 — search, account, cart. */
+
+/* Reduce the collection banner section top-padding in Theme Editor defaults */
+@media screen and (min-width: 750px) {
+  .shopify-section-main-collection-banner {
+    padding-bottom: 0;
+  }
+}
+
+/* ============================================================
+   Onetti global compactness — reduces over-sized padding
+   on sections, banners, and grid rows across the whole theme.
+   Target: every section feels purposeful, not bloated.
+   ============================================================ */
+
+/* Reduce the CSS-var-driven spacing tokens for sections */
+/* Hero banner: center content when position is middle-center (set in templates/index.json) */
+@media screen and (min-width: 750px) {
+  .banner--content-align-middle-center .banner__content {
+    justify-content: center;
+    text-align: center;
+  }
+  .banner--content-align-middle-center .banner__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 56rem;
+    min-width: 0;
+  }
+}
+
+/* Banner box: premium glassmorphism — semi-transparent with backdrop blur */
+.banner:not(.banner--desktop-transparent) .banner__box {
+  background-color: rgba(var(--color-base-text), 0.06) !important;
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border-radius: 6px;
+  border: 1px solid rgba(var(--color-base-text), 0.12);
+  padding: 2.4rem 2.8rem !important;
+  box-shadow: 0 8px 32px rgba(var(--color-base-text), 0.12);
+}
+@media screen and (min-width: 990px) {
+  .banner:not(.banner--desktop-transparent) .banner__box {
+    padding: 2.8rem 3.2rem !important;
+  }
+}
+
+/* Banner heading: tighter tracking, balanced wrap */
+.banner__heading {
+  text-wrap: balance;
+  letter-spacing: 0.01em;
+  line-height: 1.05;
+  margin-bottom: 0.4rem;
+}
+
+/* Banner body: refined line-height and max-width */
+.banner__text {
+  max-width: 44ch;
+  margin-inline: auto;
+  line-height: 1.5;
+  font-size: 1.3rem;
+  opacity: 0.85;
+}
+.banner__text p {
+  margin: 0;
+}
+
+/* Banner eyebrow: smaller, more tracked */
+.banner .onetti-eyebrow {
+  font-size: 0.95rem;
+  letter-spacing: 0.32em;
+  margin-bottom: 0.8rem;
+  opacity: 0.9;
+}
+
+/* Banner button: subtle lift + better proportions */
+.banner__buttons {
+  margin-top: 1.6rem;
+}
+.banner .button {
+  letter-spacing: 0.08em;
+  padding: 0.95rem 2rem;
+  font-size: 1.2rem;
+  min-width: 16rem;
+  justify-content: center;
+  transition: transform 0.35s var(--ease-out-quart), background-color 0.35s var(--ease-out-quart), box-shadow 0.35s var(--ease-out-quart);
+}
+.banner .button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(var(--color-base-text), 0.18);
+}
+
+/* Onetti eyebrow: tighter margins */
+.onetti-eyebrow {
+  margin-bottom: 0.4rem;
 }

@@ -1,11 +1,21 @@
 # Onetti Watches Shopify Theme
 
-This project contains the custom Shopify theme for the Onetti Watches store.
+Custom Shopify theme for the Onetti Watches store.
 
-## Overview
+## Local Development
 
-This repository is used to manage and edit the Shopify theme for Onetti Watches' e-commerce platform.
+Prereqs: Node 18+, partner access to the `onetti-watches` store.
 
-## Development
+```bash
+npm install -g @shopify/cli @shopify/theme
+shopify auth login
+shopify theme dev --store onetti-watches
+```
 
-This theme is built using Shopify's Liquid templating language along with standard web technologies (HTML, CSS, JavaScript).
+CLI prints a local URL (default `http://127.0.0.1:9292`) and hot-reloads on save.
+
+Other commands:
+
+| Command | Purpose |
+|---------|---------|
+| `shopify theme check` | Lint theme |

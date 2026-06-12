@@ -13,7 +13,7 @@
 			"type": "main-collection-banner",
 			"settings": {
 				"show_collection_description": true,
-				"show_collection_image": false,
+				"show_collection_image": true,
 				"color_scheme": "background-1"
 			}
 		},
@@ -23,7 +23,7 @@
 				"products_per_page": 16,
 				"columns_desktop": 3,
 				"image_ratio": "portrait",
-				"show_secondary_image": false,
+				"show_secondary_image": true,
 				"show_vendor": false,
 				"show_rating": false,
 				"enable_quick_add": false,
@@ -31,8 +31,8 @@
 				"filter_type": "drawer",
 				"enable_sorting": true,
 				"columns_mobile": "2",
-				"padding_top": 36,
-				"padding_bottom": 36
+				"padding_top": 48,
+				"padding_bottom": 48
 			}
 		}
 	},

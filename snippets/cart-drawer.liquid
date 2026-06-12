@@ -27,7 +27,9 @@
         <div class="drawer__inner-empty">
           <div class="cart-drawer__warnings center{% if settings.cart_drawer_collection != blank %} cart-drawer__warnings--has-collection{% endif %}">
             <div class="cart-drawer__empty-content">
+              <span class="onetti-eyebrow">Vacío</span>
               <h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
+              <p class="caption">{{ 'general.continue_shopping' | t }}</p>
               <button
                 class="drawer__close"
                 type="button"
@@ -56,7 +58,10 @@
         </div>
       {%- endif -%}
       <div class="drawer__header">
-        <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        <div>
+          <span class="onetti-eyebrow">Tu selección</span>
+          <h2 class="drawer__heading">{{ 'sections.cart.title' | t }}</h2>
+        </div>
         <button
           class="drawer__close"
           type="button"

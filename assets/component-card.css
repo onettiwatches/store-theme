@@ -248,7 +248,7 @@
 @media screen and (min-width: 990px) {
   .card .media.media--hover-effect > img:only-child,
   .card-wrapper .media.media--hover-effect > img:only-child {
-    transition: transform var(--duration-long) ease;
+    transition: transform var(--duration-long) cubic-bezier(0.22, 1, 0.36, 1);
   }
 
   .card:hover .media.media--hover-effect > img:first-child:only-child,
@@ -264,7 +264,7 @@
 
   .card-wrapper:hover .media.media--hover-effect > img + img {
     opacity: 1;
-    transition: transform var(--duration-long) ease;
+    transition: transform var(--duration-long) cubic-bezier(0.22, 1, 0.36, 1);
     transform: scale(1.03);
   }
 
