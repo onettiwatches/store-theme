@@ -20,6 +20,10 @@
   }
 
   #pc-{{ section.id }} .pc-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
     text-align: center;
     margin-bottom: var(--space-6);
     padding: 0 var(--space-4);
@@ -34,16 +38,10 @@
   }
 
   #pc-{{ section.id }} .pc-nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 40px;
     display: flex;
+    justify-content: center;
     gap: 10px;
-  }
-
-  @media (max-width: 768px) {
-    #pc-{{ section.id }} .pc-nav { right: 16px; }
+    margin-top: var(--space-3);
   }
 
   #pc-{{ section.id }} .pc-nav-btn {
@@ -132,7 +130,7 @@
 
   #pc-{{ section.id }} .pc-card-body {
     padding: var(--space-4);
-    text-align: left;
+    text-align: center;
   }
 
   #pc-{{ section.id }} a.pc-card,
@@ -158,13 +156,18 @@
     overflow: hidden;
     text-overflow: ellipsis;
     line-height: var(--lh-normal);
+    transition: color 0.3s var(--ease-out-quart);
   }
-
   #pc-{{ section.id }} .pc-price {
     margin: 0;
     font-family: var(--font-body-family);
     font-size: var(--text-sm);
     color: rgba(var(--pc-text), 0.75);
+    transition: color 0.3s var(--ease-out-quart);
+  }
+  #pc-{{ section.id }} a.pc-card:hover .pc-price,
+  #pc-{{ section.id }} a.pc-card:focus-visible .pc-price {
+    color: var(--pc-accent);
   }
 
   #pc-{{ section.id }} .pc-dots {

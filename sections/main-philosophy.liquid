@@ -47,7 +47,7 @@
 
   #filosofia-{{ section.id }} .ph-block-image {
     width: 100%;
-    max-width: 36rem;
+    max-width: 52rem;
     aspect-ratio: 4 / 3;
     overflow: hidden;
     border-radius: var(--radius-md);
@@ -56,7 +56,7 @@
   }
   @media (max-width: 989px) {
     #filosofia-{{ section.id }} .ph-block-image {
-      max-width: 32rem;
+      max-width: 40rem;
       justify-self: center;
     }
   }
@@ -112,148 +112,152 @@
     margin-bottom: 0;
   }
 
-  #filosofia-{{ section.id }} .ph-holo {
+  #filosofia-{{ section.id }} .ph-holo-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "txt card";
+    gap: var(--space-6);
+    align-items: center;
     max-width: var(--page-width, 1600px);
-    margin: 0 auto;
+    margin: 0 auto var(--space-8);
     padding: 0 var(--space-4);
   }
-  #filosofia-{{ section.id }} .ph-holo-container {
+  #filosofia-{{ section.id }} .ph-holo-block:last-child {
+    margin-bottom: 0;
+  }
+  #filosofia-{{ section.id }} .ph-holo-block--right {
+    grid-template-areas: "card txt";
+  }
+  #filosofia-{{ section.id }} .ph-holo-text {
+    grid-area: txt;
+    text-align: left;
+  }
+  #filosofia-{{ section.id }} .ph-holo-card-wrap {
+    grid-area: card;
     perspective: 1000px;
     width: 100%;
-    max-width: 22rem;
-    margin: 0 auto;
+    max-width: 52rem;
+    justify-self: center;
   }
+  @media (max-width: 989px) {
+    #filosofia-{{ section.id }} .ph-holo-block,
+    #filosofia-{{ section.id }} .ph-holo-block--right {
+      grid-template-columns: 1fr;
+      grid-template-areas: "card" "txt";
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
+    }
+  }
+
   #filosofia-{{ section.id }} .ph-holo-card {
     position: relative;
     width: 100%;
-    aspect-ratio: 3 / 4;
-    transform-style: preserve-3d;
-    border-radius: 1rem;
-    background:
-      linear-gradient(
-        135deg,
-        rgba(var(--color-base-accent-2), 0.18) 0%,
-        rgba(var(--color-base-accent-2), 0.04) 35%,
-        rgba(var(--color-foreground), 0.04) 100%
-      ),
-      linear-gradient(
-        180deg,
-        rgba(var(--color-background), 0.6) 0%,
-        rgba(var(--color-background), 0.95) 100%
-      );
-    border: 1px solid rgba(var(--color-base-accent-2), 0.35);
-    box-shadow:
-      0 10px 30px rgba(0, 0, 0, 0.35),
-      0 0 0 1px rgba(var(--color-foreground), 0.04) inset;
+    max-width: 52rem;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
     transition: transform 0.15s var(--ease-out-quart);
-    will-change: transform;
     cursor: pointer;
     overflow: hidden;
+    --glow-x: 50%;
+    --glow-y: 50%;
+    --glow-intensity: 0.5;
+    --glow-size: 80%;
+  }
+  #filosofia-{{ section.id }} .ph-holo-image-wrap {
+    display: block;
+    line-height: 0;
+  }
+  #filosofia-{{ section.id }} .ph-holo-image-wrap img {
+    display: block;
+    width: 100%;
+    max-width: 52rem;
+    height: auto;
+    object-fit: contain;
+    pointer-events: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+  }
+  #filosofia-{{ section.id }} .ph-holo-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background-image:
+      repeating-linear-gradient(
+        62deg,
+        rgba(0, 0, 0, 0.08) 0px,
+        rgba(0, 0, 0, 0.08) 1px,
+        transparent 1px,
+        transparent 3px
+      ),
+      repeating-linear-gradient(
+        -28deg,
+        rgba(255, 255, 255, 0.05) 0px,
+        rgba(255, 255, 255, 0.05) 1px,
+        transparent 1px,
+        transparent 4px
+      );
+    opacity: 0.4;
+    transition: opacity 0.4s var(--ease-out-quart);
+    mix-blend-mode: overlay;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    #filosofia-{{ section.id }} .ph-holo-card:hover::before {
+      opacity: 0.55;
+    }
+  }
+  #filosofia-{{ section.id }} .ph-holo-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+    background-image: radial-gradient(
+      circle at var(--glow-x) var(--glow-y),
+      rgba(255, 255, 255, var(--glow-intensity)) 0%,
+      rgba(255, 255, 255, calc(var(--glow-intensity) * 0.625)) 15%,
+      rgba(197, 160, 89, calc(var(--glow-intensity) * 0.5)) 35%,
+      rgba(197, 160, 89, calc(var(--glow-intensity) * 0.2)) 55%,
+      transparent var(--glow-size)
+    );
+    opacity: 0;
+    transition: opacity 0.4s var(--ease-out-quart);
+    mix-blend-mode: soft-light;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    #filosofia-{{ section.id }} .ph-holo-card:hover::before,
+    #filosofia-{{ section.id }} .ph-holo-card:hover::after {
+      opacity: 1;
+    }
   }
   #filosofia-{{ section.id }} .ph-holo-card:focus-visible {
     outline: 0.2rem solid rgba(var(--color-base-accent-2), 0.7);
     outline-offset: 0.3rem;
   }
 
-  #filosofia-{{ section.id }} .ph-holo-content {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    padding: var(--space-4);
-    text-align: center;
-    color: rgb(var(--color-foreground));
-  }
-
-  #filosofia-{{ section.id }} .ph-holo-eyebrow {
-    display: inline-block;
-    font-family: var(--font-body-family);
-    font-size: var(--text-xs);
-    letter-spacing: 0.32em;
-    text-transform: uppercase;
-    font-weight: var(--font-body-weight-bold);
-    color: rgb(var(--color-base-accent-2));
-  }
   #filosofia-{{ section.id }} .ph-holo-title {
     font-family: var(--font-heading-family);
-    font-size: clamp(1.4rem, 2vw, 1.75rem);
+    font-size: clamp(1.6rem, 2.4vw, 2rem);
     font-weight: 500;
     line-height: var(--lh-snug);
-    margin: var(--space-1) 0 0;
+    margin: 0 0 var(--space-3);
     text-wrap: balance;
   }
-  #filosofia-{{ section.id }} .ph-holo-subtitle {
-    display: block;
+  #filosofia-{{ section.id }} .ph-holo-body {
     font-family: var(--font-body-family);
-    font-size: var(--text-xs);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(var(--color-foreground), 0.65);
-    margin-top: var(--space-1);
+    font-size: var(--text-base);
+    line-height: var(--lh-relaxed);
+    color: rgba(var(--color-foreground), 0.78);
+    margin: 0;
   }
-
-  #filosofia-{{ section.id }} .ph-holo-image {
-    flex: 1 1 auto;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: var(--space-3) 0;
-    overflow: hidden;
+  #filosofia-{{ section.id }} .ph-holo-body p {
+    margin: 0 0 var(--space-3);
   }
-  #filosofia-{{ section.id }} .ph-holo-image img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-    display: block;
-  }
-  #filosofia-{{ section.id }} .ph-holo-image--empty {
-    aspect-ratio: 1 / 1;
-    border: 1px dashed rgba(var(--color-foreground), 0.2);
-    border-radius: var(--radius-md);
-  }
-  #filosofia-{{ section.id }} .ph-holo-image--empty span {
-    color: rgba(var(--color-foreground), 0.4);
-    font-family: var(--font-body-family);
-    font-size: var(--text-sm);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  #filosofia-{{ section.id }} .ph-holo-meta {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding-top: var(--space-2);
-    border-top: 1px solid rgba(var(--color-base-accent-2), 0.2);
-    font-family: var(--font-body-family);
-    font-size: var(--text-xs);
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: rgba(var(--color-foreground), 0.75);
-  }
-  #filosofia-{{ section.id }} .ph-holo-meta-item {
-    flex: 1 1 0;
-  }
-
-  #filosofia-{{ section.id }} .ph-holo-glow {
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    pointer-events: none;
-    z-index: 1;
-    mix-blend-mode: overlay;
-    opacity: 0.9;
-    background-image: radial-gradient(
-      circle at 50% 50%,
-      #ffffff55,
-      #0000000f
-    );
-    transition: opacity 0.3s var(--ease-out-quart);
+  #filosofia-{{ section.id }} .ph-holo-body p:last-child {
+    margin-bottom: 0;
   }
 </style>
 
@@ -270,46 +274,32 @@
   {%- if section.blocks.size > 0 -%}
     {%- for block in section.blocks -%}
       {%- if block.type == 'holo_card' -%}
-        <div class="ph-holo" {{ block.shopify_attributes }}>
-          <div class="ph-holo-container">
+        {%- assign holo_pos = '' -%}
+        {%- if block.settings.position == 'right' -%}
+          {%- assign holo_pos = 'ph-holo-block--right' -%}
+        {%- endif -%}
+        <div class="ph-holo-block {{ holo_pos }}" {{ block.shopify_attributes }}>
+          <div class="ph-holo-text">
+            {%- if block.settings.title != blank -%}
+              <h3 class="ph-holo-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.body != blank -%}
+              <div class="ph-holo-body">{{ block.settings.body }}</div>
+            {%- endif -%}
+          </div>
+          <div class="ph-holo-card-wrap">
             <div class="ph-holo-card" tabindex="0">
-              <div class="ph-holo-content">
-                {%- if block.settings.eyebrow != blank -%}
-                  <span class="ph-holo-eyebrow">{{ block.settings.eyebrow }}</span>
-                {%- endif -%}
-                {%- if block.settings.title != blank -%}
-                  <h3 class="ph-holo-title">{{ block.settings.title }}</h3>
-                {%- endif -%}
-                {%- if block.settings.subtitle != blank -%}
-                  <span class="ph-holo-subtitle">{{ block.settings.subtitle }}</span>
-                {%- endif -%}
-
-                <div class="ph-holo-image{% if block.settings.image == blank %} ph-holo-image--empty{% endif %}">
-                  {%- if block.settings.image != blank -%}
-                    {{ block.settings.image | image_url: width: 1200 | image_tag:
-                      loading: 'lazy',
-                      width: block.settings.image.width,
-                      height: block.settings.image.height,
-                      sizes: '(min-width: 990px) 360px, 80vw',
-                      alt: block.settings.image.alt | default: block.settings.title
-                    }}
-                  {%- else -%}
-                    <span>Imagen</span>
-                  {%- endif -%}
-                </div>
-
-                {%- if block.settings.meta_left != blank or block.settings.meta_right != blank -%}
-                  <div class="ph-holo-meta">
-                    {%- if block.settings.meta_left != blank -%}
-                      <span class="ph-holo-meta-item">{{ block.settings.meta_left }}</span>
-                    {%- endif -%}
-                    {%- if block.settings.meta_right != blank -%}
-                      <span class="ph-holo-meta-item">{{ block.settings.meta_right }}</span>
-                    {%- endif -%}
-                  </div>
+              <div class="ph-holo-image-wrap">
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 1200 | image_tag:
+                    loading: 'lazy',
+                    width: block.settings.image.width,
+                    height: block.settings.image.height,
+                    sizes: '(min-width: 990px) 600px, 90vw',
+                    alt: block.settings.image.alt | default: block.settings.title
+                  }}
                 {%- endif -%}
               </div>
-              <div class="ph-holo-glow" aria-hidden="true"></div>
             </div>
           </div>
         </div>
@@ -359,22 +349,21 @@
   {%- endif -%}
 </section>
 
-{%- if section.blocks.size > 0 -%}
-  <script>
-    (function () {
-      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+<script>
+  (function () {
+    'use strict';
 
+    function init() {
       var section = document.getElementById('filosofia-{{ section.id }}');
       if (!section) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
       var cards = section.querySelectorAll('.ph-holo-card');
-      if (!cards.length) return;
 
       cards.forEach(function ($card) {
         var bounds = null;
 
-        var rotateToMouse = function (e) {
+        function rotateToMouse(e) {
           if (!bounds) return;
 
           var mouseX = e.clientX;
@@ -393,38 +382,37 @@
               -center.x / 100 + ', 0, ' +
               Math.log(distance) * 2 + 'deg)';
 
-          var glow = $card.querySelector('.ph-holo-glow');
-          if (glow) {
-            glow.style.backgroundImage =
-              'radial-gradient(' +
-                'circle at ' +
-                (center.x * 2 + bounds.width / 2) + 'px ' +
-                (center.y * 2 + bounds.height / 2) + 'px, ' +
-                '#ffffff55, #0000000f)';
-          }
-        };
+          $card.style.setProperty('--glow-x', (center.x * 1.3 + bounds.width / 2) + 'px');
+          $card.style.setProperty('--glow-y', (center.y * 1.3 + bounds.height / 2) + 'px');
+        }
 
-        var handleMouseEnter = function () {
+        function onEnter() {
           bounds = $card.getBoundingClientRect();
           document.addEventListener('mousemove', rotateToMouse);
-        };
+        }
 
-        var handleMouseLeave = function () {
+        function onLeave() {
           document.removeEventListener('mousemove', rotateToMouse);
           $card.style.transform = '';
-          var glow = $card.querySelector('.ph-holo-glow');
-          if (glow) glow.style.backgroundImage = '';
+          $card.style.removeProperty('--glow-x');
+          $card.style.removeProperty('--glow-y');
           bounds = null;
-        };
+        }
 
-        $card.addEventListener('mouseenter', handleMouseEnter);
-        $card.addEventListener('mouseleave', handleMouseLeave);
-        $card.addEventListener('focus', handleMouseEnter);
-        $card.addEventListener('blur', handleMouseLeave);
+        $card.addEventListener('mouseenter', onEnter);
+        $card.addEventListener('mouseleave', onLeave);
+        $card.addEventListener('focus', onEnter);
+        $card.addEventListener('blur', onLeave);
       });
-    })();
-  </script>
-{%- endif -%}
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -502,37 +490,29 @@
         {
           "type": "image_picker",
           "id": "image",
-          "label": "Imagen principal"
-        },
-        {
-          "type": "text",
-          "id": "eyebrow",
-          "label": "Etiqueta superior",
-          "default": "Edición limitada"
+          "label": "Imagen"
         },
         {
           "type": "text",
           "id": "title",
           "label": "Título",
-          "default": "Submarine GMT"
+          "default": "Producción controlada, sin exceso"
         },
         {
-          "type": "text",
-          "id": "subtitle",
-          "label": "Subtítulo",
-          "default": "Referencia 001 / 100"
+          "type": "richtext",
+          "id": "body",
+          "label": "Párrafo",
+          "default": "<p>Cada pieza se produce bajo pedido, manteniendo un control total de calidad y evitando la producción en masa. Tu reloj es único, no uno más en una línea de ensamblaje.</p>"
         },
         {
-          "type": "text",
-          "id": "meta_left",
-          "label": "Meta izquierda",
-          "default": "42 mm"
-        },
-        {
-          "type": "text",
-          "id": "meta_right",
-          "label": "Meta derecha",
-          "default": "300 m"
+          "type": "select",
+          "id": "position",
+          "label": "Posición de la imagen",
+          "options": [
+            { "value": "left", "label": "Derecha (texto izquierda)" },
+            { "value": "right", "label": "Izquierda (texto derecha)" }
+          ],
+          "default": "left"
         }
       ]
     }
@@ -561,11 +541,9 @@
         {
           "type": "holo_card",
           "settings": {
-            "eyebrow": "Edición limitada",
-            "title": "Submarine GMT",
-            "subtitle": "Referencia 001 / 100",
-            "meta_left": "42 mm",
-            "meta_right": "300 m"
+            "title": "Producción controlada, sin exceso",
+            "body": "<p>Cada pieza se produce bajo pedido, manteniendo un control total de calidad y evitando la producción en masa. Tu reloj es único, no uno más en una línea de ensamblaje.</p>",
+            "position": "left"
           }
         }
       ]

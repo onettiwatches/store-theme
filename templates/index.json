@@ -223,20 +223,20 @@
             "position": "alternating"
           }
         },
-        "item-3": {
-          "type": "item",
+        "holo-1": {
+          "type": "holo_card",
           "settings": {
             "image": "shopify://shop_images/tarjeta_frontal_onetti_v5.png",
             "title": "Producción controlada, sin exceso",
             "body": "<p>Cada pieza se produce bajo pedido, manteniendo un control total de calidad y evitando la producción en masa. Tu reloj es único, no uno más en una línea de ensamblaje.</p>",
-            "position": "alternating"
+            "position": "left"
           }
         }
       },
       "block_order": [
         "item-1",
         "item-2",
-        "item-3"
+        "holo-1"
       ],
       "settings": {
         "heading": "Nuestra Filosofía",

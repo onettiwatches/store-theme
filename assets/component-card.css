@@ -322,6 +322,9 @@
   white-space: nowrap;
   transition: transform var(--duration-short) ease;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
 }
 
 .card-information > * + * {
@@ -339,6 +342,7 @@
 
 .card-information > .price {
   color: rgb(var(--color-foreground));
+  text-align: center;
 }
 
 .card--horizontal .card-information > .price {
