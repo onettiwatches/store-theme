@@ -931,6 +931,16 @@ summary::-webkit-details-marker {
   margin: 3rem 0 2rem;
 }
 
+/* Homepage section titles: center them */
+.title-wrapper,
+.title-wrapper-with-link {
+  text-align: center;
+  justify-content: center;
+}
+.title-wrapper-with-link > .link-with-icon {
+  margin-inline: auto;
+}
+
 .title-wrapper-with-link .title {
   margin: 0;
 }
@@ -3497,10 +3507,10 @@ details-disclosure > details {
 
 /* Featured collection title: editorial micro rhythm */
 .featured-collection__heading {
-  text-align: left;
+  text-align: center;
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  justify-content: center;
   gap: var(--space-4);
   flex-wrap: wrap;
 }
@@ -4123,11 +4133,18 @@ input[type="number"],
   }
 }
 
-/* Banner heading: tighter tracking, balanced wrap */
-.banner__heading {
+/* Banner heading: tighter tracking, balanced wrap, smaller scale */
+.banner__heading,
+.banner__box h1.banner__heading,
+.banner__box h2.banner__heading {
   text-wrap: balance;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
   letter-spacing: 0.01em;
   line-height: 1.05;
+  font-size: clamp(1.8rem, 2.6vw, 2.4rem) !important;
+  max-width: 20ch;
   margin-bottom: 0.4rem;
 }
 
