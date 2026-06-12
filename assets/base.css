@@ -1180,7 +1180,6 @@ summary::-webkit-details-marker {
     margin-left: 1.5rem;
   }
 
-
   .grid--peek.slider:after {
     margin-left: calc(-1 * var(--grid-mobile-horizontal-spacing));
   }
@@ -3105,7 +3104,6 @@ details-disclosure > details {
   --duration-medium: 380ms;
   --duration-long: 600ms;
 
-
   --space-1: 0.4rem;
   --space-2: 0.8rem;
   --space-3: 1.2rem;
@@ -3115,7 +3113,6 @@ details-disclosure > details {
   --space-7: 4.8rem;
   --space-8: 6.4rem;
   --space-9: 9.6rem;
-
 
   --radius-xs: 0.2rem;
   --radius-sm: 0.4rem;
@@ -3166,19 +3163,9 @@ details-disclosure > details {
 }
 
 .product-card-wrapper {
-  transition: transform 0.5s var(--ease-out-quart);
-}
-@media screen and (min-width: 990px) {
-  .product-card-wrapper:hover {
-    transform: translateY(-2px);
-  }
+  transition: none;
 }
 
-/* ============================================================
-   Onetti design tokens — single source of truth.
-   All paddings, font-sizes, radii, and line-heights added in
-   this session (and in the new section files) MUST use these.
-   ============================================================ */
 :root {
   --space-0:   0;
   --space-1:   0.4rem;

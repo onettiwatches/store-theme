@@ -12,7 +12,8 @@
   #filosofia-{{ section.id }} .ph-block {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-8);
+    grid-template-areas: "img txt";
+    gap: var(--space-6);
     align-items: center;
     max-width: var(--page-width, 1600px);
     margin: 0 auto var(--space-8);
@@ -21,15 +22,72 @@
   #filosofia-{{ section.id }} .ph-block:last-child {
     margin-bottom: 0;
   }
+  #filosofia-{{ section.id }} .ph-block--left {
+    grid-template-areas: "txt img";
+  }
+  #filosofia-{{ section.id }} .ph-block--right {
+    grid-template-areas: "img txt";
+  }
+  #filosofia-{{ section.id }} .ph-block-image {
+    grid-area: img;
+  }
+  #filosofia-{{ section.id }} .ph-block-text {
+    grid-area: txt;
+  }
   @media (max-width: 989px) {
-    #filosofia-{{ section.id }} .ph-block {
+    #filosofia-{{ section.id }} .ph-block,
+    #filosofia-{{ section.id }} .ph-block--left,
+    #filosofia-{{ section.id }} .ph-block--right {
       grid-template-columns: 1fr;
-      gap: var(--space-5);
-      margin-bottom: var(--space-5);
+      grid-template-areas: "img" "txt";
+      gap: var(--space-4);
+      margin-bottom: var(--space-6);
     }
   }
 
+  #filosofia-{{ section.id }} .ph-block-image {
+    width: 100%;
+    max-width: 36rem;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: var(--radius-md);
+    background-color: rgba(var(--color-foreground), 0.04);
+    justify-self: center;
+  }
+  @media (max-width: 989px) {
+    #filosofia-{{ section.id }} .ph-block-image {
+      max-width: 32rem;
+      justify-self: center;
+    }
+  }
+  #filosofia-{{ section.id }} .ph-block-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transition: transform 0.6s var(--ease-out-quart);
+  }
+  #filosofia-{{ section.id }} .ph-block:hover .ph-block-image img {
+    transform: scale(1.04);
+  }
+  #filosofia-{{ section.id }} .ph-block-image--empty {
+    aspect-ratio: 4 / 3;
+    border: 1px dashed rgba(var(--color-foreground), 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #filosofia-{{ section.id }} .ph-block-image--empty span {
+    color: rgba(var(--color-foreground), 0.4);
+    font-family: var(--font-body-family);
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
   #filosofia-{{ section.id }} .ph-block-text {
+    grid-area: txt;
     text-align: left;
   }
   #filosofia-{{ section.id }} .ph-block-title {
@@ -52,21 +110,6 @@
   }
   #filosofia-{{ section.id }} .ph-block-body p:last-child {
     margin-bottom: 0;
-  }
-
-  /* Right text (image would be on the left) */
-  #filosofia-{{ section.id }} .ph-block--right .ph-block-text {
-    grid-column: 2;
-  }
-  /* Left text (image would be on the right) */
-  #filosofia-{{ section.id }} .ph-block--left .ph-block-text {
-    grid-column: 1;
-  }
-  @media (max-width: 989px) {
-    #filosofia-{{ section.id }} .ph-block--right .ph-block-text,
-    #filosofia-{{ section.id }} .ph-block--left .ph-block-text {
-      grid-column: 1;
-    }
   }
 </style>
 
@@ -97,6 +140,20 @@
       {%- endif -%}
 
       <div class="ph-block {{ pos_class }}" {{ block.shopify_attributes }}>
+        <div class="ph-block-image{% if block.settings.image == blank %} ph-block-image--empty{% endif %}">
+          {%- if block.settings.image != blank -%}
+            {{ block.settings.image | image_url: width: 1200 | image_tag:
+              loading: 'lazy',
+              width: block.settings.image.width,
+              height: block.settings.image.height,
+              sizes: '(min-width: 990px) 50vw, 100vw',
+              alt: block.settings.image.alt | default: block.settings.title
+            }}
+          {%- else -%}
+            <span>Imagen</span>
+          {%- endif -%}
+        </div>
+
         <div class="ph-block-text">
           {%- if block.settings.title != blank -%}
             <h3 class="ph-block-title">{{ block.settings.title }}</h3>
@@ -154,8 +211,13 @@
   "blocks": [
     {
       "type": "item",
-      "name": "Párrafo",
+      "name": "Párrafo con imagen",
       "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen"
+        },
         {
           "type": "text",
           "id": "title",
@@ -171,11 +233,11 @@
         {
           "type": "select",
           "id": "position",
-          "label": "Posición del texto",
+          "label": "Posición de la imagen",
           "options": [
             { "value": "alternating", "label": "Intercalada (auto)" },
-            { "value": "right", "label": "Derecha" },
-            { "value": "left", "label": "Izquierda" }
+            { "value": "right", "label": "Derecha (texto izquierda)" },
+            { "value": "left", "label": "Izquierda (texto derecha)" }
           ],
           "default": "alternating",
           "info": "En modo auto, alterna: 1ª derecha, 2ª izquierda, 3ª derecha."

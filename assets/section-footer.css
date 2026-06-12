@@ -179,7 +179,7 @@
 }
 
 @media screen and (min-width: 750px) {
-  /* Pushes other components to the right of the flexbox */
+
   .footer-block__newsletter:not(:only-child) {
     text-align: left;
     margin-right: auto;
@@ -198,17 +198,14 @@
   .footer__follow-on-shop {
     margin-bottom: 0.4rem;
   }
-  /* Follow on shop is the first button but it has siblings*/
+
   .footer__follow-on-shop:first-child:not(:last-child) {
     justify-content: flex-start;
     margin-right: auto;
     text-align: left;
   }
 
-  /*
-    All three components are present, email, Follow on Shop, and social icons.
-    Moves the FoS button next to the social icons so they appear grouped together
-  */
+
   .footer__follow-on-shop:not(:first-child):not(:last-child) {
     justify-content: flex-end;
     text-align: right;
@@ -216,10 +213,7 @@
 }
 
 @media screen and (max-width: 749px) {
-  /*
-    On a small screen we want all the items to be centered
-    because they will be stacked.
-   */
+
   .footer-block--newsletter {
     display: flex;
     flex-direction: column;
@@ -496,7 +490,6 @@
   }
 }
 
-/* check for flexbox gap in older Safari versions */
 @supports not (inset: 10px) {
   @media screen and (max-width: 749px) {
     .footer .grid {
@@ -515,15 +508,6 @@
   }
 }
 
-/* ============================================================
-   Onetti editorial footer
-   - Body text in Inter (readable), brand display in Cormorant
-   - Gold center-grow underline on links (matches header)
-   - Hairline gold rule under brand name + active section links
-   - All transitions reuse --ease-out-quart
-   ============================================================ */
-
-/* Section headings (menu/newsletter labels): Inter, tracked, all-caps */
 .footer-block__heading {
   font-family: var(--font-body-family);
   font-weight: var(--font-body-weight-bold, 600);
@@ -539,7 +523,6 @@
   }
 }
 
-/* Brand block: serif display name + readable body intro */
 .footer-block__brand-info .footer-block__heading {
   font-family: var(--font-heading-family);
   font-weight: 500;
@@ -573,7 +556,6 @@
   margin-bottom: var(--space-5);
 }
 
-/* List menu links: Inter, muted idle → full on hover, gold center-grow */
 .footer-block__details-content .list-menu__item--link {
   font-family: var(--font-body-family);
   font-weight: 400;
@@ -605,7 +587,6 @@
   transform: translateX(-50%) scaleX(1);
 }
 
-/* Active menu link: italic accent + persistent short gold rule */
   .footer-block__details-content .list-menu__item--active {
     color: rgb(var(--color-foreground));
     text-decoration: none;
@@ -615,7 +596,6 @@
   width: 0.9rem;
 }
 
-/* Copyright + policies: small Inter, muted, gold hover */
 .footer__copyright,
 .footer__copyright .copyright__content,
 .footer .policies li a {
@@ -634,7 +614,6 @@
   color: rgba(var(--color-foreground), 0.35);
 }
 
-/* Bottom bar: refined divider, breathing room */
 .footer__content-bottom {
   border-top: 1px solid rgba(var(--color-foreground), 0.12);
   padding-top: var(--space-5);
@@ -646,12 +625,10 @@
   }
 }
 
-/* Social icons: match header idle opacity (0.7), keep existing lift+gold hover */
 .footer .list-social__link {
   color: rgba(var(--color-foreground), 0.7);
 }
 
-/* Localization labels: small Inter, kept subtle */
 .footer__localization h2 {
   font-family: var(--font-body-family);
   font-size: 1.1rem;
@@ -660,14 +637,12 @@
   color: rgba(var(--color-foreground), 0.75);
 }
 
-/* Newsletter copy & fields: force Inter for any inherited serif */
 .footer__newsletter,
 .footer__newsletter .newsletter-form__field-wrapper .field__input,
 .footer__newsletter .field__label {
   font-family: var(--font-body-family);
 }
 
-/* Reduced motion: drop transitions, transforms still apply instantly */
 @media (prefers-reduced-motion: reduce) {
   .footer-block__details-content .list-menu__item--link::after,
   .footer-block__details-content .list-menu__item--active::after,
