@@ -307,38 +307,12 @@
     .whatsapp-actions {
       display: flex;
       gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .whatsapp-actions button {
-      flex: 1;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .whatsapp-send-btn {
-      background-color: {{ settings.whatsapp_button_color }};
-      color: rgb(var(--color-base-solid-button-labels));
-    }
-
-    .whatsapp-send-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px {{ settings.whatsapp_button_color }}40;
-    }
-
-    .whatsapp-close-btn {
-      background-color: {{ settings.colors_background_2 }};
-      color: {{ settings.colors_text }};
-    }
-
-    .whatsapp-close-btn:hover {
-      background-color: {{ settings.colors_accent_1 }}15;
+    .whatsapp-actions .onetti-btn {
+      flex: 1 1 auto;
+      min-width: 0;
     }
 
     @media (max-width: 768px) {
@@ -446,8 +420,8 @@
       <div class="whatsapp-message-preview" id="whatsappPreview"></div>
 
       <div class="whatsapp-actions">
-        <button class="whatsapp-send-btn" id="whatsappSendBtn">Enviar por WhatsApp</button>
-        <button class="whatsapp-close-btn" id="whatsappCloseBtn">Cancelar</button>
+        <button class="onetti-btn" id="whatsappSendBtn">Enviar por WhatsApp</button>
+        <button class="onetti-btn onetti-btn--secondary" id="whatsappCloseBtn">Cancelar</button>
       </div>
     </div>
   </div>

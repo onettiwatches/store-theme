@@ -50,7 +50,7 @@
                     {% else %}
                       href="{{ block.settings.button_link }}"
                     {% endif %}
-                    class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                    class="onetti-btn{% if block.settings.button_style_secondary %} onetti-btn--secondary{% endif %}"
                   >
                     {{- block.settings.button_label | escape -}}
                   </a>
@@ -62,7 +62,7 @@
                     {% else %}
                       href="{{ block.settings.button_link_2 }}"
                     {% endif %}
-                    class="button{% if block.settings.button_style_secondary_2 %} button--secondary{% else %} button--primary{% endif %}"
+                    class="onetti-btn{% if block.settings.button_style_secondary_2 %} onetti-btn--secondary{% endif %}"
                   >
                     {{- block.settings.button_label_2 | escape -}}
                   </a>

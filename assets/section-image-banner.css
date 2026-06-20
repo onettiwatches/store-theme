@@ -452,3 +452,7 @@
     color: currentColor;
   }
 }
+
+.banner__content:has(> .banner__box:empty) {
+  display: none;
+}

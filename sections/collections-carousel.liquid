@@ -171,6 +171,10 @@
     background: var(--cc-accent);
     transform: scale(1.4);
   }
+
+  #cc-{{ section.id }} .onetti-btn {
+    margin-top: var(--space-4);
+  }
 </style>
 
 <section id="cc-{{ section.id }}">
@@ -184,6 +188,9 @@
         <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
       </button>
     </div>
+    {%- if section.settings.show_view_all -%}
+      <a href="{{ routes.collections_url }}" class="onetti-btn">Ver todos</a>
+    {%- endif -%}
   </div>
 
   <div class="cc-viewport" id="cc-vp-{{ section.id }}">
@@ -431,6 +438,12 @@
       "id": "heading",
       "label": "Título",
       "default": "Colecciones"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Mostrar botón 'Ver todos'",
+      "default": true
     },
     {
       "type": "checkbox",

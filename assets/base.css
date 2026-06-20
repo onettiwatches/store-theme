@@ -4172,3 +4172,73 @@ a.pc-card:hover {
   border-radius: var(--radius-sm);
   overflow: hidden;
 }
+
+.onetti-btn {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  padding: 0 3rem;
+  min-width: 12rem;
+  min-height: 4.5rem;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.5rem;
+  letter-spacing: 0.1rem;
+  line-height: calc(1 + 0.2 / var(--font-body-scale));
+  text-decoration: none;
+  color: rgb(var(--color-base-solid-button-labels));
+  background-color: rgb(var(--color-base-accent-2));
+  border-radius: 4px;
+  transition: box-shadow var(--duration-short) ease;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.onetti-btn::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.5rem;
+  width: 100%;
+  height: 1px;
+  background: rgb(var(--color-base-accent-2));
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  transition: transform 0.45s var(--ease-out-quart);
+}
+
+.onetti-btn:hover::after,
+.onetti-btn:focus-visible::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+.onetti-btn--secondary {
+  color: rgb(var(--color-base-accent-2));
+  background-color: transparent;
+  box-shadow: inset 0 0 0 1px rgb(var(--color-base-accent-2));
+}
+
+.onetti-btn--secondary:hover {
+  background-color: rgba(var(--color-base-accent-2), 0.08);
+}
+
+.onetti-btn--full-width {
+  display: flex;
+  width: 100%;
+}
+
+.onetti-btn:focus-visible {
+  outline: 0;
+  box-shadow: 0 0 0 0.3rem rgb(var(--color-background)),
+    0 0 0 0.5rem rgba(var(--color-foreground), 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .onetti-btn::after,
+  .onetti-btn:hover::after,
+  .onetti-btn:focus-visible::after {
+    transition: none;
+  }
+}
