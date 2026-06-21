@@ -18,9 +18,7 @@
     },
     "header": {
       "type": "header",
-      "custom_css": [
-        ".header__heading-link .h2 {font-size: 22px;}"
-      ],
+      "custom_css": [],
       "settings": {
         "logo_position": "middle-center",
         "menu": "main-menu",
