@@ -1,0 +1,47 @@
+{%- comment -%}
+  Renders a list of all store collections for the header "Colecciones" dropdown.
+
+  Usage:
+    {% render 'header-collections-list', layout: 'desktop' %}
+    {% render 'header-collections-list', layout: 'mobile' %}
+
+  Accepts:
+    - layout: 'desktop' or 'mobile' (default: 'desktop')
+{%- endcomment -%}
+
+{%- assign layout = layout | default: 'desktop' -%}
+{%- assign limit = 24 -%}
+
+{%- if layout == 'mobile' -%}
+  <ul class="menu-drawer__menu list-menu header-collections-list" role="list" tabindex="-1">
+    {%- for collection in collections limit: limit -%}
+      {%- unless collection.title == 'Mejor Vendidos' -%}
+        <li>
+          <a
+            href="{{ collection.url }}"
+            class="menu-drawer__menu-item link link--text list-menu__item focus-inset{% if collection.current %} menu-drawer__menu-item--active{% endif %}"
+            {% if collection.current %} aria-current="page"{% endif %}
+          >
+            {{- collection.title | escape -}}
+          </a>
+        </li>
+      {%- endunless -%}
+    {%- endfor -%}
+  </ul>
+{%- else -%}
+  <ul class="header__submenu list-menu list-menu--disclosure gradient caption-large motion-reduce global-settings-popup header-collections-list" role="list" tabindex="-1">
+    {%- for collection in collections limit: limit -%}
+      {%- unless collection.title == 'Mejor Vendidos' -%}
+        <li>
+          <a
+            href="{{ collection.url }}"
+            class="header__menu-item list-menu__item link link--text focus-inset caption-large{% if collection.current %} list-menu__item--active{% endif %}"
+            {% if collection.current %} aria-current="page"{% endif %}
+          >
+            {{- collection.title | escape -}}
+          </a>
+        </li>
+      {%- endunless -%}
+    {%- endfor -%}
+  </ul>
+{%- endif -%}
