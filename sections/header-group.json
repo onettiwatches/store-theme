@@ -16,6 +16,40 @@
       "disabled": true,
       "settings": {}
     },
+    "stock-ticker": {
+      "type": "main-stock-ticker",
+      "blocks": {
+        "st-item-1": {
+          "type": "item",
+          "settings": {
+            "text": "Envío gratis en pedidos +$500",
+            "link": ""
+          }
+        },
+        "st-item-2": {
+          "type": "item",
+          "settings": {
+            "text": "Garantía internacional de 2 años",
+            "link": ""
+          }
+        },
+        "st-item-3": {
+          "type": "item",
+          "settings": {
+            "text": "Producción artesanal bajo pedido",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "st-item-1",
+        "st-item-2",
+        "st-item-3"
+      ],
+      "settings": {
+        "speed": 40
+      }
+    },
     "header": {
       "type": "header",
       "custom_css": [],
@@ -37,6 +71,7 @@
   },
   "order": [
     "announcement-bar",
+    "stock-ticker",
     "header"
   ]
 }

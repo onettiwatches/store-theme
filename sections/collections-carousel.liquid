@@ -172,8 +172,10 @@
     transform: scale(1.4);
   }
 
-  #cc-{{ section.id }} .onetti-btn {
-    margin-top: var(--space-4);
+  #cc-{{ section.id }} .cc-view-all-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-5);
   }
 </style>
 
@@ -188,9 +190,6 @@
         <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
       </button>
     </div>
-    {%- if section.settings.show_view_all -%}
-      <a href="{{ routes.collections_url }}" class="onetti-btn">Ver todos</a>
-    {%- endif -%}
   </div>
 
   <div class="cc-viewport" id="cc-vp-{{ section.id }}">
@@ -198,6 +197,12 @@
   </div>
 
   <div class="cc-dots" id="cc-dots-{{ section.id }}"></div>
+
+  {%- if section.settings.show_view_all -%}
+    <div class="cc-view-all-wrap">
+      <a href="{{ routes.collections_url }}" class="onetti-btn">Ver todos</a>
+    </div>
+  {%- endif -%}
 </section>
 
 <script>
