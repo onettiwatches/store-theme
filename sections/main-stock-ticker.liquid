@@ -15,7 +15,7 @@
     gap: var(--space-7);
     padding: 0.6rem 0;
     width: max-content;
-    animation: st-scroll-{{ section.id }} {{ section.settings.speed }}s linear infinite;
+    animation: st-scroll-{{ section.id }} 40s linear infinite;
     will-change: transform;
   }
 
@@ -68,15 +68,7 @@
   }
 </style>
 
-{%- assign items = '' -%}
-{%- for block in section.blocks -%}
-  {%- if block.type == 'item' and block.settings.text != blank -%}
-    {%- assign items = items | append: block.settings.text -%}
-    {%- unless forloop.last -%}{%- assign items = items | append: '|||' -%}{%- endunless -%}
-  {%- endif -%}
-{%- endfor -%}
-
-{%- if items != blank -%}
+{%- if section.blocks.size > 0 -%}
   <section
     id="st-{{ section.id }}"
     class="st-section"
@@ -84,23 +76,73 @@
     role="region"
   >
     <div class="st-track">
-      {%- for i in (1..2) -%}
-        {%- for block in section.blocks -%}
-          {%- if block.type == 'item' and block.settings.text != blank -%}
-            <span class="st-item" {{ block.shopify_attributes }}>
-              {%- if block.settings.link != blank -%}
-                <a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>
-              {%- else -%}
-                {{ block.settings.text | escape }}
-              {%- endif -%}
-              <span class="st-dot" aria-hidden="true"></span>
-            </span>
-          {%- endif -%}
-        {%- endfor -%}
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'item' and block.settings.text != blank -%}
+          <span class="st-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}">{{ block.settings.text | escape }}</a>
+            {%- else -%}
+              {{ block.settings.text | escape }}
+            {%- endif -%}
+            <span class="st-dot" aria-hidden="true"></span>
+          </span>
+        {%- endif -%}
       {%- endfor -%}
     </div>
   </section>
 {%- endif -%}
+
+<script>
+(function () {
+  const SECTION_ID     = {{ section.id | json }};
+  const SPEED_PX_PER_S = {{ section.settings.speed | times: 1.0 }};
+
+  function init() {
+    const container = document.getElementById('st-' + SECTION_ID);
+    if (!container) return;
+
+    const track = container.querySelector('.st-track');
+    if (!track) return;
+
+    const originals = Array.from(track.children);
+    if (originals.length === 0) return;
+
+    track.innerHTML = '';
+    originals.forEach(c => track.appendChild(c));
+
+    const vw = container.offsetWidth;
+
+    let safety = 0;
+    while (track.scrollWidth < vw * 2 && safety < 6) {
+      const current = Array.from(track.children);
+      current.forEach(c => track.appendChild(c.cloneNode(true)));
+      safety++;
+    }
+
+    const halfWidth = track.scrollWidth / 2;
+    if (halfWidth > 0) {
+      const duration = halfWidth / SPEED_PX_PER_S;
+      track.style.animationDuration = duration + 's';
+    }
+  }
+
+  function schedule() {
+    requestAnimationFrame(init);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', schedule);
+  } else {
+    schedule();
+  }
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(schedule, 150);
+  });
+})();
+</script>
 
 {% schema %}
 {
@@ -114,9 +156,8 @@
       "min": 20,
       "max": 120,
       "step": 5,
-      "unit": "s",
-      "label": "Duración del ciclo (segundos)",
-      "default": 40
+      "label": "Velocidad (px/seg)",
+      "default": 50
     }
   ],
   "blocks": [
