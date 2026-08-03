@@ -45,8 +45,8 @@
 
 :root,
 .color-background-1 {
-  --color-link: var(--color-base-outline-button-labels);
-  --alpha-link: 0.85;
+  --color-link: var(--color-foreground);
+  --alpha-link: 0.7;
 }
 
 .color-background-2,
@@ -3860,6 +3860,11 @@ img.lazyload.is-loading, img[loading="lazy"].is-loading {
   text-align: left !important;
   display: block !important;
   color: rgba(var(--color-foreground), 0.7) !important;
+}
+
+/* Compensate for parent .product-count.light opacity (0.7) — keep AA contrast on dark bg */
+.product-count__text {
+  color: rgb(var(--color-foreground)) !important;
 }
 .facet-filters__label label {
   font-size: 1.2rem;

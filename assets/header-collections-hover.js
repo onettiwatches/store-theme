@@ -2,12 +2,9 @@
   'use strict';
 
   function init() {
-    // Only on devices with real hover (desktop)
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-    var collectionsMenus = document.querySelectorAll('.header-menu__collections');
-
-    collectionsMenus.forEach(function (details) {
+    document.querySelectorAll('.header-menu__collections').forEach(function (details) {
       var headerMenu = details.closest('header-menu');
       if (!headerMenu) return;
 
@@ -25,7 +22,7 @@
         if (openTimer) { clearTimeout(openTimer); openTimer = null; }
         closeTimer = setTimeout(function () {
           details.removeAttribute('open');
-        }, 150);
+        }, 200);
       }
 
       headerMenu.addEventListener('mouseenter', function () {
@@ -34,20 +31,6 @@
       });
 
       headerMenu.addEventListener('mouseleave', scheduleClose);
-
-      // Keep open when hovering the dropdown content itself
-      details.addEventListener('mouseenter', function () {
-        if (closeTimer) { clearTimeout(closeTimer); closeTimer = null; }
-      });
-
-      details.addEventListener('mouseleave', scheduleClose);
-
-      // Close on Escape
-      details.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-          details.removeAttribute('open');
-        }
-      });
     });
   }
 

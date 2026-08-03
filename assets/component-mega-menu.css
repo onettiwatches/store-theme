@@ -93,6 +93,21 @@
 }
 
 /* Header collections dropdown (auto-populated) */
+.header-menu__collections {
+  position: relative;
+}
+
+.header-menu__collections::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 28rem;
+  pointer-events: auto;
+  z-index: 0;
+}
+
 .header-menu__collections .header__submenu {
   min-width: 24rem;
   padding: var(--space-3) 0;
