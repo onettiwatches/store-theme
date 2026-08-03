@@ -114,7 +114,7 @@
       "type": "products-carousel",
       "settings": {
         "heading": "Productos destacados",
-        "source_collection": "submarine-gmt",
+        "source_collection": "mejor-vendidos",
         "products_limit": 12,
         "autoplay": true,
         "autoplay_speed": 4500
