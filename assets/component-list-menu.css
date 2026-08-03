@@ -26,5 +26,20 @@
   max-height: 18rem;
   overflow: auto;
   width: 10rem;
-  padding: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.header-menu__collections::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  height: 28rem;
+  pointer-events: auto;
+  z-index: 0;
+}
+
+.header-menu__collections[open] > .header__menu-item {
+  text-decoration: none !important;
 }
