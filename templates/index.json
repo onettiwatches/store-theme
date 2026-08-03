@@ -197,7 +197,7 @@
         "holo-1": {
           "type": "holo_card",
           "settings": {
-            "image": "shopify://shop_images/tarjeta_frontal_onetti_v5.png",
+            "image": "shopify://shop_images/5705b71e.png",
             "title": "Producción controlada, sin exceso",
             "body": "<p>Cada pieza se produce bajo pedido, manteniendo un control total de calidad y evitando la producción en masa. Tu reloj es único, no uno más en una línea de ensamblaje.</p>",
             "position": "left"
