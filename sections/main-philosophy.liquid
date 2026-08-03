@@ -157,12 +157,13 @@
     background: transparent;
     box-shadow: none;
     transition: transform 0.15s var(--ease-out-quart);
+    will-change: transform;
     cursor: pointer;
     overflow: hidden;
     --glow-x: 50%;
     --glow-y: 50%;
-    --glow-intensity: 0.5;
-    --glow-size: 80%;
+    --glow-intensity: 0.2;
+    --glow-size: 90%;
   }
   #filosofia-{{ section.id }} .ph-holo-image-wrap {
     display: block;
@@ -191,25 +192,25 @@
     background-image:
       repeating-linear-gradient(
         62deg,
-        rgba(0, 0, 0, 0.08) 0px,
-        rgba(0, 0, 0, 0.08) 1px,
-        transparent 1px,
+        rgba(255, 255, 255, 0.036) 0px,
+        rgba(255, 255, 255, 0.01) 1px,
+        transparent 2px,
         transparent 3px
       ),
       repeating-linear-gradient(
         -28deg,
-        rgba(255, 255, 255, 0.05) 0px,
-        rgba(255, 255, 255, 0.05) 1px,
-        transparent 1px,
+        rgba(197, 160, 89, 0.028) 0px,
+        rgba(197, 160, 89, 0.008) 1px,
+        transparent 2px,
         transparent 4px
       );
-    opacity: 0.4;
+    opacity: 0.9;
     transition: opacity 0.4s var(--ease-out-quart);
-    mix-blend-mode: overlay;
+    mix-blend-mode: screen;
   }
   @media (hover: hover) and (pointer: fine) {
     #filosofia-{{ section.id }} .ph-holo-card:hover::before {
-      opacity: 0.55;
+      opacity: 1;
     }
   }
   #filosofia-{{ section.id }} .ph-holo-card::after {
@@ -221,17 +222,24 @@
     left: 0;
     pointer-events: none;
     z-index: 2;
-    background-image: radial-gradient(
-      circle at var(--glow-x) var(--glow-y),
-      rgba(255, 255, 255, var(--glow-intensity)) 0%,
-      rgba(255, 255, 255, calc(var(--glow-intensity) * 0.625)) 15%,
-      rgba(197, 160, 89, calc(var(--glow-intensity) * 0.5)) 35%,
-      rgba(197, 160, 89, calc(var(--glow-intensity) * 0.2)) 55%,
-      transparent var(--glow-size)
-    );
+    background-image:
+      radial-gradient(
+        circle at var(--glow-x) var(--glow-y),
+        rgba(255, 255, 255, calc(var(--glow-intensity) * 1.2)) 0%,
+        rgba(255, 255, 255, calc(var(--glow-intensity) * 0.95)) 10%,
+        rgba(255, 240, 200, calc(var(--glow-intensity) * 0.7)) 22%,
+        rgba(197, 160, 89, calc(var(--glow-intensity) * 0.45)) 40%,
+        rgba(197, 160, 89, calc(var(--glow-intensity) * 0.18)) 60%,
+        transparent var(--glow-size)
+      ),
+      radial-gradient(
+        circle at var(--glow-x) var(--glow-y),
+        rgba(255, 255, 255, calc(var(--glow-intensity) * 0.5)) 0%,
+        transparent 35%
+      );
     opacity: 0;
     transition: opacity 0.4s var(--ease-out-quart);
-    mix-blend-mode: soft-light;
+    mix-blend-mode: screen;
   }
   @media (hover: hover) and (pointer: fine) {
     #filosofia-{{ section.id }} .ph-holo-card:hover::before,
@@ -403,6 +411,7 @@
           $card.style.removeProperty('--glow-x');
           $card.style.removeProperty('--glow-y');
           bounds = null;
+          void $card.offsetWidth;
         }
 
         $card.addEventListener('mouseenter', onEnter);
