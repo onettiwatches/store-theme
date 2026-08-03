@@ -91,6 +91,7 @@
       "name": "Collections Carousel",
       "settings": {
         "heading": "Colecciones destacadas",
+        "show_view_all": true,
         "autoplay": true,
         "autoplay_speed": 4000
       }
@@ -221,7 +222,7 @@
         "heading": "Nuestro trabajo",
         "heading_size": "h1",
         "enable_video_looping": false,
-        "video": "shopify://files/videos/videoplayback.mp4",
+        "video": "shopify://files/videos/sample-5s-360p.mp4",
         "video_url": "",
         "description": "",
         "full_width": false,
@@ -239,6 +240,9 @@
             "show_sample_reviews": true,
             "reviews_selection": "all",
             "products": [],
+            "filter_pinned": false,
+            "filter_featured": false,
+            "filter_custom_tags": "",
             "star_rating": "all",
             "review_type": "photo_and_video",
             "max_reviews": 20,
@@ -260,7 +264,8 @@
             "transition_speed": 5,
             "carousel_style": "highlight",
             "header_text": "Reseñas de clientes",
-            "show_average_rating": true
+            "show_average_rating": true,
+            "rating_display": "default"
           }
         }
       },
