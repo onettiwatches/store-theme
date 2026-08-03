@@ -10,20 +10,15 @@
 {
   "sections": {
     "6a3bb789-ce10-45f5-ae67-e2063ef8c76b": {
-      "type": "image-banner",
+      "type": "main-hero",
       "custom_css": [],
       "settings": {
         "image": "shopify://shop_images/banner13.png",
-        "image_overlay_opacity": 0,
-        "image_height": "small",
-        "desktop_content_position": "middle-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "background-1",
-        "image_behavior": "ambient",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": false
+        "logo": "",
+        "button_label": "Ir a comprar",
+        "button_link": "shopify://collections/all",
+        "padding_top": 24,
+        "padding_bottom": 24
       }
     },
     "collections_carousel_Qthrx3": {

@@ -1,0 +1,224 @@
+<style>
+  #hero-{{ section.id }} {
+    padding: 0;
+    background-color: #000000;
+    background-image:
+      radial-gradient(ellipse 70% 60% at 30% 25%, rgba(60, 60, 60, 0.55) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 75% 70%, rgba(40, 40, 40, 0.4) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 40% at 50% 90%, rgba(30, 30, 30, 0.35) 0%, transparent 50%),
+      linear-gradient(180deg, #000000 0%, #121212 100%);
+  }
+
+  @media screen and (max-width: 989px) {
+    #hero-{{ section.id }} {
+      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  #hero-{{ section.id }} .mh-inner {
+    max-width: var(--page-width, 1600px);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-7);
+    align-items: stretch;
+    min-height: 40vh;
+  }
+
+  #hero-{{ section.id }} .mh-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-5);
+    text-align: center;
+  }
+
+  #hero-{{ section.id }} .mh-logo-wrap {
+    width: 100%;
+    max-width: 22rem;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #hero-{{ section.id }} .mh-logo-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  #hero-{{ section.id }} .mh-logo-wrap--empty {
+    border: 1px dashed rgba(var(--color-foreground), 0.2);
+    border-radius: var(--radius-md);
+  }
+  #hero-{{ section.id }} .mh-logo-wrap--empty span {
+    color: rgba(var(--color-foreground), 0.4);
+    font-family: var(--font-body-family);
+    font-size: var(--text-sm);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  #hero-{{ section.id }} .mh-button {
+    min-width: 18rem;
+  }
+
+  #hero-{{ section.id }} .mh-right {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  #hero-{{ section.id }} .mh-right img {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
+  @media screen and (max-width: 989px) {
+    #hero-{{ section.id }} .mh-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+      text-align: center;
+      min-height: 0;
+    }
+    #hero-{{ section.id }} .mh-right {
+      order: 1;
+      aspect-ratio: 1 / 1;
+      max-width: 26rem;
+      margin: 0 auto;
+      height: auto;
+      justify-content: center;
+    }
+    #hero-{{ section.id }} .mh-right img {
+      height: 100%;
+      width: 100%;
+    }
+    #hero-{{ section.id }} .mh-left {
+      order: 2;
+    }
+    #hero-{{ section.id }} .mh-logo-wrap {
+      display: none;
+    }
+  }
+</style>
+
+<section
+  id="hero-{{ section.id }}"
+  class="section color-background-1"
+>
+  <div class="mh-inner">
+    <div class="mh-left">
+      <div class="mh-logo-wrap{% if section.settings.logo == blank %} mh-logo-wrap--empty{% endif %}">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 800 | image_tag:
+            loading: 'eager',
+            width: section.settings.logo.width,
+            height: section.settings.logo.height,
+            sizes: '(min-width: 990px) 22rem, 0px',
+            alt: section.settings.logo.alt | default: 'Logo'
+          }}
+        {%- else -%}
+          <span>Logo</span>
+        {%- endif -%}
+      </div>
+      {%- if section.settings.button_label != blank -%}
+        <a
+          {% if section.settings.button_link == blank %}
+            role="link" aria-disabled="true"
+          {% else %}
+            href="{{ section.settings.button_link }}"
+          {% endif %}
+          class="button button--primary mh-button"
+        >
+          {{- section.settings.button_label | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+
+    <div class="mh-right">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1200 | image_tag:
+          loading: 'eager',
+          width: section.settings.image.width,
+          height: section.settings.image.height,
+          sizes: '(min-width: 990px) 52rem, 80vw',
+          alt: section.settings.image.alt | default: 'Banner'
+        }}
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero principal",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen del banner (derecha)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo (izquierda)"
+    },
+    {
+      "type": "header",
+      "content": "Botón"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Etiqueta",
+      "default": "Ir a comprar"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Enlace"
+    },
+    {
+      "type": "header",
+      "content": "Espaciado móvil"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding superior",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding inferior",
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero principal"
+    }
+  ]
+}
+{% endschema %}
