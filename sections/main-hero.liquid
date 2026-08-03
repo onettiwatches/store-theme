@@ -9,12 +9,6 @@
       linear-gradient(180deg, #000000 0%, #121212 100%);
   }
 
-  @media screen and (max-width: 989px) {
-    #hero-{{ section.id }} {
-      padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
-    }
-  }
-
   #hero-{{ section.id }} .mh-inner {
     max-width: var(--page-width, 1600px);
     margin: 0 auto;
@@ -37,7 +31,7 @@
 
   #hero-{{ section.id }} .mh-logo-wrap {
     width: 100%;
-    max-width: 22rem;
+    max-width: 30rem;
     aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
@@ -85,15 +79,16 @@
   @media screen and (max-width: 989px) {
     #hero-{{ section.id }} .mh-inner {
       grid-template-columns: 1fr;
-      gap: var(--space-5);
+      gap: 0;
       text-align: center;
       min-height: 0;
+      position: relative;
     }
     #hero-{{ section.id }} .mh-right {
       order: 1;
       aspect-ratio: 1 / 1;
-      max-width: 26rem;
-      margin: 0 auto;
+      max-width: 100%;
+      margin: 0;
       height: auto;
       justify-content: center;
     }
@@ -102,7 +97,19 @@
       width: 100%;
     }
     #hero-{{ section.id }} .mh-left {
-      order: 2;
+      position: absolute;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      width: 100%;
+      max-width: 22rem;
+      pointer-events: none;
+      display: flex;
+      justify-content: center;
+    }
+    #hero-{{ section.id }} .mh-left > * {
+      pointer-events: auto;
     }
     #hero-{{ section.id }} .mh-logo-wrap {
       display: none;
@@ -189,30 +196,6 @@
       "type": "url",
       "id": "button_link",
       "label": "Enlace"
-    },
-    {
-      "type": "header",
-      "content": "Espaciado móvil"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding superior",
-      "default": 24
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 120,
-      "step": 4,
-      "unit": "px",
-      "label": "Padding inferior",
-      "default": 24
     }
   ],
   "presets": [
