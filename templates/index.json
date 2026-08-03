@@ -14,7 +14,7 @@
       "custom_css": [],
       "settings": {
         "image": "shopify://shop_images/banner13.png",
-        "logo": "",
+        "logo": "shopify://shop_images/79f88a66-5a5a-4d06-a4d8-59ee745d1267-Photoroom.png",
         "button_label": "Ir a comprar",
         "button_link": "shopify://collections/all",
         "padding_top": 24,
