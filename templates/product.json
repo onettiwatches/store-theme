@@ -23,6 +23,10 @@
             "text_style": "body"
           }
         },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
         "variant_picker": {
           "type": "variant_picker",
           "settings": {
@@ -31,10 +35,6 @@
         },
         "quantity_selector": {
           "type": "quantity_selector",
-          "settings": {}
-        },
-        "price": {
-          "type": "price",
           "settings": {}
         },
         "buy_buttons": {
@@ -47,15 +47,6 @@
         "description": {
           "type": "description",
           "settings": {}
-        },
-        "specs_tab": {
-          "type": "collapsible_tab",
-          "settings": {
-            "heading": "Especificaciones",
-            "icon": "stopwatch",
-            "content": "<p>Movimiento automático de alta precisión. Caja de acero inoxidable 316L. Cristal zafiro antirreflejos. Resistencia al agua 10 ATM.</p>",
-            "page": ""
-          }
         },
         "shipping_tab": {
           "type": "collapsible_tab",
@@ -86,7 +77,6 @@
         "quantity_selector",
         "buy_buttons",
         "description",
-        "specs_tab",
         "shipping_tab",
         "share",
         "judge_me_reviews_preview_badge_AVND4j"
