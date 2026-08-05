@@ -23,85 +23,92 @@
     "07c5541b-f8e9-4e48-9d3c-06973d977a3a": {
       "type": "collection-list",
       "blocks": {
-        "featured_collection_CkjhUH": {
+        "featured_collection_pXAKge": {
           "type": "featured_collection",
           "settings": {
-            "collection": "submarine-gmt"
+            "collection": "mejor-vendidos"
           }
         },
-        "featured_collection_nTDfYM": {
+        "featured_collection_pgQixT": {
           "type": "featured_collection",
           "settings": {
-            "collection": "royal-oak"
+            "collection": "square-aviator"
           }
         },
-        "featured_collection_YnLbBy": {
+        "featured_collection_DNHE6W": {
           "type": "featured_collection",
           "settings": {
-            "collection": "onetti-yatch-master"
+            "collection": "rubber-sport"
           }
         },
-        "featured_collection_tJggFi": {
+        "featured_collection_ejM6eY": {
           "type": "featured_collection",
           "settings": {
-            "collection": "onetti-seamaster"
+            "collection": "racing-chronograph"
           }
         },
-        "featured_collection_pg7pPx": {
+        "featured_collection_834idj": {
           "type": "featured_collection",
           "settings": {
-            "collection": "onetti-santos"
+            "collection": "professional-diver"
           }
         },
-        "featured_collection_xH4MTt": {
+        "featured_collection_JnPgwr": {
           "type": "featured_collection",
           "settings": {
-            "collection": "onetti-presage"
+            "collection": "porthole-sport"
           }
         },
-        "featured_collection_Y4a6Tj": {
+        "featured_collection_3rfdPG": {
           "type": "featured_collection",
           "settings": {
-            "collection": "nautilius"
+            "collection": "octagon-sport"
           }
         },
-        "featured_collection_qU47dm": {
+        "featured_collection_bXFecR": {
           "type": "featured_collection",
           "settings": {
-            "collection": "grand-onetti"
+            "collection": "marine-sport"
           }
         },
-        "featured_collection_xGWYqb": {
+        "featured_collection_RJAjWn": {
           "type": "featured_collection",
           "settings": {
-            "collection": "explorer"
+            "collection": "jeweled-classic-date"
           }
         },
-        "featured_collection_VTFgPj": {
+        "featured_collection_r8cwVM": {
           "type": "featured_collection",
           "settings": {
-            "collection": "daytona"
+            "collection": "dual-time"
           }
         },
-        "featured_collection_ETnwnF": {
+        "featured_collection_wcU6Xk": {
           "type": "featured_collection",
           "settings": {
-            "collection": "datejust"
+            "collection": "day-date-dress"
+          }
+        },
+        "featured_collection_UPNzUz": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "classic-date"
           }
         }
       },
       "block_order": [
-        "featured_collection_CkjhUH",
-        "featured_collection_nTDfYM",
-        "featured_collection_YnLbBy",
-        "featured_collection_tJggFi",
-        "featured_collection_pg7pPx",
-        "featured_collection_xH4MTt",
-        "featured_collection_Y4a6Tj",
-        "featured_collection_qU47dm",
-        "featured_collection_xGWYqb",
-        "featured_collection_VTFgPj",
-        "featured_collection_ETnwnF"
+        "featured_collection_pXAKge",
+        "featured_collection_pgQixT",
+        "featured_collection_DNHE6W",
+        "featured_collection_ejM6eY",
+        "featured_collection_834idj",
+        "featured_collection_JnPgwr",
+        "featured_collection_3rfdPG",
+        "featured_collection_bXFecR",
+        "featured_collection_RJAjWn",
+        "featured_collection_r8cwVM",
+        "featured_collection_wcU6Xk",
+        "featured_collection_UPNzUz"
       ],
       "settings": {
         "title": "Todas las Colecciones",
