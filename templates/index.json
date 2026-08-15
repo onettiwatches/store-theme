@@ -167,6 +167,7 @@
         "item-1": {
           "type": "item",
           "settings": {
+            "image": "shopify://shop_images/content1.png",
             "title": "Componentes de alta gama",
             "body": "<p>Seleccionamos piezas de proveedores suizos y japoneses reconocidos, eligiendo cada componente por su fiabilidad demostrada y su comportamiento a largo plazo.</p>",
             "position": "alternating"
@@ -175,6 +176,7 @@
         "item-2": {
           "type": "item",
           "settings": {
+            "image": "shopify://shop_images/content2_22764fbd-edc2-4c2c-a178-7c8d2088e7e0.png",
             "title": "Montaje manual y ajuste individual",
             "body": "<p>Cada reloj se ensambla a mano en nuestro taller. El ajuste de precisión se realiza individualmente para asegurar una marcha estable y exacta desde el primer día.</p>",
             "position": "alternating"
