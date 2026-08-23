@@ -29,13 +29,13 @@
   padding: 0.5rem 0;
 }
 
-.header-menu__collections::after {
+.header-menu__collections[open]::after {
   content: '';
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  height: 28rem;
+  height: 1.2rem;
   pointer-events: auto;
   z-index: 0;
 }
