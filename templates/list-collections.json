@@ -35,12 +35,6 @@
             "collection": "square-aviator"
           }
         },
-        "featured_collection_DNHE6W": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "rubber-sport"
-          }
-        },
         "featured_collection_ejM6eY": {
           "type": "featured_collection",
           "settings": {
@@ -71,22 +65,10 @@
             "collection": "marine-sport"
           }
         },
-        "featured_collection_RJAjWn": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "jeweled-classic-date"
-          }
-        },
         "featured_collection_r8cwVM": {
           "type": "featured_collection",
           "settings": {
             "collection": "dual-time"
-          }
-        },
-        "featured_collection_wcU6Xk": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": "day-date-dress"
           }
         },
         "featured_collection_UPNzUz": {
@@ -99,15 +81,12 @@
       "block_order": [
         "featured_collection_pXAKge",
         "featured_collection_pgQixT",
-        "featured_collection_DNHE6W",
         "featured_collection_ejM6eY",
         "featured_collection_834idj",
         "featured_collection_JnPgwr",
         "featured_collection_3rfdPG",
         "featured_collection_bXFecR",
-        "featured_collection_RJAjWn",
         "featured_collection_r8cwVM",
-        "featured_collection_wcU6Xk",
         "featured_collection_UPNzUz"
       ],
       "settings": {
