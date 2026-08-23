@@ -78,3 +78,28 @@
 .collection__view-all a:not(.link) {
   margin-top: 1rem;
 }
+
+infinite-product-grid {
+  display: block;
+}
+
+.infinite-scroll-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1px;
+}
+
+.infinite-scroll-status .loading-overlay__spinner {
+  width: 2.4rem;
+  padding: var(--space-6) 0 var(--space-4);
+  visibility: hidden;
+}
+
+infinite-product-grid[aria-busy='true'] .infinite-scroll-status .loading-overlay__spinner {
+  visibility: visible;
+}
+
+.infinite-scroll-status[hidden] {
+  display: none;
+}
