@@ -134,9 +134,7 @@
   }
 
   #pc-{{ section.id }} a.pc-card,
-  #pc-{{ section.id }} a.pc-card *,
-  #pc-{{ section.id }} a.pc-card .pc-name,
-  #pc-{{ section.id }} a.pc-card .pc-price {
+  #pc-{{ section.id }} a.pc-card .pc-name {
     color: var(--pc-text);
     text-decoration: none !important;
   }
@@ -158,16 +156,29 @@
     line-height: var(--lh-normal);
     transition: color 0.3s var(--ease-out-quart);
   }
-  #pc-{{ section.id }} .pc-price {
+  #pc-{{ section.id }} .pc-price,
+  #pc-{{ section.id }} .pc-price * {
     margin: 0;
     font-family: var(--font-body-family);
-    font-size: var(--text-sm);
-    color: rgba(var(--pc-text), 0.75);
-    transition: color 0.3s var(--ease-out-quart);
+    font-style: var(--font-body-style);
+    font-weight: var(--font-body-weight);
+    font-size: 1.6rem;
+    letter-spacing: 0.1rem;
+    line-height: calc(1 + 0.5 / var(--font-body-scale));
+    color: rgb(var(--color-foreground));
+    text-decoration: none;
   }
-  #pc-{{ section.id }} a.pc-card:hover .pc-price,
-  #pc-{{ section.id }} a.pc-card:focus-visible .pc-price {
-    color: var(--pc-accent);
+  #pc-{{ section.id }} .pc-price {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+  #pc-{{ section.id }} .pc-price-compare {
+    text-decoration: line-through !important;
+    font-size: 1.3rem;
+    color: rgba(var(--color-foreground), 0.75);
   }
 
   #pc-{{ section.id }} .pc-dots {
@@ -225,7 +236,8 @@
           title: {{ product.title | json }},
           img:   {{ product.featured_image | default: product.images.first | image_url: width: 600 | json }},
           alt:   {{ product.featured_image.alt | default: product.title | json }},
-          price: {{ product.price | money | json }}
+          price: {{ product.price | money | json }},
+          compare: {% if product.compare_at_price > product.price %}{{ product.compare_at_price | money | json }}{% else %}null{% endif %}
         }{% unless forloop.last %},{% endunless %}
       {%- endfor -%}
     {%- endif -%}
@@ -292,7 +304,7 @@
       </div>
       <div class="pc-card-body">
         <p class="pc-name">${c.title}</p>
-        <p class="pc-price">${c.price}</p>
+        <p class="pc-price">${c.compare ? `<s class="pc-price-compare">${c.compare}</s>` : ''}<span class="pc-price-current">${c.price}</span></p>
       </div>
     `;
 

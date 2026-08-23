@@ -4135,9 +4135,7 @@ button.quick-add__submit[disabled],
 }
 .card__heading,
 .cc-card .cc-name,
-.pc-card .pc-name,
-.pc-card,
-.pc-card * {
+.pc-card .pc-name {
   font-family: var(--font-heading-family);
   font-size: var(--text-base);
   font-weight: 500;
@@ -4149,19 +4147,15 @@ button.quick-add__submit[disabled],
 .card__heading a,
 .cc-card .cc-name a,
 .cc-card a .cc-name,
-.pc-card a .pc-name,
-.pc-card .pc-name a,
-a.pc-card,
-a.pc-card * {
+.pc-card .pc-name,
+a.pc-card .pc-name {
   color: rgb(var(--color-foreground));
   text-decoration: none !important;
   transition: color 0.3s var(--ease-out-quart);
 }
 .card__heading a:hover,
 .cc-card .cc-name a:hover,
-.pc-card .pc-name a:hover,
-a.pc-card:hover .pc-name,
-a.pc-card:hover {
+a.pc-card:hover .pc-name {
   color: rgb(var(--color-base-accent-2));
   text-decoration: none !important;
 }
