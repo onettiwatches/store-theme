@@ -1,0 +1,41 @@
+{%- comment -%}
+  Deterministic collection sales figure in 11-29.
+  Seed: collection.id plus title-length minus first-vowel count.
+{%- endcomment -%}
+
+{%- liquid
+  assign title_chars = collection.title | downcase | split: ''
+  assign vowel_list = 'aeiou' | split: ''
+  assign first_vowel = ''
+  for char in title_chars
+    if vowel_list contains char
+      assign first_vowel = char
+      break
+    endif
+  endfor
+
+  assign match_count = 0
+  if first_vowel != ''
+    for char in title_chars
+      if char == first_vowel
+        assign match_count = match_count | plus: 1
+      endif
+    endfor
+  endif
+
+  assign variation = title_chars.size | minus: match_count
+  if variation < 0
+    assign variation = 0
+  endif
+
+  assign seed = collection.id | times: 1 | plus: variation
+  assign total_sales = seed | modulo: 19 | plus: 11
+-%}
+
+<p class="collection-sales">
+  <span class="collection-sales__count">{{ total_sales }}</span>
+  <span class="collection-sales__copy">
+    <span class="collection-sales__label">piezas vendidas</span>
+    <span class="collection-sales__hint">en esta coleccion</span>
+  </span>
+</p>

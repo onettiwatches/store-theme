@@ -23,6 +23,62 @@
       padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
+
+  .collection-toolbar {
+    margin-bottom: var(--space-4);
+  }
+
+  .collection-sales {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin: 0;
+    max-width: 100%;
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid rgba(var(--color-foreground), 0.1);
+  }
+
+  .collection-sales__count {
+    flex-shrink: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.8rem, 5vw, 3.6rem);
+    font-weight: 400;
+    line-height: var(--lh-tight);
+    letter-spacing: 0.04em;
+    font-variant-numeric: tabular-nums lining-nums;
+    color: rgb(var(--color-base-accent-2));
+  }
+
+  .collection-sales__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+    padding-left: var(--space-4);
+    border-left: 1px solid rgb(var(--color-base-accent-2));
+  }
+
+  .collection-sales__label {
+    font-size: 1.1rem;
+    font-weight: var(--font-body-weight-bold);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    line-height: var(--lh-snug);
+    color: rgb(var(--color-foreground));
+  }
+
+  .collection-sales__hint {
+    font-size: var(--text-md);
+    letter-spacing: 0.06em;
+    line-height: var(--lh-normal);
+    color: rgba(var(--color-foreground), 0.58);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .collection-sales {
+      animation: onetti-fade-up 0.75s var(--ease-out-quart) both;
+    }
+  }
 {%- endstyle -%}
 
 <div class="section-{{ section.id }}-padding">
@@ -137,6 +193,10 @@
         {%- else -%}
           <div class="collection{% if section.settings.filter_type != 'vertical' %} page-width{% endif %}">
             <div class="loading-overlay gradient"></div>
+
+            <div class="collection-toolbar">
+              {% render 'collection-fake-sales', collection: collection %}
+            </div>
 
             <infinite-product-grid
               data-section-id="{{ section.id }}"
