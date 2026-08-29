@@ -227,7 +227,7 @@
       "name": "t:sections.video.presets.name",
       "settings": {
         "layout": "text_side",
-        "enable_video_looping": false,
+        "enable_video_looping": true,
         "max_height": 750,
         "video": "shopify://files/videos/Anuncio_1.mp4",
         "video_url": "",
