@@ -244,7 +244,7 @@
         "judge_me_reviews_review_snippet_widget_PbNGdV": {
           "type": "shopify://apps/judge-me-reviews/blocks/review_snippet_widget/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
           "settings": {
-            "reviews_selection": "all",
+            "reviews_selection": "product",
             "products": [],
             "filter_pinned": false,
             "filter_featured": false,
