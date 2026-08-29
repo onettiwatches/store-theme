@@ -206,9 +206,27 @@
     "video_azVNCN": {
       "type": "video",
       "name": "t:sections.video.presets.name",
+      "blocks": {
+        "video-heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Nuestro trabajo",
+            "heading_size": "h1"
+          }
+        },
+        "video-text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Cada reloj Onetti se ensambla a mano en nuestro taller. Mira el proceso completo: selección de componentes, montaje del movimiento, ajuste de precisión y control de calidad final.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "video-heading",
+        "video-text"
+      ],
       "settings": {
-        "heading": "Nuestro trabajo",
-        "heading_size": "h1",
+        "layout": "text_side",
         "enable_video_looping": false,
         "video": "shopify://files/videos/Anuncio_1.mp4",
         "video_url": "",
