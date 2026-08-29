@@ -57,6 +57,15 @@
             "page": ""
           }
         },
+        "collapsible_tab_W3p9AB": {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Detalles del producto",
+            "icon": "clipboard",
+            "content": "<p><strong>Aviso:</strong> Por motivos legales, algunos textos y logotipos del dial pueden aparecer modificados o parcialmente ocultos en las imágenes de la web. Estas modificaciones se realizan únicamente sobre las imágenes de presentación; el dial del reloj podrá mostrar los elementos correspondientes al diseño original del <em>Mod</em>.<br/><br/>Tu reloj se prepara especialmente bajo pedido y pasa por un proceso de revisión antes del envío. Una vez enviado, recibirás la información de seguimiento.<br/><br/></p>",
+            "page": ""
+          }
+        },
         "share": {
           "type": "share",
           "disabled": true,
@@ -78,6 +87,7 @@
         "buy_buttons",
         "description",
         "shipping_tab",
+        "collapsible_tab_W3p9AB",
         "share",
         "judge_me_reviews_preview_badge_AVND4j"
       ],
