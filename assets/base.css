@@ -4450,3 +4450,18 @@ a.pc-card:hover .pc-name {
     transition: none;
   }
 }
+
+.jdgm-rev-snippet-card {
+  background-color: var(--gradient-base-background-2) !important;
+  border-radius: var(--radius-md) !important;
+  color:rgb(var(--color-foreground)) !important;
+}
+
+.jdgm-rev-snippet-card__product-name{
+  color:rgb(var(--color-base-accent-2)) !important;
+}
+
+.jm-star-rating svg path, .jm-star-rating__filled svg path {
+  fill:rgb(var(--color-base-accent-2)) !important;
+  stroke:rgb(var(--color-base-accent-2)) !important;
+}
