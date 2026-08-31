@@ -148,6 +148,7 @@
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
+        "view_all_link": "/collections/all",
         "enable_desktop_slider": true,
         "color_scheme": "background-1",
         "image_ratio": "portrait",

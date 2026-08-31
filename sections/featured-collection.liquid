@@ -128,7 +128,7 @@
     {%- if section.settings.show_view_all and more_in_collection -%}
       <div class="center collection__view-all">
         <a
-          href="{{ section.settings.collection.url }}"
+          href="{{ section.settings.view_all_link | default: section.settings.collection.url }}"
           class="{% if section.settings.view_all_style == 'link' %}link underlined-link{% elsif section.settings.view_all_style == 'solid' %}onetti-btn{% else %}onetti-btn onetti-btn--secondary{% endif %}"
           aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: section.settings.collection.title }}"
         >
@@ -259,6 +259,12 @@
         }
       ],
       "default": "solid"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link override",
+      "info": "Leave blank to use the collection URL. Use to point to e.g. /collections/all."
     },
     {
       "type": "checkbox",
