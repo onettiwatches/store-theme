@@ -363,6 +363,41 @@ a.product__text {
   margin-top: 0;
 }
 
+.product-sales {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.0rem;
+  margin: 1rem 0 0;
+  padding: 0.6rem 1.2rem;
+  background: rgba(var(--color-foreground), 0.05);
+  border-radius: var(--radius-sm);
+  font-size: 1.05rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: rgba(var(--color-foreground), 0.78);
+}
+
+.product-sales__dot {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  background: rgb(62, 214, 96);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.product-sales__count {
+  font-family: var(--font-body-family);
+  font-weight: var(--font-body-weight-bold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: rgb(var(--color-foreground));
+}
+
+.product-sales__label {
+  line-height: 1;
+}
+
 .product__accordion .accordion__content {
   padding: 0 1rem;
 }

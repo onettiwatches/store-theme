@@ -1,0 +1,10 @@
+{%- liquid
+  assign sale_count = product.metafields.custom.sale_count.value | default: 0
+-%}
+{%- if sale_count != blank and sale_count != 0 -%}
+  <span class="product-sales">
+    <span class="product-sales__dot" aria-hidden="true"></span>
+    <span class="product-sales__count">{{ sale_count }}</span>
+    <span class="product-sales__label">unidades vendidas</span>
+  </span>
+{%- endif -%}
