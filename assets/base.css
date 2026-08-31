@@ -4465,3 +4465,10 @@ a.pc-card:hover .pc-name {
   fill:rgb(var(--color-base-accent-2)) !important;
   stroke:rgb(var(--color-base-accent-2)) !important;
 }
+
+.jm-content {
+  background-color: var(--gradient-base-background-2) !important;
+  & .jdgm-rev-snippet-lightbox{
+    color:rgb(var(--color-foreground)) !important;
+  }
+}
