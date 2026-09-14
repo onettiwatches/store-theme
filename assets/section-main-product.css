@@ -366,23 +366,22 @@ a.product__text {
 .product-sales {
   display: inline-flex;
   align-items: center;
-  gap: 1.0rem;
-  margin: 1rem 0 0;
-  padding: 0.6rem 1.2rem;
-  background: rgba(var(--color-foreground), 0.05);
-  border-radius: var(--radius-sm);
-  font-size: 1.05rem;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  font-family: var(--font-body-family);
+  font-size: var(--text-md);
   line-height: 1;
   letter-spacing: 0.04em;
-  color: rgba(var(--color-foreground), 0.78);
+  color: rgba(var(--color-foreground), 0.88);
 }
 
 .product-sales__dot {
   display: inline-block;
   width: 0.6rem;
   height: 0.6rem;
-  background: rgb(62, 214, 96);
-  border-radius: 50%;
+  background: rgb(var(--color-base-accent-2));
+  border-radius: var(--radius-pill);
   flex-shrink: 0;
 }
 

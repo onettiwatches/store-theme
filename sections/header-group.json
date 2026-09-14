@@ -13,7 +13,20 @@
   "sections": {
     "announcement-bar": {
       "type": "announcement-bar",
-      "disabled": true,
+      "blocks": {
+        "announcement_urgency": {
+          "type": "announcement",
+          "settings": {
+            "text": "Taller con plazas limitadas esta semana. Reserva tu pieza.",
+            "text_alignment": "center",
+            "color_scheme": "background-1",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "announcement_urgency"
+      ],
       "settings": {}
     },
     "stock-ticker": {
@@ -22,21 +35,21 @@
         "st-item-1": {
           "type": "item",
           "settings": {
-            "text": "Envío gratis",
+            "text": "Envío gratis. Sin letra pequeña.",
             "link": ""
           }
         },
         "st-item-2": {
           "type": "item",
           "settings": {
-            "text": "Garantía nacional de 2 años",
+            "text": "Garantía internacional 2 años. Duerme tranquilo.",
             "link": ""
           }
         },
         "st-item-3": {
           "type": "item",
           "settings": {
-            "text": "Producción artesanal bajo pedido",
+            "text": "Plazas de taller limitadas esta semana",
             "link": ""
           }
         }

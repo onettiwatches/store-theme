@@ -31,7 +31,7 @@
 
   #hero-{{ section.id }} .mh-logo-wrap {
     width: 100%;
-    max-width: 30rem;
+    max-width: 25rem;
     aspect-ratio: 1 / 1;
     display: flex;
     align-items: center;
@@ -55,6 +55,24 @@
     font-size: var(--text-sm);
     letter-spacing: 0.1em;
     text-transform: uppercase;
+  }
+
+  #hero-{{ section.id }} .mh-heading {
+    font-family: var(--font-heading-family);
+    font-size: max(var(--font-heading-min-size), var(--text-2-5xl));
+    line-height: var(--lh-tight);
+    color: rgb(var(--color-foreground));
+    margin: 0;
+    max-width: 28rem;
+  }
+
+  #hero-{{ section.id }} .mh-subheading {
+    font-family: var(--font-body-family);
+    font-size: var(--text-sm);
+    line-height: var(--lh-relaxed);
+    color: rgba(var(--color-foreground), 0.72);
+    margin: 0;
+    max-width: 26rem;
   }
 
   #hero-{{ section.id }} .mh-button {
@@ -114,6 +132,10 @@
     #hero-{{ section.id }} .mh-logo-wrap {
       display: none;
     }
+    #hero-{{ section.id }} .mh-heading,
+    #hero-{{ section.id }} .mh-subheading {
+      display: none;
+    }
   }
 </style>
 
@@ -136,6 +158,12 @@
           <span>Logo</span>
         {%- endif -%}
       </div>
+      {%- if section.settings.heading != blank -%}
+        <h1 class="mh-heading">{{ section.settings.heading | escape }}</h1>
+      {%- endif -%}
+      {%- if section.settings.subheading != blank -%}
+        <p class="mh-subheading">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
       {%- if section.settings.button_label != blank -%}
         <a
           {% if section.settings.button_link == blank %}
@@ -181,6 +209,16 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Logo (izquierda)"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subtítulo"
     },
     {
       "type": "header",

@@ -15,7 +15,9 @@
       "settings": {
         "image": "shopify://shop_images/banner13.png",
         "logo": "shopify://shop_images/79f88a66-5a5a-4d06-a4d8-59ee745d1267-Photoroom.png",
-        "button_label": "Ir a comprar",
+        "heading": "No lleves el mismo reloj que todos",
+        "subheading": "Montaje a mano. Bajo pedido. Para que pregunten por tu muñeca.",
+        "button_label": "Elegir mi pieza",
         "button_link": "shopify://collections/all"
       }
     },
@@ -88,20 +90,20 @@
         "intro-heading": {
           "type": "heading",
           "settings": {
-            "heading": "Calidad sin Concesiones",
+            "heading": "Hecho para quien no se esconde",
             "heading_size": "h2"
           }
         },
         "intro-text": {
           "type": "text",
           "settings": {
-            "text": "<p>Relojería personalizada con componentes de alta gama. Diseños únicos creados para quienes no se conforman con lo ordinario.</p>"
+            "text": "<p>Relojería personalizada con componentes de alta gama. Piezas que se notan en la muñeca y en la conversación. No para quien se conforma con lo de siempre.</p>"
           }
         },
         "intro-button": {
           "type": "button",
           "settings": {
-            "button_label": "Ir a comprar",
+            "button_label": "Ver las colecciones",
             "button_link": "shopify://collections/all",
             "button_style_secondary": false,
             "button_label_2": "",
@@ -127,7 +129,7 @@
     "products_carousel_demo": {
       "type": "products-carousel",
       "settings": {
-        "heading": "Productos destacados",
+        "heading": "Los que ya se están llevando",
         "source_collection": "mejor-vendidos",
         "products_limit": 12,
         "autoplay": true,
@@ -136,6 +138,7 @@
     },
     "featured_collection": {
       "type": "featured-collection",
+      "disabled": true,
       "settings": {
         "title": "Productos",
         "heading_size": "h1",
@@ -296,7 +299,7 @@
           "type": "item",
           "settings": {
             "question": "¿Cuál es la política de devolución?",
-            "answer": "<p>Aceptamos devoluciones dentro de los 14 días posteriores a la entrega para piezas no personalizadas, en su empaque original.</p>"
+            "answer": "<p>Aceptamos devoluciones dentro de los 30 días posteriores a la entrega para piezas no personalizadas, en su embalaje original.</p>"
           }
         }
       },
@@ -318,10 +321,10 @@
     "collections_carousel_Qthrx3",
     "intro_rich_text",
     "products_carousel_demo",
+    "1773612769741e1091",
     "featured_collection",
     "philosophy",
     "video_azVNCN",
-    "1773612769741e1091",
     "main_faq"
   ]
 }

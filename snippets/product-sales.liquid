@@ -5,6 +5,11 @@
   <span class="product-sales">
     <span class="product-sales__dot" aria-hidden="true"></span>
     <span class="product-sales__count">{{ sale_count }}</span>
-    <span class="product-sales__label">unidades vendidas</span>
+    <span class="product-sales__label">{{ 'products.product.persuasion.sold' | t }}</span>
+  </span>
+{%- else -%}
+  <span class="product-sales">
+    <span class="product-sales__dot" aria-hidden="true"></span>
+    <span class="product-sales__label">{{ 'products.product.persuasion.demand' | t }}</span>
   </span>
 {%- endif -%}

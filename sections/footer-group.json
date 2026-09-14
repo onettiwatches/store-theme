@@ -34,8 +34,8 @@
       ],
       "settings": {
         "color_scheme": "background-2",
-        "newsletter_enable": false,
-        "newsletter_heading": "Recibe nuestros correos",
+        "newsletter_enable": true,
+        "newsletter_heading": "Entra a la lista. Las piezas y las plazas salen primero aquí.",
         "enable_follow_on_shop": true,
         "show_social": true,
         "enable_country_selector": false,

@@ -6,6 +6,7 @@
 {% endcomment %}
 
 <script src="{{ 'cart.js' | asset_url }}" defer="defer"></script>
+{{ 'persuasion.css' | asset_url | stylesheet_tag }}
 
 <style>
   .drawer {
@@ -413,6 +414,8 @@
         </div>
 
         <!-- CTAs -->
+
+        {% render 'cart-persuasion' %}
 
         <div class="cart__ctas" {{ block.shopify_attributes }}>
           <noscript>

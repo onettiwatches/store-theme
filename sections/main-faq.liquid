@@ -18,7 +18,7 @@
   #faq-{{ section.id }} .faq-title {
     margin: 0;
     font-family: var(--font-heading-family);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: max(var(--font-heading-min-size), clamp(2rem, 4vw, 3rem));
     font-weight: 500;
     line-height: var(--lh-tight);
     color: rgb(var(--color-foreground));
@@ -65,7 +65,7 @@
   }
   #faq-{{ section.id }} .faq-question-text {
     font-family: var(--font-heading-family);
-    font-size: clamp(1.3rem, 1.9vw, 1.6rem);
+    font-size: max(var(--font-heading-min-size), clamp(1.3rem, 1.9vw, 1.6rem));
     font-weight: 500;
     line-height: var(--lh-snug);
     letter-spacing: 0.01em;
@@ -261,15 +261,15 @@
         {
           "type": "item",
           "settings": {
-            "question": "¿Hacen envíos internacionales?",
-            "answer": "<p>Sí, enviamos a la mayoría de países. Los costos y plazos varían según destino y se calculan al cierre del pedido.</p>"
+            "question": "¿Hacéis envíos internacionales?",
+            "answer": "<p>Sí, enviamos a la mayoría de países. Los costes y plazos varían según el destino y se calculan al cerrar el pedido.</p>"
           }
         },
         {
           "type": "item",
           "settings": {
             "question": "¿Cuál es la política de devolución?",
-            "answer": "<p>Aceptamos devoluciones dentro de los 14 días posteriores a la entrega para piezas no personalizadas, en su empaque original.</p>"
+            "answer": "<p>Aceptamos devoluciones dentro de los 14 días posteriores a la entrega para piezas no personalizadas, en su embalaje original.</p>"
           }
         }
       ]

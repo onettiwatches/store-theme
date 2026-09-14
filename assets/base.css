@@ -433,58 +433,58 @@ h5,
 }
 
 .hxl {
-  font-size: calc(var(--font-heading-scale) * 5rem);
+  font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 5rem));
 }
 
 @media only screen and (min-width: 750px) {
   .hxl {
-    font-size: calc(var(--font-heading-scale) * 6.2rem);
+    font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 6.2rem));
   }
 }
 
 .h0 {
-  font-size: calc(var(--font-heading-scale) * 4rem);
+  font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 4rem));
 }
 
 @media only screen and (min-width: 750px) {
   .h0 {
-    font-size: calc(var(--font-heading-scale) * 5.2rem);
+    font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 5.2rem));
   }
 }
 
 h1,
 .h1 {
-  font-size: calc(var(--font-heading-scale) * 3rem);
+  font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 3rem));
 }
 
 @media only screen and (min-width: 750px) {
   h1,
   .h1 {
-    font-size: calc(var(--font-heading-scale) * 4rem);
+    font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 4rem));
   }
 }
 
 h2,
 .h2 {
-  font-size: calc(var(--font-heading-scale) * 2rem);
+  font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 2rem));
 }
 
 @media only screen and (min-width: 750px) {
   h2,
   .h2 {
-    font-size: calc(var(--font-heading-scale) * 2.4rem);
+    font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 2.4rem));
   }
 }
 
 h3,
 .h3 {
-  font-size: calc(var(--font-heading-scale) * 1.7rem);
+  font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 1.7rem));
 }
 
 @media only screen and (min-width: 750px) {
   h3,
   .h3 {
-    font-size: calc(var(--font-heading-scale) * 1.8rem);
+    font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 1.8rem));
   }
 }
 
@@ -492,18 +492,18 @@ h4,
 .h4 {
   font-family: var(--font-heading-family);
   font-style: var(--font-heading-style);
-  font-size: calc(var(--font-heading-scale) * 1.5rem);
+  font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 1.5rem));
 }
 
 h5,
 .h5 {
-  font-size: calc(var(--font-heading-scale) * 1.2rem);
+  font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 1.2rem));
 }
 
 @media only screen and (min-width: 750px) {
   h5,
   .h5 {
-    font-size: calc(var(--font-heading-scale) * 1.3rem);
+    font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 1.3rem));
   }
 }
 
@@ -2074,6 +2074,7 @@ input[type='checkbox'] {
 }
 
 .quantity__input[type='number'] {
+  appearance: textfield;
   -moz-appearance: textfield;
 }
 
@@ -3185,8 +3186,10 @@ details-disclosure > details {
   --text-lg:   1.4rem;
   --text-xl:   1.6rem;
   --text-2xl:  1.8rem;
+  --text-2-5xl: 2rem;
   --text-3xl:  2.4rem;
   --text-4xl:  3rem;
+  --font-heading-min-size: 1.5rem;
 
   --radius-sm:  0.4rem;
   --radius-md:  0.75rem;
@@ -3637,7 +3640,7 @@ cart-drawer .cart-drawer .cart-item__details > * + * {
 
 cart-drawer .cart-drawer .cart-item__name {
   font-family: var(--font-heading-family);
-  font-size: var(--text-xl);
+  font-size: max(var(--font-heading-min-size), var(--text-xl));
   font-weight: var(--font-heading-weight);
   line-height: var(--lh-snug);
   letter-spacing: 0.02em;
@@ -4346,7 +4349,7 @@ button.quick-add__submit[disabled],
 .cc-card .cc-name,
 .pc-card .pc-name {
   font-family: var(--font-heading-family);
-  font-size: var(--text-base);
+  font-size: max(var(--font-heading-min-size), var(--text-base));
   font-weight: 500;
   letter-spacing: 0.04em;
   line-height: var(--lh-normal);

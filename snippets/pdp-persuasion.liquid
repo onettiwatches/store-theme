@@ -1,0 +1,43 @@
+{%- liquid
+  assign slot = slot | default: 'demand'
+  assign view_count = product.id | modulo: 7 | plus: 4
+  assign minute_now = 'now' | date: '%M' | plus: 0
+  assign reserved_mins = minute_now | modulo: 17 | plus: 3
+  assign weekday = 'now' | date: '%u' | plus: 0
+  assign slots_left = 9 | minus: weekday
+  if slots_left < 2
+    assign slots_left = 2
+  endif
+-%}
+
+{%- case slot -%}
+  {%- when 'demand' -%}
+    <div class="pdp-demand">
+      <div class="pdp-demand__row">
+        <span class="pdp-demand__dot" aria-hidden="true"></span>
+        <span>{{ 'products.product.persuasion.viewing' | t: count: view_count }}</span>
+      </div>
+      <div class="pdp-demand__row">
+        <span>{{ 'products.product.persuasion.reserved' | t: minutes: reserved_mins }}</span>
+      </div>
+      <p class="pdp-demand__suggest">{{ 'products.product.persuasion.suggestive' | t }}</p>
+    </div>
+  {%- when 'trust' -%}
+    <ul class="pdp-trust" role="list">
+      <li>{{ 'products.product.persuasion.trust_ship' | t }}</li>
+      <li>{{ 'products.product.persuasion.trust_warranty' | t }}</li>
+      <li>{{ 'products.product.persuasion.trust_mto' | t }}</li>
+      <li>{{ 'products.product.persuasion.trust_returns' | t }}</li>
+    </ul>
+  {%- when 'scarcity' -%}
+    <div class="pdp-scarcity">
+      <p class="pdp-scarcity__slots">{{ 'products.product.persuasion.slots' | t: count: slots_left }}</p>
+      <p class="pdp-scarcity__loss">{{ 'products.product.persuasion.loss' | t }}</p>
+    </div>
+  {%- when 'after_atc' -%}
+    <div class="pdp-after">
+      <p class="pdp-after__text">{{ 'products.product.persuasion.workshop' | t }}</p>
+      <p class="pdp-after__text">{{ 'products.product.persuasion.customize' | t }}</p>
+      <p class="pdp-after__text">{{ 'products.product.persuasion.anchor' | t }}</p>
+    </div>
+{%- endcase -%}

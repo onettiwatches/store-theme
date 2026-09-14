@@ -10,6 +10,7 @@
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-loading-overlay.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'persuasion.css' | asset_url | stylesheet_tag }}
 
   {%- style -%}
     .section-{{ section.id }}-padding {
@@ -87,6 +88,7 @@
                 <span class="onetti-eyebrow">Onetti Watches</span>
                 <h1>{{ product.title | escape }}</h1>
                 {% render 'product-sales', product: product %}
+                {% render 'pdp-persuasion', slot: 'demand', product: product %}
               </div>
             {%- when 'price' -%}
               <div class="no-js-hidden" id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
@@ -107,6 +109,7 @@
                   {%- endif -%}
                 </div>
               {%- endif -%}
+              {% render 'pdp-persuasion', slot: 'trust', product: product %}
               <div {{ block.shopify_attributes }}>
                 {%- assign product_form_installment_id = 'product-form-installment-' | append: section.id -%}
                 {%- form 'product', product, id: product_form_installment_id, class: 'installment caption-large' -%}
@@ -311,7 +314,9 @@
             {%- when 'variant_picker' -%}
               {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %}
             {%- when 'buy_buttons' -%}
+              {% render 'pdp-persuasion', slot: 'scarcity', product: product %}
               {%- render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id, show_pickup_availability: true -%}
+              {% render 'pdp-persuasion', slot: 'after_atc', product: product %}
             {%- when 'rating' -%}
               {%- if product.metafields.reviews.rating.value != blank -%}
                 {% liquid

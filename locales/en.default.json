@@ -29,6 +29,12 @@
 			}
 		},
 		"continue_shopping": "Continue shopping",
+		"exit": {
+			"title": "Your wrist is still ordinary",
+			"body": "This piece is built for the look that stays on your wrist after they stop talking.",
+			"stay": "Reserve this piece",
+			"leave": "I'll keep a watch like everyone else"
+		},
 		"pagination": {
 			"label": "Pagination",
 			"page": "Page {{ number }}",
@@ -103,7 +109,23 @@
 	},
 	"products": {
 		"product": {
-			"add_to_cart": "Add to cart",
+			"add_to_cart": "Reserve my piece",
+			"persuasion": {
+				"viewing": "{{ count }} people have this piece open now",
+				"reserved": "Someone started this reference {{ minutes }} min ago",
+				"suggestive": "Let them look at your wrist. Let them ask. Let them linger.",
+				"slots": "Only {{ count }} bench slots left this week",
+				"loss": "Close this page and this piece stays someone else's.",
+				"trust_ship": "Free shipping",
+				"trust_warranty": "2-year international warranty",
+				"trust_mto": "Built to order",
+				"trust_returns": "30-day returns",
+				"workshop": "Payment starts the bench. 4-5 weeks. Not a warehouse pull.",
+				"customize": "Engrave the caseback. Once it carries your name, it is only yours.",
+				"anchor": "Less wait than a big-brand list. The same silence when they see it.",
+				"sold": "units sold",
+				"demand": "High demand on the bench"
+			},
 			"choose_options": "Choose options",
 			"choose_product_options": "Choose options for {{ product_name }}",
 			"description": "Description",
@@ -258,8 +280,11 @@
 			"subtotal": "Subtotal",
 			"new_subtotal": "New subtotal",
 			"note": "Order special instructions",
-			"checkout": "Check out",
-			"empty": "Your cart is empty",
+			"checkout": "Lock in my piece",
+			"empty": "A generic watch is waiting on every street. This one is not.",
+			"persuasion_hold": "Nothing is reserved until you pay. Another buyer can take the next slot.",
+			"persuasion_next": "After payment: bench, regulation, QC, tracking. 4-5 weeks.",
+			"persuasion_nudge": "You already chose it. Leaving now gives it to the next wrist.",
 			"cart_error": "There was an error while updating your cart. Please try again.",
 			"cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
 			"taxes_and_shipping_policy_at_checkout_html": "Taxes and <a href=\"{{ link }}\">shipping<\/a> calculated at checkout",

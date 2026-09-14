@@ -183,6 +183,10 @@
   font-size: calc(var(--font-heading-scale) * 1.2rem);
 }
 
+.card--horizontal .card__heading {
+  font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 1.2rem));
+}
+
 .card--horizontal .card-information > *:not(.visually-hidden:first-child) + *:not(.rating) {
   margin-top: 0;
 }
@@ -196,6 +200,10 @@
   .card--horizontal .price__container .price-item,
   .card--horizontal__quick-add {
     font-size: calc(var(--font-heading-scale) * 1.3rem);
+  }
+
+  .card--horizontal .card__heading {
+    font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 1.3rem));
   }
 }
 

@@ -162,12 +162,12 @@
 .footer-block__heading {
   margin-bottom: 2rem;
   margin-top: 0;
-  font-size: calc(var(--font-heading-scale) * 1.6rem);
+  font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 1.6rem));
 }
 
 @media screen and (min-width: 990px) {
   .footer-block__heading {
-    font-size: calc(var(--font-heading-scale) * 1.8rem);
+    font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 1.8rem));
   }
 }
 
@@ -543,7 +543,7 @@
   font-family: var(--font-heading-family);
   font-weight: 500;
   font-style: normal;
-  font-size: clamp(1.6rem, 2.2vw, 2rem);
+  font-size: max(var(--font-heading-min-size), clamp(1.6rem, 2.2vw, 2rem));
   letter-spacing: 0.02em;
   line-height: var(--lh-tight);
   text-transform: none;

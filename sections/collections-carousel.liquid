@@ -35,6 +35,7 @@
     line-height: var(--lh-tight);
     color: var(--cc-text);
     font-family: var(--font-heading-family);
+    font-size: max(var(--font-heading-min-size), calc(var(--font-heading-scale) * 2rem));
   }
 
   #cc-{{ section.id }} .cc-nav {
@@ -136,7 +137,7 @@
   #cc-{{ section.id }} .cc-name {
     margin: 0;
     font-family: var(--font-heading-family);
-    font-size: var(--text-base);
+    font-size: max(var(--font-heading-min-size), var(--text-base));
     font-weight: 500;
     color: var(--cc-text);
     white-space: nowrap;

@@ -1,0 +1,29 @@
+{{ 'persuasion.css' | asset_url | stylesheet_tag }}
+<div
+  id="OnettiExit"
+  class="onetti-exit"
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="OnettiExitTitle"
+>
+  <div class="onetti-exit__panel">
+    <h2 id="OnettiExitTitle" class="onetti-exit__title">{{ 'general.exit.title' | t }}</h2>
+    <p class="onetti-exit__body">{{ 'general.exit.body' | t }}</p>
+    <div class="onetti-exit__actions">
+      {%- if template.name == 'product' -%}
+        <button type="button" class="onetti-btn" data-exit-close>
+          {{ 'general.exit.stay' | t }}
+        </button>
+      {%- else -%}
+        <a class="onetti-btn" href="{{ routes.all_products_collection_url }}">
+          {{ 'general.exit.stay' | t }}
+        </a>
+      {%- endif -%}
+      <button type="button" class="onetti-exit__leave" data-exit-close>
+        {{ 'general.exit.leave' | t }}
+      </button>
+    </div>
+  </div>
+</div>
+<script src="{{ 'persuasion.js' | asset_url }}" defer="defer"></script>
