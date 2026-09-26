@@ -32,49 +32,55 @@
         "featured_collection_pgQixT": {
           "type": "featured_collection",
           "settings": {
-            "collection": "square-aviator"
+            "collection": "gmteiko"
           }
         },
         "featured_collection_ejM6eY": {
           "type": "featured_collection",
           "settings": {
-            "collection": "racing-chronograph"
+            "collection": "seitona"
           }
         },
         "featured_collection_834idj": {
           "type": "featured_collection",
           "settings": {
-            "collection": "professional-diver"
+            "collection": "nauteiko"
           }
         },
         "featured_collection_JnPgwr": {
           "type": "featured_collection",
           "settings": {
-            "collection": "porthole-sport"
+            "collection": "royal"
           }
         },
         "featured_collection_3rfdPG": {
           "type": "featured_collection",
           "settings": {
-            "collection": "octagon-sport"
+            "collection": "justdateiko"
           }
         },
         "featured_collection_bXFecR": {
           "type": "featured_collection",
           "settings": {
-            "collection": "marine-sport"
+            "collection": "smariner"
           }
         },
         "featured_collection_r8cwVM": {
           "type": "featured_collection",
           "settings": {
-            "collection": "dual-time"
+            "collection": "yatcheiko"
           }
         },
         "featured_collection_UPNzUz": {
           "type": "featured_collection",
           "settings": {
-            "collection": "classic-date"
+            "collection": "seikonaut"
+          }
+        },
+        "featured_collection_9aKzDn": {
+          "type": "featured_collection",
+          "settings": {
+            "collection": "santeiko"
           }
         }
       },
@@ -87,7 +93,8 @@
         "featured_collection_3rfdPG",
         "featured_collection_bXFecR",
         "featured_collection_r8cwVM",
-        "featured_collection_UPNzUz"
+        "featured_collection_UPNzUz",
+        "featured_collection_9aKzDn"
       ],
       "settings": {
         "title": "Todas las Colecciones",
