@@ -16,6 +16,10 @@
           "type": "title",
           "settings": {}
         },
+        "judge_me_reviews_preview_badge_AVND4j": {
+          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {}
+        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -33,11 +37,6 @@
             "picker_type": "button"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector",
-          "disabled": true,
-          "settings": {}
-        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -54,7 +53,7 @@
           "settings": {
             "heading": "Envío y garantía",
             "icon": "truck",
-            "content": "<p>Envío gratis a todo el país. Garantía internacional de 2 años por defectos de fabricación. Devoluciones durante 30 días para piezas no personalizadas. Cada reloj entra al taller después del pago: 4 a 5 semanas.</p>",
+            "content": "<p><strong>✓ Envío gratis en España<br/>✓ Garantía de 2 años<br/>✓ Devolución en 30 días</strong>&nbsp;<br/><strong>✓ Fabricación bajo pedido</strong></p>",
             "page": ""
           }
         },
@@ -73,10 +72,6 @@
           "settings": {
             "share_label": "Share"
           }
-        },
-        "judge_me_reviews_preview_badge_AVND4j": {
-          "type": "shopify://apps/judge-me-reviews/blocks/preview_badge/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
-          "settings": {}
         }
       },
       "block_order": [
