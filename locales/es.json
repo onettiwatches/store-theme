@@ -29,12 +29,6 @@
 			}
 		},
 		"continue_shopping": "Seguir comprando",
-		"exit": {
-			"title": "Tu muñeca sigue siendo una más",
-			"body": "Esta pieza está hecha para la mirada que se queda en tu muñeca cuando callan.",
-			"stay": "Reservar esta pieza",
-			"leave": "Me quedo con un reloj como el de todos"
-		},
 		"pagination": {
 			"label": "Paginación",
 			"page": "Página {{ number }}",

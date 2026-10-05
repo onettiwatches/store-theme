@@ -29,12 +29,6 @@
 			}
 		},
 		"continue_shopping": "Continue shopping",
-		"exit": {
-			"title": "Your wrist is still ordinary",
-			"body": "This piece is built for the look that stays on your wrist after they stop talking.",
-			"stay": "Reserve this piece",
-			"leave": "I'll keep a watch like everyone else"
-		},
 		"pagination": {
 			"label": "Pagination",
 			"page": "Page {{ number }}",
