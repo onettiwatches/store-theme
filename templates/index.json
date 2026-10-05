@@ -103,7 +103,7 @@
         "intro-button": {
           "type": "button",
           "settings": {
-            "button_label": "Ver las colecciones",
+            "button_label": "Ver todos",
             "button_link": "shopify://collections/all",
             "button_style_secondary": false,
             "button_label_2": "",
